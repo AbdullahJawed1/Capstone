@@ -13,5 +13,3 @@ const NavBar = () => {
 };
 
 export default NavBar;
-
-// hello world
