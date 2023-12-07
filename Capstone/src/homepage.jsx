@@ -1,6 +1,3 @@
-
-
-
 // components/HomePage.js
 import React from 'react';
 import NavBar from './NavBar';
@@ -8,15 +5,13 @@ import NavBar from './NavBar';
 const HomePage = () => {
   return (
     <>
-    <NavBar></NavBar>
-
-    <div style={{ background: 'white', padding: '20px' }}>
+    <NavBar />
+    <div>
       <h1>Capstone Home</h1>
       {/* Your home page content goes here */}
     </div>
 
     </>
-
   );
 };
 
