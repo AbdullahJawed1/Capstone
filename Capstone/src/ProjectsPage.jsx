@@ -1,13 +1,15 @@
 // components/ProjectsPage.js
 import React from 'react';
+import NavBar from './NavBar';
 
-const ProjectsPage = () => {
+export default function ProjectsPage() {
   return (
-    <div style={{ background: 'white', padding: '20px' }}>
-      <h1>Capstone Projects</h1>
-      {/* Your projects page content goes here */}
+    <div>
+      <NavBar />
+      <div>
+        <h1>Capstone Projects</h1>
+        {/* Your projects page content goes here */}
+      </div>
     </div>
   );
 };
-
-export default ProjectsPage;
