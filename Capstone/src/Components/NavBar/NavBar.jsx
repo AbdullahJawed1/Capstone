@@ -22,9 +22,9 @@ export default function NavBar() {
         <Navbar.Collapse id="basic-navbar-nav">
           <Nav className="ms-auto">
           
-            <Nav.Link href="#home">Home</Nav.Link>
-            <Nav.Link href="C:\Users\abdul\Documents\GitHub\Capstone\Capstone\src\ProjectsPage.jsx">Projects</Nav.Link>
-            <Nav.Link href="#link">Groups</Nav.Link>
+            <Nav.Link href="/HomePage">Home</Nav.Link>
+            <Nav.Link href="/ProjectsPage">Projects</Nav.Link>
+            <Nav.Link href="/GroupsPage">Groups</Nav.Link>
             <NavDropdown title="Settings" id="basic-nav-dropdown">
               <NavDropdown.Item href="#action/3.1">Profile</NavDropdown.Item>
               <NavDropdown.Item href="#action/3.2">Chat</NavDropdown.Item>

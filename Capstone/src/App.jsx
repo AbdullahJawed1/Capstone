@@ -1,20 +1,22 @@
 import { BrowserRouter, Route, Routes } from "react-router-dom";
-import HomePage from "./Components/Homepage/homepage";
+import HomePage from "./Components/Homepage/HomePage";
 import "bootstrap/dist/css/bootstrap.min.css";
 import ProjectsPage from "./Components/ProjectsPage/ProjectsPage";
-import NavBar from "./Components/NavBar/NavBar";
-import Projects from "./Components/ProjectsPage/Projects";
+import GroupsPage from "./Components/GroupsPage/GroupsPage";
 
 function App() {
   return (
     <>
-      {/* <BrowserRouter>
-           <Routes> */}
-      <HomePage />
+      <BrowserRouter>
+        <Routes>
 
-      {/* </Routes>
-          </BrowserRouter>
-     */}
+          <Route path="/HomePage" element =  {<HomePage />}>  </Route>
+          <Route path="/ProjectsPage" element =  {<ProjectsPage/>}>  </Route>
+          <Route path="/GroupsPage" element =  {<GroupsPage/>}>  </Route>
+
+        </Routes>
+      </BrowserRouter>
+
     </>
   );
 }
