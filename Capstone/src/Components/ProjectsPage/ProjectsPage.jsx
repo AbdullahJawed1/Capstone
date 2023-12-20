@@ -1,8 +1,7 @@
 // components/ProjectsPage.js
-import React from 'react';
-import NavBar from '../NavBar/NavBar';
-import Projects from "./Projects"
-
+import React from "react";
+import NavBar from "../NavBar/NavBar";
+import Projects from "./Projects";
 
 export default function ProjectsPage() {
   return (
@@ -23,8 +22,7 @@ export default function ProjectsPage() {
           Learn more
         </a>
       </div>
-      <Projects/>
-
+      <Projects />
     </div>
   );
-};
+}

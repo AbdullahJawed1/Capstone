@@ -26,6 +26,8 @@ const HomePage = () => {
       </div>
 
       <Projects />
+
+      
     </>
   );
 };
