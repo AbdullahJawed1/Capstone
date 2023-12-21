@@ -2,6 +2,7 @@
 import React from "react";
 import NavBar from "../NavBar/NavBar";
 import Projects from "./Projects";
+import SearchBar from "../SearchBar/SearchBar";
 
 export default function ProjectsPage() {
   return (
@@ -22,6 +23,7 @@ export default function ProjectsPage() {
           Learn more
         </a>
       </div>
+      <SearchBar/>
       <Projects />
     </div>
   );

@@ -1,6 +1,7 @@
 import React from "react";
 import NavBar from "../NavBar/NavBar";
 import Groups from "./Groups";
+import SearchBar from "../SearchBar/SearchBar";
 
 const GroupsPage = () => {
   return (
@@ -21,6 +22,8 @@ const GroupsPage = () => {
           Learn more
         </a>
       </div>
+      
+      <SearchBar/>
 
       <Groups />
     </div>
