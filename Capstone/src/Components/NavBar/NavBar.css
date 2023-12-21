@@ -1,0 +1,9 @@
+Nav a.active{
+    color: blue;
+    font-weight: bold;
+}
+
+Nav a.isActive{
+    color: blue;
+    font-weight: bold;
+}

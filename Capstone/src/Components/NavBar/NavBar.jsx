@@ -2,7 +2,7 @@
 import React from "react";
 import "./NavBar.css";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
-import { Link } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 import Container from "react-bootstrap/Container";
 import Nav from "react-bootstrap/Nav";
 import Navbar from "react-bootstrap/Navbar";
@@ -23,9 +23,9 @@ export default function NavBar() {
           <Navbar.Toggle aria-controls="basic-navbar-nav" />
           <Navbar.Collapse id="basic-navbar-nav">
             <Nav className="ms-auto">
-              <Nav.Link href="/">Home</Nav.Link>
-              <Nav.Link href="/ProjectsPage">Projects</Nav.Link>
-              <Nav.Link href="/GroupsPage">Groups</Nav.Link>
+              <Nav.Link exact activeClassName='isActive' href="/">Home</Nav.Link>
+              <Nav.Link activeClassName='isActive' href="/ProjectsPage">Projects</Nav.Link>
+              <Nav.Link activeClassName='isActive' href="/GroupsPage">Groups</Nav.Link>
               <NavDropdown title="Settings" id="basic-nav-dropdown">
                 <NavDropdown.Item href="#action/3.1">Profile</NavDropdown.Item>
                 <NavDropdown.Item href="#action/3.2">Chat</NavDropdown.Item>
