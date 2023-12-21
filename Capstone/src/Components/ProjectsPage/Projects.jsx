@@ -7,7 +7,7 @@ function Projects() {
   return (
     <>
       <div className="card_container">
-        <Card style={{ width: "18rem" }}>
+        <Card border="info" style={{ width: "18rem" }}>
           <Card.Img variant="top" src="holder.js/100px180" />
           <Card.Body>
             <Card.Title>Project Title</Card.Title>
@@ -19,7 +19,7 @@ function Projects() {
           </Card.Body>
         </Card>
 
-        <Card style={{ width: "18rem" }}>
+        <Card border="info" style={{ width: "18rem" }}>
           <Card.Img variant="top" src="holder.js/100px180" />
           <Card.Body>
             <Card.Title>Project Title</Card.Title>
@@ -31,7 +31,7 @@ function Projects() {
           </Card.Body>
         </Card>
 
-        <Card style={{ width: "18rem" }}>
+        <Card border="info" style={{ width: "18rem" }}>
           <Card.Img variant="top" src="holder.js/100px180" />
           <Card.Body>
             <Card.Title>Project Title</Card.Title>
@@ -43,7 +43,7 @@ function Projects() {
           </Card.Body>
         </Card>
 
-        <Card style={{ width: "18rem" }}>
+        <Card border="info" style={{ width: "18rem" }}>
           <Card.Img variant="top" src="holder.js/100px180" />
           <Card.Body>
             <Card.Title>Project Title</Card.Title>
@@ -55,7 +55,7 @@ function Projects() {
           </Card.Body>
         </Card>
 
-        <Card style={{ width: "18rem" }}>
+        <Card border="info" style={{ width: "18rem" }}>
           <Card.Img variant="top" src="holder.js/100px180" />
           <Card.Body>
             <Card.Title>Project Title</Card.Title>

@@ -7,7 +7,7 @@ export const Groups = () => {
   return (
     <>
       <div className="Groups--container">
-        <Card style={{ width: "18rem" }}>
+        <Card border="info" style={{ width: "18rem" }}>
           <Card.Img variant="top" src="holder.js/100px180?text=Image cap" />
           <Card.Body>
             <Card.Title>Group Title</Card.Title>
@@ -27,7 +27,7 @@ export const Groups = () => {
           </Card.Body>
         </Card>
 
-        <Card style={{ width: "18rem" }}>
+        <Card border="info"  style={{ width: "18rem" }}>
           <Card.Img variant="top" src="holder.js/100px180?text=Image cap" />
           <Card.Body>
             <Card.Title>Group Title</Card.Title>
@@ -47,7 +47,7 @@ export const Groups = () => {
           </Card.Body>
         </Card>
 
-        <Card style={{ width: "18rem" }}>
+        <Card border="info"  style={{ width: "18rem" }}>
           <Card.Img variant="top" src="holder.js/100px180?text=Image cap" />
           <Card.Body>
             <Card.Title>Group Title</Card.Title>
@@ -67,7 +67,7 @@ export const Groups = () => {
           </Card.Body>
         </Card>
 
-        <Card style={{ width: "18rem" }}>
+        <Card border="info"  style={{ width: "18rem" }}>
           <Card.Img variant="top" src="holder.js/100px180?text=Image cap" />
           <Card.Body>
             <Card.Title>Group Title</Card.Title>
@@ -87,7 +87,7 @@ export const Groups = () => {
           </Card.Body>
         </Card>
 
-        <Card style={{ width: "18rem" }}>
+        <Card border="info"  style={{ width: "18rem" }}>
           <Card.Img variant="top" src="holder.js/100px180?text=Image cap" />
           <Card.Body>
             <Card.Title>Group Title</Card.Title>
