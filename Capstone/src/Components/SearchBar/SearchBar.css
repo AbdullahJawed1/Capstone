@@ -1,18 +1,16 @@
-/* You can adjust the styles based on your specific needs */
 .search-bar-container {
-    width: 100%;
-    padding: 15px; /* Add padding if needed */
-    box-sizing: border-box;
-  }
-  
-  .input-group {
-    width: 100%;
+  width: 100%;
+  padding: 15px;
+  box-sizing: border-box;
+}
 
-  }
-  
-  .form-control {
-    width: 100%;
-    border-color: #3B71CA; /* Set the border color to blue */
+.input-group {
+  width: 100%;
 
-  }
-  
+}
+
+.form-control {
+  width: 100%;
+  border-color: #3B71CA;
+
+}
