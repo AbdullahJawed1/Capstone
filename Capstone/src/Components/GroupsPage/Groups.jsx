@@ -1,6 +1,8 @@
 import React from "react";
 import Card from "react-bootstrap/Card";
 import ListGroup from "react-bootstrap/ListGroup";
+import Button from "react-bootstrap/Button";
+
 import "./Groups.css";
 
 export const Groups = () => {
@@ -21,10 +23,9 @@ export const Groups = () => {
             <ListGroup.Item>Member 2</ListGroup.Item>
             <ListGroup.Item>Member 3</ListGroup.Item>
           </ListGroup>
-          <Card.Body>
-            <Card.Link href="#">Card Link</Card.Link>
-            <Card.Link href="#">Another Link</Card.Link>
-          </Card.Body>
+          {/* <Card.Body> */}
+          <Button variant="primary">Open</Button>
+          {/* </Card.Body> */}
         </Card>
 
         <Card border="info"  style={{ width: "18rem" }}>
@@ -41,10 +42,9 @@ export const Groups = () => {
             <ListGroup.Item>Member 2</ListGroup.Item>
             <ListGroup.Item>Member 3</ListGroup.Item>
           </ListGroup>
-          <Card.Body>
-            <Card.Link href="#">Card Link</Card.Link>
-            <Card.Link href="#">Another Link</Card.Link>
-          </Card.Body>
+          {/* <Card.Body> */}
+          <Button variant="primary">Open</Button>
+          {/* </Card.Body> */}
         </Card>
 
         <Card border="info"  style={{ width: "18rem" }}>
@@ -61,10 +61,9 @@ export const Groups = () => {
             <ListGroup.Item>Member 2</ListGroup.Item>
             <ListGroup.Item>Member 3</ListGroup.Item>
           </ListGroup>
-          <Card.Body>
-            <Card.Link href="#">Card Link</Card.Link>
-            <Card.Link href="#">Another Link</Card.Link>
-          </Card.Body>
+          {/* <Card.Body> */}
+          <Button variant="primary">Open</Button>
+          {/* </Card.Body> */}
         </Card>
 
         <Card border="info"  style={{ width: "18rem" }}>
@@ -81,10 +80,9 @@ export const Groups = () => {
             <ListGroup.Item>Member 2</ListGroup.Item>
             <ListGroup.Item>Member 3</ListGroup.Item>
           </ListGroup>
-          <Card.Body>
-            <Card.Link href="#">Card Link</Card.Link>
-            <Card.Link href="#">Another Link</Card.Link>
-          </Card.Body>
+          {/* <Card.Body> */}
+          <Button variant="primary">Open</Button>
+          {/* </Card.Body> */}
         </Card>
 
         <Card border="info"  style={{ width: "18rem" }}>
@@ -101,10 +99,9 @@ export const Groups = () => {
             <ListGroup.Item>Member 2</ListGroup.Item>
             <ListGroup.Item>Member 3</ListGroup.Item>
           </ListGroup>
-          <Card.Body>
-            <Card.Link href="#">Card Link</Card.Link>
-            <Card.Link href="#">Another Link</Card.Link>
-          </Card.Body>
+          {/* <Card.Body> */}
+          <Button variant="primary">Open</Button>
+          {/* </Card.Body> */}
         </Card>
       </div>
     </>

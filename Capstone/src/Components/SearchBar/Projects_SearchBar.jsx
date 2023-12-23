@@ -2,7 +2,7 @@ import React from "react";
 import { MDBCol, MDBIcon } from "mdbreact";
 import "./SearchBar.css";
 
-export const SearchBar = () => {
+export const Projects_SearchBar = () => {
   return (
     <div>
       <div className="search-bar-container">
@@ -19,7 +19,7 @@ export const SearchBar = () => {
             <input
               className="form-control my-0 py-1"
               type="text"
-              placeholder="Search"
+              placeholder="Search Projects"
               aria-label="Search"
             />
           </div>
@@ -29,4 +29,4 @@ export const SearchBar = () => {
   );
 };
 
-export default SearchBar;
+export default Projects_SearchBar;

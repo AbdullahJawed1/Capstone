@@ -1,7 +1,7 @@
 import React from "react";
 import NavBar from "../NavBar/NavBar";
 import Groups from "./Groups";
-import SearchBar from "../SearchBar/SearchBar";
+import Groups_SearchBar from "../SearchBar/Groups_SearchBar";
 
 const GroupsPage = () => {
   return (
@@ -23,9 +23,9 @@ const GroupsPage = () => {
         </a>
       </div>
       
-      <SearchBar/>
+      <Groups_SearchBar/>
+      <Groups/>
 
-      <Groups />
     </div>
   );
 };

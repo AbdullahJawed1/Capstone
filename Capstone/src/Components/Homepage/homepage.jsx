@@ -25,6 +25,8 @@ const HomePage = () => {
         </a>
       </div>
 
+      <h4 className="sub-project-heading">TOP PICKS FOR YOU</h4>
+
       <Projects />
 
       
