@@ -36,6 +36,9 @@ export default function NavBar() {
               <Nav.Link as={NavLink} to="/GroupsPage" activeClassName="active">
                 Groups
               </Nav.Link>
+              <Nav.Link as={NavLink} to="/SupervisorsPage" activeClassName="active">
+              Supervisors
+              </Nav.Link>
               <NavDropdown title="Settings" id="basic-nav-dropdown">
                 <NavDropdown.Item as={NavLink} to="/profile">
                   Profile

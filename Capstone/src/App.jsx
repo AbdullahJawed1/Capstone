@@ -4,6 +4,7 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import ProjectsPage from "./Components/ProjectsPage/ProjectsPage";
 import GroupsPage from "./Components/GroupsPage/GroupsPage";
 import Profile from "./Components/Profle/Profile";
+import SupervisorsPage from "./Components/Supervisors/SupervisorsPage";
 
 function App() {
   return (
@@ -15,6 +16,8 @@ function App() {
           <Route path="/ProjectsPage" element =  {<ProjectsPage/>}>  </Route>
           <Route path="/GroupsPage" element =  {<GroupsPage/>}>  </Route>
           <Route path="/Profile" element =  {<Profile/>}>  </Route>
+          <Route path="/SupervisorsPage" element =  {<SupervisorsPage/>}>  </Route>
+
 
 
         </Routes>
