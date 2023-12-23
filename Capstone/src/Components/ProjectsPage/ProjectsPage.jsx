@@ -23,8 +23,9 @@ export default function ProjectsPage() {
           Learn more
         </a>
       </div>
-      <SearchBar/>
       <Projects_SearchBar />
+      <Projects/>
+
     </div>
   );
 }
