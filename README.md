@@ -2,7 +2,7 @@
 
 Fyp project
 
-team members 
+Team members 
 
 Abdullah Jawed,
 Abdullah Omerji,
