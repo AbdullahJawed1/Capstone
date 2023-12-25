@@ -1,12 +1,10 @@
 import React from 'react'
 import NavBar from '../NavBar/NavBar'
-
 export const Chat = () => {
   return (
     <div>
 
 <NavBar />
-
 <div class="jumbotron">
 <h1 class="display-4">Chat System!</h1>
 <p class="lead">

@@ -49,6 +49,9 @@ export default function NavBar() {
                 </NavDropdown.Item>
                 <NavDropdown.Divider />
               </NavDropdown>
+              <Nav.Link as={NavLink} to="/Login" activeClassName="active">
+                Login
+              </Nav.Link>
             </Nav>
           </Navbar.Collapse>
         </Container>
