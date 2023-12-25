@@ -6,6 +6,7 @@ Abdullah Jawed,
 Abdullah Omerji,
 Tayyib Ismail.
 
+This is a project management system with advanced capabilities of supporting features.
 
 
 
