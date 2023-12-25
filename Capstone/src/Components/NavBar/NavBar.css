@@ -1,9 +1,7 @@
 Nav a.active{
     font-weight: bold;
-    color: #3B71CA;
+    color: #3B71CA !important;
 }
 
-.navbar-nav .nav-link.active {
-    color: #3B71CA !important; /* Add !important to override Bootstrap styles */
-  }
+
 

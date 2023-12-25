@@ -40,10 +40,11 @@ export default function NavBar() {
               Supervisors
               </Nav.Link>
               <NavDropdown title="Settings" id="basic-nav-dropdown">
-                <NavDropdown.Item as={NavLink} to="/profile">
+                <NavDropdown.Item as={NavLink} to="/profile" activeClassName="active">
                   Profile
+
                 </NavDropdown.Item>
-                <NavDropdown.Item as={NavLink} to="/chat">
+                <NavDropdown.Item as={NavLink} to="/Chat" activeClassName="active">
                   Chat
                 </NavDropdown.Item>
                 <NavDropdown.Divider />

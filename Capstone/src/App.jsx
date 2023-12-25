@@ -5,6 +5,7 @@ import ProjectsPage from "./Components/ProjectsPage/ProjectsPage";
 import GroupsPage from "./Components/GroupsPage/GroupsPage";
 import Profile from "./Components/Profle/Profile";
 import SupervisorsPage from "./Components/Supervisors/SupervisorsPage";
+import Chat from "./Components/Chat/Chat";
 
 function App() {
   return (
@@ -17,6 +18,9 @@ function App() {
           <Route path="/GroupsPage" element =  {<GroupsPage/>}>  </Route>
           <Route path="/Profile" element =  {<Profile/>}>  </Route>
           <Route path="/SupervisorsPage" element =  {<SupervisorsPage/>}>  </Route>
+          <Route path="/Chat" element =  {<Chat/>}>  </Route>
+
+
 
 
 
