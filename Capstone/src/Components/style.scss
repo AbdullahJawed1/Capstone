@@ -71,20 +71,22 @@
     .container{
         border: 1px solid white;
         border-radius: 10px;
-        width: 65%;
-        height: 80%;
+        width: 75%;
+        height: 90%;
         display: flex; 
         overflow: hidden;
+        padding: 0px;
 
         .chatSideBar {
             flex: 1;
             border-right: 1px solid black;
             background-color: white;
+
             .chatNavBar {
                 display: flex;
                 align-items: center;
                 background-color: darkblue;
-                height: 50px;
+                height: calc(10%);
                 padding: 10px;
                 justify-content: space-between;
                 color: gray;
@@ -118,6 +120,101 @@
 
         .chatChat {
             flex: 2;
+
+            .chatInfo{
+                height: calc(10%);
+                background-color: pink;
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+                padding: 10px;
+                color: lightgray;
+            }
+        }
+
+        .chatSearch{
+            border-bottom: 1px solid black;
+
+            .chatSearchForm{
+                padding: 10px;
+
+                input{
+                    background-color: transparent;
+                    border: none;
+                    color: gray;
+                    outline: none;
+                }
+            }
+        }
+
+        .userChat{
+            padding: 10px;
+            align-items: center;
+            display: flex;
+            gap: 10px;
+            cursor: pointer;
+
+            &:hover{
+                background-color: pink;
+            }
+            img{
+                width: 40px;
+                height: 40px;
+                border-radius: 50%;
+                object-fit: cover;
+            }
+            
+            .userChatInfo {
+                padding: 2px;
+                span{
+                    font-size: 18px;
+                    font-weight: 500;
+                }
+                p{
+                    font-size: 14px;
+                    color: lightblue;
+                }
+            }
+
+        }
+
+        .chatMessages{
+            background: lightcyan;
+            padding: 10px;
+            height: calc(80%);
+        }
+
+        .chatInput{
+            height: calc(10%);
+            background-color: white;
+            padding: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+
+            input{
+                width: 75%;
+                border: none;
+                outline: none;
+                color: lightgray;
+                font-size: 18px;
+            }
+            button{
+                border-radius: 10px;
+                background-color: pink;
+                border: none;
+            }
+        }
+
+        .sendMessages{
+            display: flex;
+            align-items: center;
+            gap: 10px;
+
+            img{
+                height: 25px;
+                cursor: pointer;
+            }
         }
     }
 }

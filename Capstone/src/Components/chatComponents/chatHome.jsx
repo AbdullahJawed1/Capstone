@@ -5,7 +5,6 @@ export default function ChatHome () {
     return(
         <div className="chatHome">
             <div className="container">
-                {/* <p>Home</p> */}
                 <ChatSideBar />
                 <ChatChat />
             </div>

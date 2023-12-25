@@ -25,11 +25,11 @@ function App() {
           <Route path="/GroupsPage" element =  {<GroupsPage/>}>  </Route>
           <Route path="/Profile" element =  {<Profile/>}>  </Route>
           <Route path="/SupervisorsPage" element =  {<SupervisorsPage/>}>  </Route>
-          <Route path="/Chat" element =  {<Chat/>}>  </Route>
+          {/* <Route path="/Chat" element =  {<ChatHome/>}>  </Route> */}
           <Route path="/Register" element =  {<Register/>}>  </Route>
           <Route path="/Login" element =  {<Login/>}>  </Route>
 
-          <Route path="/chatHome" element =  {<ChatHome/>}>  </Route>
+          <Route path="/Chat" element =  {<ChatHome/>}>  </Route>
 
         </Routes>
       </BrowserRouter>
