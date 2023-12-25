@@ -4,6 +4,6 @@ Fyp project
 
 team members 
 
-abdullah jawed
-abdullah omerji
-tayyib ismail 20k-0461
+Abdullah Jawed,
+Abdullah Omerji,
+Tayyib Ismail
