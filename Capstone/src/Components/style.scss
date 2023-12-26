@@ -1,3 +1,4 @@
+
 .formContainer{
     background-color: #303F9F;
     height: 100vh;
@@ -182,6 +183,55 @@
             background: lightcyan;
             padding: 10px;
             height: calc(80%);
+            overflow: scroll;
+
+            .chatMessage{
+                display: flex;
+                gap: 10px;
+                margin-bottom: 10px;
+
+                .messageInfo{
+                    display: flex;
+                    flex-direction: column;
+                    color: gray;
+                    font-weight: 100;
+                    img{
+                       width: 40px;
+                       height: 40px;
+                       border-radius: 50%;
+                       object-fit: cover; 
+                    }
+                }
+
+                .messageContent{
+                    max-width: 75%;
+                    display: flex;
+                    flex-direction: column;
+                    gap: 10px;
+
+                    p{
+                        background-color: pink;
+                        padding: 10px;
+                        border-radius: 0px 10px 10px 10px;
+                    }
+                    img{
+                        width: 40%;
+                    }
+                }
+
+                &.owner{
+                    flex-direction: row-reverse;
+                    .messageContent{
+                        align-items: flex-end;
+                    
+                        p{
+                            background-color: purple;
+                            color: white;
+                            border-radius: 10px 0px 10px 10px;
+                        }
+                    }
+                }
+            }
         }
 
         .chatInput{
