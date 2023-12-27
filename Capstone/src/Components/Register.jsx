@@ -17,33 +17,39 @@ export default function Register() {
         const password = e.target[2].value;
         const imgFile = e.target[3].files[0];
 
-        try{
-            const res = await createUserWithEmailAndPassword(auth, email, password)
-            
-            const storageRef = ref(storage, displayName);
+        createUserWithEmailAndPassword(auth, email, password)
+            .then((userCredential) =>{
+            const user = userCredential.user;
 
-            const uploadTask = uploadBytesResumable(storageRef, file);
-
-            uploadTask.on(
-            (error) => {
-               setError(true)
-            }, 
-            () => {
-                getDownloadURL(uploadTask.snapshot.ref).then(async (downloadURL) => {
-                await updateProfile(res.user,{
-                    displayName,
-                    photoURL:downloadURL
-                });
-                });
-            }
-            );
-
-            await setDoc(doc(db,"Users",res.user.uid),{
-                
+            console.log(user);
             })
-        }catch(error){
-            setError(true)
-        }
+        // try{
+        //     const res = await createUserWithEmailAndPassword(auth, email, password)
+            
+        //     const storageRef = ref(storage, displayName);
+
+        //     const uploadTask = uploadBytesResumable(storageRef, file);
+
+        //     uploadTask.on(
+        //     (error) => {
+        //        setError(true)
+        //     }, 
+        //     () => {
+        //         getDownloadURL(uploadTask.snapshot.ref).then(async (downloadURL) => {
+        //         await updateProfile(res.user,{
+        //             displayName,
+        //             photoURL:downloadURL
+        //         });
+        //         });
+        //     }
+        //     );
+
+        //     await setDoc(doc(db,"Users",res.user.uid),{
+                
+        //     })
+        // }catch(error){
+        //     setError(true)
+        // }
 
     }
     
