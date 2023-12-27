@@ -3,6 +3,7 @@ import { createUserWithEmailAndPassword, updateProfile } from "firebase/auth";
 import { auth,storage } from "../firebase.js"
 import { ref, uploadBytesResumable, getDownloadURL } from "firebase/storage";
 import { doc, setDoc } from "firebase/firestore"
+import { Link } from "react-router-dom";
 
 
 export default function Register() {
@@ -63,7 +64,7 @@ export default function Register() {
                     <button>Sign Up</button>
                     {error && <span>Some error occured!</span>}
                 </form>
-                <p>Already have an account?Sign in</p>
+                <p>Already have an account?<Link style={{textDecoration:"none"}} to="/Login"> Sign in</Link></p>
             </div>
         </div>
     )
