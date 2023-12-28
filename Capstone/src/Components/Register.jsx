@@ -3,11 +3,12 @@ import { createUserWithEmailAndPassword, updateProfile } from "firebase/auth";
 import { auth,storage,db } from "../firebase.js"
 import { ref, uploadBytesResumable, getDownloadURL } from "firebase/storage";
 import { doc, setDoc } from "firebase/firestore"
-import { Link } from "react-router-dom";
+import { Link,useNavigate } from "react-router-dom";
 
 
 export default function Register() {
     
+    const history = useNavigate();
     const [error,setError] = useState(false)
     const handleSubmit = async (e) =>{
         e.preventDefault()
@@ -21,6 +22,7 @@ export default function Register() {
         .then((userCredential)=>{
             const user = userCredential.user;
             console.log(user)
+            history('/Login');
         })
         .catch((error)=>{
             const errorCode = error.code;
@@ -75,7 +77,7 @@ export default function Register() {
                             <span>Add an image</span>
                         </label>
                     <button>
-                        <Link style={{textDecoration:"none"}} to="/">Sign Up</Link>
+                        Sign Up
                     </button>
                     {error && <span>Some error occured!</span>}
                 </form>
