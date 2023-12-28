@@ -7,8 +7,8 @@ function Projects() {
   return (
     <>
       <div className="card_container">
-        <Card border="info" style={{ width: "18rem" }}>
-          <Card.Img variant="top" src="holder.js/100px180" />
+        <Card border="info" style={{ width: "18rem" ,height: "22rem"}}>
+          <Card.Img variant="top" style={{ height: "150px", maxWidth: "auto", objectFit: "cover" }} src="./src/assets/Capstone.png" />
           <Card.Body>
             <Card.Title>Project Title</Card.Title>
             <Card.Text>
@@ -19,8 +19,8 @@ function Projects() {
           </Card.Body>
         </Card>
 
-        <Card border="info" style={{ width: "18rem" }}>
-          <Card.Img variant="top" src="holder.js/100px180" />
+         <Card border="info" style={{ width: "18rem" ,height: "22rem"}}>
+          <Card.Img variant="top" style={{ height: "150px", maxWidth: "auto", objectFit: "cover" }} src="./src/assets/Capstone.png" />
           <Card.Body>
             <Card.Title>Project Title</Card.Title>
             <Card.Text>
@@ -31,8 +31,8 @@ function Projects() {
           </Card.Body>
         </Card>
 
-        <Card border="info" style={{ width: "18rem" }}>
-          <Card.Img variant="top" src="holder.js/100px180" />
+         <Card border="info" style={{ width: "18rem" ,height: "22rem"}}>
+          <Card.Img variant="top" style={{ height: "150px", maxWidth: "auto", objectFit: "cover" }} src="./src/assets/Capstone.png" />
           <Card.Body>
             <Card.Title>Project Title</Card.Title>
             <Card.Text>
@@ -43,8 +43,8 @@ function Projects() {
           </Card.Body>
         </Card>
 
-        <Card border="info" style={{ width: "18rem" }}>
-          <Card.Img variant="top" src="holder.js/100px180" />
+         <Card border="info" style={{ width: "18rem" ,height: "22rem"}}>
+          <Card.Img variant="top" style={{ height: "150px", maxWidth: "auto", objectFit: "cover" }} src="./src/assets/Capstone.png" />
           <Card.Body>
             <Card.Title>Project Title</Card.Title>
             <Card.Text>
@@ -55,8 +55,8 @@ function Projects() {
           </Card.Body>
         </Card>
 
-        <Card border="info" style={{ width: "18rem" }}>
-          <Card.Img variant="top" src="holder.js/100px180" />
+         <Card border="info" style={{ width: "18rem" ,height: "22rem"}}>
+          <Card.Img variant="top" style={{ height: "150px", maxWidth: "auto", objectFit: "cover" }} src="./src/assets/Capstone.png" />
           <Card.Body>
             <Card.Title>Project Title</Card.Title>
             <Card.Text>
