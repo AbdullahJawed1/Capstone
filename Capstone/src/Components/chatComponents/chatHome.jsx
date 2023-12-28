@@ -1,8 +1,10 @@
-import React from 'react'
-import NavBar from '../NavBar/NavBar'
-export const Chat = () => {
-  return (
-    <div>
+import React from "react";
+import ChatSideBar from "./chatSidebar";
+import ChatChat from "./chatChat";
+import NavBar from "../NavBar/NavBar";
+export default function ChatHome () {
+    return(
+        <>
 
 <NavBar />
 <div class="jumbotron">
@@ -21,8 +23,15 @@ export const Chat = () => {
 </a>
 </div>
 
-    </div>
-  )
-}
 
-export default Chat;
+        <div className="chatHome">
+
+
+            <div className="container">
+                <ChatSideBar />
+                <ChatChat />
+            </div>
+        </div>
+        </>
+    )
+}
