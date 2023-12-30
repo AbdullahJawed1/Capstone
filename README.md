@@ -1,6 +1,6 @@
 # Capstone
 
-Fyp project Team members. 
+Fyp project Team members 
 
 Abdullah Jawed,
 Abdullah Omerji,
