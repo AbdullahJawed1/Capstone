@@ -1,0 +1,16 @@
+.search-bar-container {
+  width: 100%;
+  padding: 15px;
+  box-sizing: border-box;
+}
+
+.input-group {
+  width: 100%;
+
+}
+
+.form-control {
+  width: 100%;
+  border-color: #3B71CA;
+
+}

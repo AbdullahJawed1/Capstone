@@ -8,7 +8,8 @@ pnpm-debug.log*
 lerna-debug.log*
 
 node_modules
-dist
+C:\Users\abdul\Documents\GitHub\Capstone\Backend\node_modulesdist
+Backend\node_modules
 dist-ssr
 *.local
 
