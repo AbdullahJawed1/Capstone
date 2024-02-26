@@ -6,8 +6,23 @@ import Container from "react-bootstrap/Container";
 import Nav from "react-bootstrap/Nav";
 import Navbar from "react-bootstrap/Navbar";
 import NavDropdown from "react-bootstrap/NavDropdown";
+import { signOut } from "firebase/auth";
+import { auth } from "../../firebase";
+import { useNavigate, Link } from "react-router-dom";
 
 export default function NavBar() {
+  
+  const navigate = useNavigate();
+
+  const handleSubmit = async () => {
+    try {
+      await signOut(auth);
+      navigate("/");
+    } catch (error) {
+      console.error("Error signing out:", error);
+    }
+  };
+
   return (
     <>
       <Navbar expand="lg" className="bg-body-tertiary">
@@ -49,12 +64,12 @@ export default function NavBar() {
                 </NavDropdown.Item>
                 <NavDropdown.Divider />
               </NavDropdown>
-              <Nav.Link as={NavLink} to="/Login" activeClassName="active">
-                Login
-              </Nav.Link>
             </Nav>
           </Navbar.Collapse>
         </Container>
+        <a className="btn btn-primary btn-sml" href="#" role="button" onClick={handleSubmit} style={{ margin: '10px' }}>
+          Sign Out
+        </a>
       </Navbar>
     </>
   );

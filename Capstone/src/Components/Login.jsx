@@ -1,30 +1,26 @@
 import React,{useState} from "react"
-import { signInWithEmailAndPassword } from 'firebase/auth';
+import { signInWithEmailAndPassword } from "firebase/auth";
 import { Link,useNavigate } from "react-router-dom";
-import { auth} from "../firebase.js"
+import { auth } from "../firebase.js"
 
 export default function Login() {
 
-    const history = useNavigate();
-    const [error, setError] = useState(false);
+    const [err, setErr] = useState(false);
+    const navigate = useNavigate();
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-
         const email = e.target[0].value;
         const password = e.target[1].value;
 
-        signInWithEmailAndPassword(auth, email, password)
-            .then((userCredential) => {
-                const user = userCredential.user;
-                console.log(user);
-                history('/'); 
-            })
-            .catch((error) => {
-                const errorCode = error.code;
-                const errorMessage = error.message;
-                console.error(errorCode, errorMessage);
-            });
+
+        try {
+            await signInWithEmailAndPassword(auth, email, password);
+            navigate("/");
+        }catch (err) {
+            setErr(true);
+            console.log(err);
+          }
     };
     return (
         <div className="formContainer">
@@ -35,6 +31,7 @@ export default function Login() {
                     <input type="email" placeholder="Email"/>
                     <input type="password" placeholder="Password"/>
                     <button>Sign In</button>
+                    {err && <span>Some error occured!</span>}
                 </form>
                 <p>Don't have an account?<Link style={{textDecoration:"none"}} to="/Register"> Register</Link></p>
             </div>

@@ -6,7 +6,7 @@ export default function ChatChat() {
     return(
         <div className="chatChat">
             <div className="chatInfo">
-                <span>Display Name</span>
+                <span>Display Name ?</span>
             </div>
             <ChatMessages />
 
