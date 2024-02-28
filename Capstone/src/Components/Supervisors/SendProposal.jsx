@@ -84,13 +84,14 @@ export default function SendProposal() {
                   </div>
 
                   {/* Submit Button */}
-                  <MDBBtn
-                    color="danger"
-                    style={{ width: "100%" }}
-                    className="mt-4"
-                  >
-                    <MDBIcon far icon="paper-plane" className="me-2" /> Send Proposal
-                  </MDBBtn>
+                  {/* <Link to="/SupervisorsPage/SendProposal"> */}
+                  <button
+                      className="btn btn-outline-dark rounded block"
+                      style={{ backgroundColor: "#DC4C64", width: "100%" }}
+                    >
+                      <i className="far fa-clock me-2"></i> Send proposal
+                    </button>
+                  {/* </Link> */}
                 </form>
               </MDBCardBody>
             </MDBCard>
