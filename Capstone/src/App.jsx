@@ -1,6 +1,6 @@
 import { BrowserRouter, Route, Routes,Navigate } from "react-router-dom";
 import { useContext } from "react";
-import { AuthContext } from "./Components/Context/AuthContext";
+import { AuthContext } from "./Components/context/AuthContext";
 
 import "./Components/style.scss";
 import "bootstrap/dist/css/bootstrap.min.css";
