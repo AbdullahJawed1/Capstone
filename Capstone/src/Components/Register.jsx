@@ -40,7 +40,7 @@ const Register = () => {
             // Update profile
             await updateProfile(res.user, {
               displayName,
-              photoURL: downloadURL,
+            //   photoURL: downloadURL,
             });
 
             // Create user on firestore based on userType

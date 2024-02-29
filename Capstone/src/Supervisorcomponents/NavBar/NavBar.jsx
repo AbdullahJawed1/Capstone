@@ -34,6 +34,19 @@ export default function NavBar() {
               >
                 Projects
               </Nav.Link>
+
+              <Nav.Link
+                as={NavLink}
+                to="/proposals"
+                activeClassName="active"
+              >
+                proposals
+              </Nav.Link>
+
+
+
+
+
               
               <NavDropdown title="Settings" id="basic-nav-dropdown">
                 {/* <NavDropdown.Item as={NavLink} to="/Sup_profile" activeClassName="active">
