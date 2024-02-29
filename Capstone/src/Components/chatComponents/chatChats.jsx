@@ -34,7 +34,7 @@ export default function ChatChats() {
 
 
     return(
-        <div className="chatChats">
+        <div className="chats">
             {Object.entries(chats)?.map((chat) => (
             <div className="userChat" 
                 key = {chat[0]}

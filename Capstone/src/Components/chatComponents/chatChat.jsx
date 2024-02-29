@@ -8,7 +8,7 @@ export default function ChatChat() {
     const {data} = useContext(ChatContext);
 
     return(
-        <div className="chatChat">
+        <div className="chat">
             <div className="chatInfo">
                 <span>{data.user.displayName}</span>
             </div>

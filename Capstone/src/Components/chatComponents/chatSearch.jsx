@@ -75,8 +75,8 @@ export default function ChatSearch() {
         };
     
     return(
-        <div className="chatSearch">
-            <div className="chatSearchForm">
+        <div className="search">
+            <div className="searchForm">
                 <input type="text" placeholder="Find a user" 
                 onChange={e=>setUsername(e.target.value)} 
                 onKeyDown={handleKey}

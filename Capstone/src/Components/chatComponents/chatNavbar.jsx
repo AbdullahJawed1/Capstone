@@ -6,7 +6,7 @@ import { AuthContext } from "../Context/AuthContext";
 export default function ChatNavBar() {
     const {currUser} = useContext(AuthContext);
     return(
-        <div className="chatNavBar">
+        <div className="navbar">
             <span className="logo">Capstone</span>
             <div className="user">
                 <img src={currUser.photoURL} alt="image" />

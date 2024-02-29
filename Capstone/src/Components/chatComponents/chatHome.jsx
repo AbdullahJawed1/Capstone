@@ -24,7 +24,7 @@ export default function ChatHome () {
 </div>
 
 
-        <div className="chatHome">
+        <div className="home">
 
 
             <div className="container">

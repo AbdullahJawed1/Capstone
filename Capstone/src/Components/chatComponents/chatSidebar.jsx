@@ -5,7 +5,7 @@ import ChatChats from "./chatChats";
 
 export default function ChatSideBar() {
     return(
-        <div className="chatSideBar">
+        <div className="sidebar">
             <ChatNavBar />
             <ChatSearch />
             <ChatChats />
