@@ -1,88 +1,67 @@
-import React, { useState } from "react"
-import { createUserWithEmailAndPassword, updateProfile } from "firebase/auth";
-import { auth,storage,db } from "../firebase.js"
-import { ref, uploadBytesResumable, getDownloadURL } from "firebase/storage";
-import { doc, setDoc } from "firebase/firestore"
-import { Link,useNavigate } from "react-router-dom";
+import { useState } from 'react';
+import '../assets/style.css'
+import { Link } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
+import supabase from '../../config/supabase';
 
+function Register() {
+    const navigate = useNavigate();
+    const [firstname,setFirstname] = useState('');
+    const [lastname,setLastname] = useState('');
+    const [email,setEmail] = useState('');
+    const [password,setPassword] = useState('');
+    const [error, setError] = useState('');
 
-export default function Register() {
-    
-    const history = useNavigate();
-    const [error,setError] = useState(false)
-    const handleSubmit = async (e) =>{
-        e.preventDefault()
-
-        const displayName = e.target[0].value;
-        const email = e.target[1].value;
-        const password = e.target[2].value;
-        const imgFile = e.target[3].files[0];
+    const handleSubmit = async (e) => {
+        e.preventDefault();
         
-        createUserWithEmailAndPassword(auth, email, password)
-        .then((userCredential)=>{
-            const user = userCredential.user;
-            console.log(user)
-            history('/Login');
-        })
-        .catch((error)=>{
-            const errorCode = error.code;
-            const errorMessage = error.message
-        })
-        // try{
-        //     createUserWithEmailAndPassword(auth, email, password)
-        // //     const res = await createUserWithEmailAndPassword(auth, email, password)
-        // //     console.log(res.user);
-        // //     const storageRef = ref(storage,`${displayName}`);
+        if(!email||!password||!firstname||!lastname){
+            setError("Fill all fields")
+            return 
+        }
+        
+        // console.log(email,password,firstname,lastname);
 
-        // //     const uploadTask = uploadBytesResumable(storageRef, imgFile);
+        let { data, error } = await supabase.auth.signUp({
+            email: email,
+            password: password
+            })
 
-        // //     uploadTask.on(
-        // //     (error) => {
-        // //        setError(true);
-        // //     }, 
-        // //     () => {
-        // //         getDownloadURL(uploadTask.snapshot.ref).then(async (downloadURL) => {
-        // //         await updateProfile(res.user,{
-        // //             displayName,
-        // //             photoURL:downloadURL
-        // //         });
-        // //         await setDoc(doc(db,"users",res.user.uid),{
-        // //             uid:res.user.uid,
-        // //             displayName,
-        // //             email,
-        // //             photoURL:downloadURL,
-        // //         });
-        // //     });
-        // // }
-        // // );    
-        // }catch(error){
-        //     console.log(error)
-        //     setError(true);
-        // }
+        try {
+            const { data, error } = await supabase
+              .from('student')
+              .insert([
+                { email,firstname,lastname }
+              ]);        
+            if (error) {
+              throw error;
+            }
+            console.log('Student inserted successfully:', data);
+            navigate('/Login');
+          } catch (error) {
+            console.error('Error inserting student:', error.message);
+          }
 
-    };
-    
-    return (
-        <div className="formContainer">
-            <div className="formWrapper">
-                <span className="logo">Capstone</span>
-                <span className="title">Register</span>
-                <form onSubmit={handleSubmit}>
-                    <input type="text" placeholder="Name"/>
-                    <input type="email" placeholder="Email"/>
-                    <input type="password" placeholder="Password"/>
-                    <input style={{display:"none"}}type="file" id="imagefile"/>
-                        <label htmlFor="imagefile">
-                            <img src="src\assets\addAvatar.png" alt="" />
-                            <span>Add an image</span>
-                        </label>
-                    <button>
-                        Sign Up
-                    </button>
-                    {error && <span>Some error occured!</span>}
-                </form>
-                <p>Already have an account?<Link style={{textDecoration:"none"}} to="/Login"> Sign in</Link></p>
-            </div>
+      };
+
+    return(
+        <div>
+            <h1>Register Page</h1>
+            <form className="LoginForm" onSubmit={handleSubmit}>
+                <input type="text" id="email" value={email} 
+                placeholder="Enter Email" onChange={(e) => setEmail(e.target.value)}/>
+                <input type="password" id="password" value={password} 
+                placeholder="Enter password" onChange={(e) => setPassword(e.target.value)}/>
+                <input type="text" id="firstname" value={firstname} 
+                placeholder="Enter first name" onChange={(e) => setFirstname(e.target.value)}/>
+                <input type="text" id="lastname" value={lastname} 
+                placeholder="Enter last name" onChange={(e) => setLastname(e.target.value)}/>
+                <button type='submit'>Register</button>
+                {error && <div className="error-message">{error}</div>}
+                <p>Already have an account? <Link to="/Login">Login</Link></p>
+            </form>
         </div>
     )
 }
+  
+export default Register  

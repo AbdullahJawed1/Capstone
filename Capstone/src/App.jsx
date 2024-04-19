@@ -1,52 +1,26 @@
-import { BrowserRouter, Route, Routes } from "react-router-dom";
-
-import "./Components/style.scss";
-import "bootstrap/dist/css/bootstrap.min.css";
-import HomePage from "./Components/Homepage/homepage";
-import ProjectsPage from "./Components/ProjectsPage/ProjectsPage";
-import GroupsPage from "./Components/GroupsPage/GroupsPage";
-import Profile from "./Components/Profle/Profile";
-import SupervisorsPage from "./Components/Supervisors/SupervisorsPage";
-import Chat from "./Components/Chat/Chat";
-import Register from "./Components/Register";
-import Login from "./Components/Login";
-import ChatHome from "./Components/chatComponents/chatHome";
-import SupervisorProfile from "./Components/Supervisors/SupervisorProfile"
-import SendProposal from "./Components/Supervisors/SendProposal"
-import Sup_HomePage from "./Supervisorcomponents/Homepage/Sup_homepage"
-import Sup_ProjectsPage from "./Supervisorcomponents/ProjectsPage/Sup_ProjectsPage";
+import './App.css'
+import supabase from '../config/supabase'
+import {BrowserRouter as Router,Routes,Route} from 'react-router-dom'
+import Home from './Components/Home'
+import Login from './Components/Login'
+import Register from './Components/Register'
 
 function App() {
-  return (
-    <>
-      <BrowserRouter>
-        <Routes>
+  console.log(supabase)
+  return(
+    <Router>
+      <Routes>
+
+      <Route path="/" element={<Home/>}/>
+        <Route path="/Login" element={<Login />}/>
+        <Route path="/Register" element={<Register/>}/>
         
-
-          <Route path="/" element =  {<HomePage />}>  </Route>
-          <Route path="/ProjectsPage" element =  {<ProjectsPage/>}>  </Route>
-          <Route path="/GroupsPage" element =  {<GroupsPage/>}>  </Route>
-          <Route path="/Profile" element =  {<Profile/>}>  </Route>
-          <Route path="/SupervisorsPage" element =  {<SupervisorsPage/>}>  </Route>
-          {/* <Route path="/Chat" element =  {<ChatHome/>}>  </Route> */}
-          <Route path="/Register" element =  {<Register/>}>  </Route>
-          <Route path="/Login" element =  {<Login/>}>  </Route>
-          <Route path="/Chat" element =  {<ChatHome/>}>  </Route>
-          <Route path="/SupervisorsPage/SupervisorProfile" element =  {<SupervisorProfile/>}>  </Route>
-          <Route path="/SupervisorsPage/SendProposal" element =  {<SendProposal/>}>  </Route>
-          <Route path="/Sup_HomePage" element =  {<Sup_HomePage/>}>  </Route>
-          <Route path="/Sup_ProjectsPage" element =  {<Sup_ProjectsPage/>}>  </Route>
-
-
-
-
-
-
-        </Routes>
-      </BrowserRouter>
-
-    </>
-  );
+      </Routes>
+    </Router>
+    // <div>
+    //   <h2>Capstone</h2>
+    // </div>
+  )    
 }
 
-export default App;
+export default App
