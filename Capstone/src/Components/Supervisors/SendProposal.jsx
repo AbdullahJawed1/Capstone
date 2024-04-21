@@ -15,13 +15,13 @@ export default function SendProposal() {
     e.preventDefault();
     try {
       // Insert the proposal into the database
-      const { data, error } = await supabase.from('proposals').insert([
+      const { data, error } = await supabase.from('Proposals').insert([
         {
           project_name: projectName,
           project_domain: projectDomain,
-          team_lead_email: teamLeadEmail,
           team_lead_name: teamLeadName,
           team_lead_Id: teamLeadRollNumber,
+          team_lead_email: teamLeadEmail,
           reason: reason,
           proposal: proposal
         },
@@ -47,7 +47,7 @@ export default function SendProposal() {
               <div className="card-body" style={{ backgroundColor: "#f8f9fa" }}>
                 <form onSubmit={handleSubmit}>
 
-                <h2 className="mb-4 text-center text-primary">SEND PROPOSAL</h2>
+                  <h2 className="mb-4 text-center text-primary">SEND PROPOSAL</h2>
 
                   {/* Input for Project Name */}
                   <h4 className="mb-4">Project Details</h4>
