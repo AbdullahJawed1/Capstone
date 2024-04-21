@@ -23,11 +23,11 @@ function Projects() {
     <>
       <div className="card_container">
         {projects.map(project => (
-          <Card key={project.ProjectID} border="info" style={{ width: "18rem", height: "22rem" }}>
+          <Card key={project.ProjectID} border="info" style={{ width: "18rem", height: "22rem", marginBottom: "20px" }}>
             <Card.Body>
               <Card.Title>{project.Title}</Card.Title>
               <Card.Text>
-                {project.Summary}
+                {project.Subjects}
               </Card.Text>
               <Button variant="primary">Open</Button>
             </Card.Body>
