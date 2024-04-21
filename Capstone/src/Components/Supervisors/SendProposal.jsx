@@ -1,14 +1,4 @@
 import React, { useState } from "react";
-import {
-  MDBContainer,
-  MDBRow,
-  MDBCol,
-  MDBCard,
-  MDBCardBody,
-  MDBBtn,
-  MDBIcon,
-  MDBInput,
-} from "mdb-react-ui-kit";
 import NavBar from "../NavBar/NavBar";
 
 export default function SendProposal() {
@@ -26,52 +16,33 @@ export default function SendProposal() {
     <>
       <NavBar />
 
-      <MDBContainer className="py-5" >
-        <MDBRow className="justify-content-center" >
-          <MDBCol md="8">
-            <MDBCard>
-              <MDBCardBody style={{ backgroundColor: "#f8f9fa" }}>
+      <div className="container py-5">
+        <div className="row justify-content-center">
+          <div className="col-md-8">
+            <div className="card">
+              <div className="card-body" style={{ backgroundColor: "#f8f9fa" }}>
                 <form>
 
                 <h2 className="mb-4 text-center text-primary">SEND PROPOSAL</h2>
 
                   {/* Input for Project Name */}
                   <h4 className="mb-4">Project Details</h4>
-                  <MDBInput type="text" className="mb-3" placeholder="Enter project name" />
-                  <MDBInput type="text" className="mb-3" placeholder="Enter project domain" />
+                  <input type="text" className="form-control mb-3" placeholder="Enter project name" />
+                  <input type="text" className="form-control mb-3" placeholder="Enter project domain" />
 
                   {/* Input for Team Leader's Details */}
                   <h4 className="mb-4">Team Leader Details</h4>
-                  <MDBInput type="text" className="mb-3" placeholder="Enter team leader's name" />
-                  <MDBInput type="text" className="mb-3" placeholder="Enter team leader's roll number" />
-                  <MDBInput type="email" className="mb-3" placeholder="Enter team leader's email" />
+                  <input type="text" className="form-control mb-3" placeholder="Enter team leader's name" />
+                  <input type="text" className="form-control mb-3" placeholder="Enter team leader's roll number" />
+                  <input type="email" className="form-control mb-3" placeholder="Enter team leader's email" />
 
-                  {/* Input for Group Members */}
-                  <h4 className="mb-4">Group Member 1</h4>
-                  {members.map((member) => (
-                    <div key={member.id}>
-                      <MDBInput type="text" className="mb-3" placeholder="Enter member's name" />
-                      <MDBInput type="text" className="mb-3" placeholder="Enter member's roll number" />
-                      <MDBInput type="email" className="mb-3" placeholder="Enter member's email" />
-                    </div>
-                  ))}
-
-                    <h4 className="mb-4">Group Member 2</h4>
-                  {members.map((member) => (
-                    <div key={member.id}>
-                      <MDBInput type="text" className="mb-3" placeholder="Enter member's name" />
-                      <MDBInput type="text" className="mb-3" placeholder="Enter member's roll number" />
-                      <MDBInput type="email" className="mb-3" placeholder="Enter member's email" />
-                    </div>
-                  ))}
-                  
+                 
 
                   {/* Input for Why You Want Me as Your Supervisor */}
                   <h4 className="mt-4 mb-4">Why You Want Me as Your Supervisor</h4>
-                  <MDBInput
-                    type="textarea"
+                  <textarea
                     rows="4"
-                    className="mb-3"
+                    className="form-control mb-3"
                     placeholder="Enter your reason for choosing this supervisor"
                   />
 
@@ -84,19 +55,19 @@ export default function SendProposal() {
                   </div>
 
                   {/* Submit Button */}
-                  <MDBBtn
-                    color="danger"
+                  <button
+                    type="submit"
+                    className="btn btn-danger"
                     style={{ width: "100%" }}
-                    className="mt-4"
                   >
-                    <MDBIcon far icon="paper-plane" className="me-2" /> Send Proposal
-                  </MDBBtn>
+                    Send Proposal
+                  </button>
                 </form>
-              </MDBCardBody>
-            </MDBCard>
-          </MDBCol>
-        </MDBRow>
-      </MDBContainer>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
     </>
   );
 }

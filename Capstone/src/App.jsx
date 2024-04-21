@@ -15,6 +15,7 @@ import SupervisorProfile from "./Components/Supervisors/SupervisorProfile"
 import SendProposal from "./Components/Supervisors/SendProposal"
 import Sup_HomePage from "./Supervisorcomponents/Homepage/Sup_homepage"
 import Sup_ProjectsPage from "./Supervisorcomponents/ProjectsPage/Sup_ProjectsPage";
+import AddProject from "./Components/ProjectsPage/AddProject"
 
 function App() {
   return (
@@ -36,9 +37,11 @@ function App() {
           <Route path="/SupervisorsPage/SendProposal" element =  {<SendProposal/>}>  </Route>
           <Route path="/Sup_HomePage" element =  {<Sup_HomePage/>}>  </Route>
           <Route path="/Sup_ProjectsPage" element =  {<Sup_ProjectsPage/>}>  </Route>
+          <Route path="/AddProject" element =  {<AddProject/>}>  </Route>
 
 
 
+          
 
 
 
