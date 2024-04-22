@@ -31,7 +31,8 @@ function App() {
           {/* <Route path="/Register" element =  {<Register/>}>  </Route>
           <Route path="/Login" element =  {<Login/>}>  </Route> */}
           <Route path="/Chat" element =  {<ChatHome/>}>  </Route>
-          <Route path="/SupervisorsPage/SupervisorProfile" element =  {<SupervisorProfile/>}>  </Route>
+          {/* <Route path="/SupervisorsPage/SupervisorProfile" element =  {<SupervisorProfile/>}>  </Route> */}
+          <Route path="/SupervisorsPage/SupervisorProfile/:id" element={<SupervisorProfile />} />
           <Route path="/SupervisorsPage/SendProposal" element =  {<SendProposal/>}>  </Route>
           <Route path="/AddProject" element =  {<AddProject/>}>  </Route>
 
