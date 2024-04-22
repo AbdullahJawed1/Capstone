@@ -19,7 +19,7 @@ const GroupsPage = () => {
           out within the larger container.
         </p>
         <a class="btn btn-primary btn-lg" href="#" role="button">
-          Learn more
+          Add Group
         </a>
       </div>
       

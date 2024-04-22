@@ -25,9 +25,9 @@ function Projects() {
         {projects.map(project => (
           <Card key={project.ProjectID} border="info" style={{ width: "18rem", height: "22rem", marginBottom: "20px" }}>
             <Card.Body>
-              <Card.Title>{project.Title}</Card.Title>
+              <Card.Title>{project.title}</Card.Title>
               <Card.Text>
-                {project.Subjects}
+                {project.domain}
               </Card.Text>
               <Button variant="primary">Open</Button>
             </Card.Body>
