@@ -1,15 +1,19 @@
+
 import React from 'react'
 import NavBar from '../NavBar/NavBar'
 import SupervisorsCard from './SupervisorCard'
 import "./SupervisorPage.css"
 import Supervisor_SearchBar from '../SearchBar/Supervisor_SearchBar'
+import Footer from "../Footer/footer";
 
-export default function SupervisorsPage() {
+
+const SupervisorsPage = () => {
   return (
-    <div>
-        <NavBar/>
-        <div class="jumbotron">
-        <h1 class="display-4">Supervisors!</h1>
+    <>
+      <NavBar />
+
+      <div class="jumbotron">
+        <h1 class="display-4">Welcome to CAPSTONE!</h1>
         <p class="lead">
           This is a simple hero unit, a simple jumbotron-style component for
           calling extra attention to featured content or information.
@@ -23,10 +27,16 @@ export default function SupervisorsPage() {
           Learn more
         </a>
       </div>
+
+
       <Supervisor_SearchBar/>
 
       <SupervisorsCard/>
+      <Footer />
 
-    </div>
-  )
-}
+      
+    </>
+  );
+};
+
+export default SupervisorsPage;

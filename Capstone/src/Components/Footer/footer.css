@@ -1,0 +1,44 @@
+/* components/Footer/Footer.css */
+.footer {
+    background-color: #3B71CA;
+    color: #fff;
+    padding: 50px 0;
+  }
+  
+  .footer h3 {
+    color: #fff;
+  }
+  
+  .footer p {
+    margin-bottom: 10px;
+  }
+  
+  .footer ul.social-links {
+    list-style: none;
+    padding: 0;
+  }
+  
+  .footer ul.social-links li {
+    display: inline;
+    margin-right: 10px;
+  }
+  
+  .footer ul.social-links li a {
+    color: #fff;
+    text-decoration: none;
+  }
+  
+  .bottom-footer {
+    /* background-color: #222; */
+    color: #fff !important;
+    padding: 10px 0;
+    margin-top: 20px;
+  }
+  
+  .bottom-footer p {
+    margin: 0;
+    text-align: center;
+    color: #fff;
+    font-size: 25px; /* Increase font size */
+  }
+  

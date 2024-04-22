@@ -4,6 +4,8 @@ import { Link } from "react-router-dom"; // Assuming you're using React Router f
 import NavBar from "../NavBar/NavBar";
 import Projects from "./Projects";
 import Projects_SearchBar from "../SearchBar/Projects_SearchBar";
+import Footer from "../Footer/footer";
+
 
 export default function ProjectsPage() {
   return (
@@ -26,6 +28,8 @@ export default function ProjectsPage() {
       </div>
       <Projects_SearchBar />
       <Projects/>
+      <Footer />
+
     </div>
   );
 }

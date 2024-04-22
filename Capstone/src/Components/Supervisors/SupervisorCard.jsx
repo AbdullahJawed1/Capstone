@@ -1,6 +1,9 @@
 import React, { useState, useEffect } from "react";
+import Button from "react-bootstrap/Button";
+import Card from "react-bootstrap/Card";
 import { Link } from "react-router-dom";
-import supabase from '../../CONFIG/supabaseClient'; // Assuming you've exported supabase instance correctly
+import supabase from '../../CONFIG/supabaseClient';
+import "./supervisorCard.css"; // Import CSS file
 
 export default function SupervisorsCard() {
   const [supervisors, setSupervisors] = useState([]);
@@ -21,58 +24,25 @@ export default function SupervisorsCard() {
   }, []);
 
   return (
-    <div className="vh-100" style={{ backgroundColor: "#eee" }}>
-      <div className="container supervisorCards">
-        <div className="row justify-content-center">
-          {supervisors.map((supervisor, index) => (
-            <div className="col-md-4 mt-5" key={index}>
-              <div
-                className="card"
-                style={{ borderRadius: "15px", backgroundColor: "#fff" }}
-              >
-                <div className="card-body p-4 text-black">
-                  <div>
-                    <h6>
-                      {supervisor.Name}
-                    </h6>
-                  </div>
-                  <div className="d-flex align-items-center mb-4">
-                    <div className="flex-shrink-0">
-                      <img
-                        src="./src/assets/Capstone.png"
-                        alt="Profile"
-                        style={{ width: "70px" }}
-                        className="img-fluid rounded-circle border border-dark border-3"
-                      />
-                    </div>
-                    <div className="flex-grow-1 ms-3">
-                      <div className="d-flex flex-row align-items-center mb-2">
-                        <p className="mb-0 me-2">{supervisor.Domain}</p>
-                        {/* You can add stars or any other information here */}
-                      </div>
-                      <div>
-                        {/* Link to SupervisorProfile */}
-                        <Link to={`/SupervisorsPage/SupervisorProfile/${supervisor.id}`}>
-                          <button className="btn btn-outline-dark rounded mx-1">See profile</button>
-                        </Link>
-                      </div>
-                    </div>
-                  </div>
-                  <hr />
-                  <Link to="/SupervisorsPage/SendProposal">
-                    <button
-                      className="btn btn-outline-dark rounded block"
-                      style={{ backgroundColor: "#DC4C64", width: "100%" }}
-                    >
-                      <i className="far fa-clock me-2"></i> Send proposal
-                    </button>
-                  </Link>
-                </div>
-              </div>
-            </div>
-          ))}
-        </div>
-      </div>
+    <div className="card_container">
+      {supervisors.map(supervisor => (
+        <Card key={supervisor.id} border="info" style={{ width: "18rem", height: "20rem", marginBottom: "20px" }}>
+          <Card.Body>
+            <Card.Title>{supervisor.Name}</Card.Title>
+            <Card.Text>
+              {supervisor.Domain}
+            </Card.Text>
+            <Link to={`/SupervisorsPage/SupervisorProfile/${supervisor.id}`}>
+              <Button variant="outline-dark" className="btn-profile">See Profile</Button>
+            </Link>
+            <Link to="/SupervisorsPage/SendProposal">
+              <Button variant="outline-dark" className="btn-send-proposal">
+                <i className="far fa-clock me-2"></i> Send Proposal
+              </Button>
+            </Link>
+          </Card.Body>
+        </Card>
+      ))}
     </div>
   );
 }

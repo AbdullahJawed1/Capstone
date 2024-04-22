@@ -3,6 +3,7 @@ import React from "react";
 import "./Homepage.css";
 import NavBar from "../NavBar/NavBar";
 import Projects from "../ProjectsPage/Projects";
+import Footer from "../Footer/footer"; // Import Footer component
 
 const HomePage = () => {
   return (
@@ -28,6 +29,7 @@ const HomePage = () => {
       <h4 className="sub-project-heading">TOP PICKS FOR YOU</h4>
 
       <Projects />
+      <Footer />
 
       
     </>
