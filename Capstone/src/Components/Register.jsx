@@ -2,7 +2,7 @@ import { useState } from 'react';
 import '../assets/style.css'
 import { Link } from 'react-router-dom';
 import { useNavigate } from 'react-router-dom';
-import supabase from '../../config/supabase';
+import supabase from '../CONFIG/supabaseClient';
 
 function Register() {
     const navigate = useNavigate();
@@ -22,26 +22,33 @@ function Register() {
         
         // console.log(email,password,firstname,lastname);
 
-        let { data, error } = await supabase.auth.signUp({
-            email: email,
-            password: password
-            })
-
-        try {
-            const { data, error } = await supabase
-              .from('student')
-              .insert([
-                { email,firstname,lastname }
-              ]);        
-            if (error) {
-              throw error;
+            try {
+              const { data, error } = await supabase.auth.signUp({
+                email: email,
+                password: password
+                })        
+              if (error) {
+                throw error;
+              }
+              console.log('User registered successfully:', data);
+              try {
+                const { data, error } = await supabase
+                  .from('student')
+                  .insert([
+                    { email,firstname,lastname }
+                  ]);        
+                if (error) {
+                  throw error;
+                }
+                console.log('Student inserted successfully:', data);
+                navigate('/Login');
+              } catch (error) {
+                console.error('Error inserting student:', error.message);
+              }
+              navigate('/Login');
+            } catch (error) {
+              console.error('Error registering student:', error.message);
             }
-            console.log('Student inserted successfully:', data);
-            navigate('/Login');
-          } catch (error) {
-            console.error('Error inserting student:', error.message);
-          }
-
       };
 
     return(

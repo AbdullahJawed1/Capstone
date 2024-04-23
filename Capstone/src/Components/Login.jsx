@@ -2,7 +2,7 @@ import '../assets/style.css'
 import { Link } from 'react-router-dom';
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import supabase from '../../config/supabase';
+import supabase from '../CONFIG/supabaseClient';
 
 function Login() {
     const navigate = useNavigate();
@@ -18,19 +18,20 @@ function Login() {
             return 
         }
 
-        let { data, error } = await supabase.auth.signInWithPassword({
-            email: email,
-            password: password
-        })
-        if(error){
-            setError(true)
-            console.log(error)
-        }
-        if(data){
-            setError(null)
-            console.log(data)
+        try {
+            const { data, error } = await supabase.auth.signInWithPassword({
+              email: email,
+              password: password
+            });
+            if (error) {
+              throw error;
+            }
+            console.log('User signed in successfully:', data);
             navigate('/')
-        }
+          } catch (error) {
+            console.error('Error signing in:', error.message);
+            setError('Invalid email or password. Please try again.');
+          }
   
     }
     return(

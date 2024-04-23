@@ -8,8 +8,8 @@ import GroupsPage from "./Components/GroupsPage/GroupsPage";
 import Profile from "./Components/Profle/Profile";
 import SupervisorsPage from "./Components/Supervisors/SupervisorsPage";
 import Chat from "./Components/Chat/Chat";
-// import Register from "./Components/Register";
-// import Login from "./Components/Login";
+import Register from "./Components/Register";
+import Login from "./Components/Login";
 import ChatHome from "./Components/chatComponents/chatHome";
 import SupervisorProfile from "./Components/Supervisors/SupervisorProfile"
 import SendProposal from "./Components/Supervisors/SendProposal"
@@ -28,8 +28,8 @@ function App() {
           <Route path="/Profile" element =  {<Profile/>}>  </Route>
           <Route path="/SupervisorsPage" element =  {<SupervisorsPage/>}>  </Route>
           {/* <Route path="/Chat" element =  {<ChatHome/>}>  </Route> */}
-          {/* <Route path="/Register" element =  {<Register/>}>  </Route>
-          <Route path="/Login" element =  {<Login/>}>  </Route> */}
+          <Route path="/Register" element =  {<Register/>}>  </Route>
+          <Route path="/Login" element =  {<Login/>}>  </Route>
           <Route path="/Chat" element =  {<ChatHome/>}>  </Route>
           {/* <Route path="/SupervisorsPage/SupervisorProfile" element =  {<SupervisorProfile/>}>  </Route> */}
           <Route path="/SupervisorsPage/SupervisorProfile/:id" element={<SupervisorProfile />} />
