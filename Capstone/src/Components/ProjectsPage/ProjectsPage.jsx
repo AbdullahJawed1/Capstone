@@ -21,8 +21,8 @@ export default function ProjectsPage() {
           It uses utility classes for typography and spacing to space content
           out within the larger container.
         </p>
-        <Link to="/addproject" className="btn btn-primary btn-lg" role="button">
-          Add Project
+        <Link to="/SimilarityChecker" className="btn btn-primary btn-lg" role="button">
+        SimilarityChecker
         </Link>
       </div>
       <ProjectsWithSearchBar/>

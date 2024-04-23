@@ -13,7 +13,7 @@ import Login from "./Components/Login";
 import ChatHome from "./Components/chatComponents/chatHome";
 import SupervisorProfile from "./Components/Supervisors/SupervisorProfile"
 import SendProposal from "./Components/Supervisors/SendProposal"
-import AddProject from "./Components/ProjectsPage/AddProject"
+import SimilarityChecker from "./Components/ProjectsPage/similarityChecker"
 
 function App() {
   return (
@@ -34,7 +34,7 @@ function App() {
           {/* <Route path="/SupervisorsPage/SupervisorProfile" element =  {<SupervisorProfile/>}>  </Route> */}
           <Route path="/SupervisorsPage/SupervisorProfile/:id" element={<SupervisorProfile />} />
           <Route path="/SupervisorsPage/SendProposal" element =  {<SendProposal/>}>  </Route>
-          <Route path="/AddProject" element =  {<AddProject/>}>  </Route>
+          <Route path="/SimilarityChecker" element =  {<SimilarityChecker/>}>  </Route>
 
 
 
