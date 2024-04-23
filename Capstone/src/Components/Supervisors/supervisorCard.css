@@ -59,10 +59,10 @@
   }
   
   .btn-send-proposal {
-    background-color: #DC4C64; /* Green send proposal button */
+    background-color: #2ecc71; /* Green send proposal button */
     transition: background-color 0.3s; /* Smooth transition effect */
   }
   
   .btn-send-proposal:hover {
-    background-color: #ff0000; /* Red color on hover */
+    background-color: #DC4C64; /* Red color on hover */
   }

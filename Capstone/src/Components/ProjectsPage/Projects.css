@@ -24,4 +24,11 @@
   .search-input:focus {
     border-color: #2ecc71; /* Green border color when focused */
   }
+
+  /* New style for Open button hover effect */
+.card_container .card-body .btn-primary:hover {
+    background-color: #2ecc71; /* Green background color on hover */
+    border-color: #2ecc71; /* Green border color on hover */
+    color: #fff; /* Text color on hover */
+  }
   
