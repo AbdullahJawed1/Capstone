@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import NavBar from "../NavBar/NavBar";
 import supabase from '../../CONFIG/supabaseClient'; // Assuming you've exported supabase instance correctly
+import Footer from "../Footer/footer";
 
 export default function SupervisorProfile() {
   const { id } = useParams();
@@ -13,7 +14,7 @@ export default function SupervisorProfile() {
         const { data, error } = await supabase
           .from('supervisors')
           .select('Name, Email, Domain, "Area of Interest 2", "Area of Interest 3", "Area of Interest 4"')
-          .eq('id', id)
+          .eq('supervisorId', id)
           .single();
         if (error) {
           throw error;
@@ -68,6 +69,9 @@ export default function SupervisorProfile() {
           </div>
         </div>
       </div>
+
+      <Footer />
+
     </>
   );
 }

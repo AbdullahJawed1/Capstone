@@ -3,7 +3,6 @@ import React from 'react'
 import NavBar from '../NavBar/NavBar'
 import SupervisorsCard from './SupervisorCard'
 import "./SupervisorPage.css"
-import Supervisor_SearchBar from '../SearchBar/Supervisor_SearchBar'
 import Footer from "../Footer/footer";
 
 
@@ -29,7 +28,6 @@ const SupervisorsPage = () => {
       </div>
 
 
-      <Supervisor_SearchBar/>
 
       <SupervisorsCard/>
       <Footer />

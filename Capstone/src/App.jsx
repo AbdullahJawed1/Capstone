@@ -27,10 +27,10 @@ function App() {
           <Route path="/GroupsPage" element =  {<GroupsPage/>}>  </Route>
           <Route path="/Profile" element =  {<Profile/>}>  </Route>
           <Route path="/SupervisorsPage" element =  {<SupervisorsPage/>}>  </Route>
-          {/* <Route path="/Chat" element =  {<ChatHome/>}>  </Route> */}
+          <Route path="/Chat" element =  {<ChatHome/>}>  </Route>
           <Route path="/Register" element =  {<Register/>}>  </Route>
           <Route path="/Login" element =  {<Login/>}>  </Route>
-          <Route path="/Chat" element =  {<ChatHome/>}>  </Route>
+          {/* <Route path="/Chat" element =  {<ChatHome/>}>  </Route> */}
           {/* <Route path="/SupervisorsPage/SupervisorProfile" element =  {<SupervisorProfile/>}>  </Route> */}
           <Route path="/SupervisorsPage/SupervisorProfile/:id" element={<SupervisorProfile />} />
           <Route path="/SupervisorsPage/SendProposal" element =  {<SendProposal/>}>  </Route>

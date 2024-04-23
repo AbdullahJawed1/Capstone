@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import NavBar from "../NavBar/NavBar";
 import supabase from '../../CONFIG/supabaseClient'; // Assuming you've exported supabase instance correctly
+import Footer from "../Footer/footer";
 
 export default function SendProposal() {
   const [projectName, setProjectName] = useState('');
@@ -76,6 +77,8 @@ export default function SendProposal() {
           </div>
         </div>
       </div>
+
+      <Footer/>
     </>
   );
 }

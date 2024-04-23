@@ -16,40 +16,40 @@ export default function NavBar() {
             as={NavLink}
             to="/"
             style={{ color: "#3B71CA", fontWeight: "bold" }}
-            activeClassName=""
+            activeclassname=""
           >
             CAPSTONE
           </Navbar.Brand>
           <Navbar.Toggle aria-controls="basic-navbar-nav" />
           <Navbar.Collapse id="basic-navbar-nav">
             <Nav className="ms-auto">
-              <Nav.Link as={NavLink} to="/" exact activeClassName="active">
+              <Nav.Link as={NavLink} to="/" exact activeclassname="active">
                 Home
               </Nav.Link>
               <Nav.Link
                 as={NavLink}
                 to="/ProjectsPage"
-                activeClassName="active"
+                activeclassname="active"
               >
                 Projects
               </Nav.Link>
-              <Nav.Link as={NavLink} to="/GroupsPage" activeClassName="active">
+              <Nav.Link as={NavLink} to="/GroupsPage" activeclassname="active">
                 Groups
               </Nav.Link>
-              <Nav.Link as={NavLink} to="/SupervisorsPage" activeClassName="active">
+              <Nav.Link as={NavLink} to="/SupervisorsPage" activeclassname="active">
               Supervisors
               </Nav.Link>
               <NavDropdown title="Settings" id="basic-nav-dropdown">
-                <NavDropdown.Item as={NavLink} to="/profile" activeClassName="active">
+                <NavDropdown.Item as={NavLink} to="/profile" activeclassname="active">
                   Profile
 
                 </NavDropdown.Item>
-                <NavDropdown.Item as={NavLink} to="/Chat" activeClassName="active">
+                <NavDropdown.Item as={NavLink} to="/Chat" activeclassname="active">
                   Chat
                 </NavDropdown.Item>
                 <NavDropdown.Divider />
               </NavDropdown>
-              <Nav.Link as={NavLink} to="/Login" activeClassName="active">
+              <Nav.Link as={NavLink} to="/Login" activeclassname="active">
                 Login
               </Nav.Link>
             </Nav>

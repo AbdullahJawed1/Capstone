@@ -2,8 +2,7 @@
 import React from "react";
 import { Link } from "react-router-dom"; // Assuming you're using React Router for navigation
 import NavBar from "../NavBar/NavBar";
-import Projects from "./Projects";
-import Projects_SearchBar from "../SearchBar/Projects_SearchBar";
+import ProjectsWithSearchBar from "./ProjectsWithSearchBar";
 import Footer from "../Footer/footer";
 
 
@@ -26,8 +25,7 @@ export default function ProjectsPage() {
           Add Project
         </Link>
       </div>
-      <Projects_SearchBar />
-      <Projects/>
+      <ProjectsWithSearchBar/>
       <Footer />
 
     </div>

@@ -1,7 +1,6 @@
 import React from "react";
 import NavBar from "../NavBar/NavBar";
 import Groups from "./Groups";
-import Groups_SearchBar from "../SearchBar/Groups_SearchBar";
 import Footer from "../Footer/footer"; 
 
 const GroupsPage = () => {
@@ -24,7 +23,6 @@ const GroupsPage = () => {
         </a>
       </div>
       
-      <Groups_SearchBar/>
       <Groups/>
       <Footer />
 
