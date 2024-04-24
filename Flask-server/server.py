@@ -10,7 +10,7 @@ CORS(app)
 # Load the dataset
 data = pd.read_csv('C:\\Users\\abdul\\Documents\\GitHub\\Capstone\\Capstone\\src\\assets\\Fyp.csv', encoding='latin1')
 
-def recommend_projects(user_interests, data, N=10):
+def recommend_projects(user_interests, data, N=12):
     # Extract features
     tfidf_vectorizer = TfidfVectorizer(stop_words='english')
     tfidf_matrix = tfidf_vectorizer.fit_transform(data['title'] + ' ' + data['summary'] + ' ' + data['domain'] + ' ' + data['tag'])
