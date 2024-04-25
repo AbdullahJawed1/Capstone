@@ -25,7 +25,7 @@ const SimilarityChecker = () => {
       setSimilarityData({ most_similar_project, similarity_percentage });
 
       // Check if similarity percentage is more than 25%
-      if (similarity_percentage > 25) {
+      if (similarity_percentage > 0.20) {
         setMessage("Your project summary is quite similar to an existing project. Consider changing your project.");
       } else {
         setMessage("Your project summary is unique.");
