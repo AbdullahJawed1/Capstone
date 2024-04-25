@@ -1,5 +1,8 @@
 from flask import Flask, request, jsonify
 import pandas as pd
+import nltk
+from nltk.corpus import stopwords
+from nltk.tokenize import word_tokenize
 from sklearn.feature_extraction.text import TfidfVectorizer
 from sklearn.metrics.pairwise import cosine_similarity
 from flask_cors import CORS
@@ -9,6 +12,36 @@ CORS(app)
 
 # Load the dataset
 data = pd.read_csv('C:\\Users\\abdul\\Documents\\GitHub\\Capstone\\Capstone\\src\\assets\\Fyp.csv', encoding='latin1')
+
+nltk.download('punkt')
+nltk.download('stopwords')
+
+def preprocess_text(text):
+    # Tokenize the text
+    tokens = word_tokenize(text.lower())
+    
+    # Remove stopwords
+    stop_words = set(stopwords.words('english'))
+    filtered_tokens = [word for word in tokens if word.isalnum() and word not in stop_words]
+    
+    # Return preprocessed text as a string
+    return ' '.join(filtered_tokens)
+
+def calculate_similarity(text1, text2):
+    # Preprocess the texts
+    preprocessed_text1 = preprocess_text(text1)
+    preprocessed_text2 = preprocess_text(text2)
+    
+    # Create TF-IDF vectorizer
+    tfidf_vectorizer = TfidfVectorizer()
+    
+    # Fit and transform the texts
+    tfidf_matrix = tfidf_vectorizer.fit_transform([preprocessed_text1, preprocessed_text2])
+    
+    # Calculate cosine similarity
+    cosine_sim = cosine_similarity(tfidf_matrix[0], tfidf_matrix[1])[0][0]
+    
+    return cosine_sim
 
 def recommend_projects(user_interests, data, N=12):
     # Extract features
@@ -26,6 +59,28 @@ def recommend_projects(user_interests, data, N=12):
     recommended_projects = data.iloc[top_indices]
 
     return recommended_projects.to_dict(orient='records')  # Return all columns
+
+@app.route('/check-similarity', methods=['POST'])
+def check_similarity():
+    # Get user input summary and database summaries from request
+    user_summary = request.json.get('user_summary', '')
+    db_summaries = data['summary']  # Get all summaries from the dataset
+    
+    # Calculate similarity for each summary in the dataset
+    max_similarity = 0
+    most_similar_project = None
+    for idx, summary in enumerate(db_summaries):
+        similarity_percentage = calculate_similarity(summary, user_summary)
+        if similarity_percentage > max_similarity:
+            max_similarity = similarity_percentage
+            most_similar_project = data.iloc[idx]
+    
+    return jsonify({
+        'most_similar_project': most_similar_project.to_dict(),
+        'similarity_percentage': max_similarity
+    })
+
+
 
 @app.route('/recommend-projects', methods=['POST'])
 def get_recommendations():

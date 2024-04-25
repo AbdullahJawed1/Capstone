@@ -1,11 +1,12 @@
 import React, { useState } from "react";
 import NavBar from "../NavBar/NavBar";
-import supabase from '../../CONFIG/supabaseClient'; // Assuming you've exported supabase instance correctly
+import axios from "axios"; // Import axios for making HTTP requests
 
 const SimilarityChecker = () => {
   const [summary, setSummary] = useState("");
-  const [similarProjects, setSimilarProjects] = useState([]);
-
+  const [similarityData, setSimilarityData] = useState(null);
+  const [message, setMessage] = useState("");
+  
   const handleChange = (e) => {
     setSummary(e.target.value);
   };
@@ -14,14 +15,23 @@ const SimilarityChecker = () => {
     e.preventDefault();
 
     try {
-      // Call an API endpoint to compare the summary with existing projects
-      const { data, error } = await supabase.from('projects').select('*').ilike('summary', `%${summary}%`);
-      if (error) {
-        throw error;
+      // Call the Flask route to check similarity
+      const response = await axios.post("http://localhost:5000/check-similarity", {
+        user_summary: summary
+      });
+      
+      // Extract similarity data from response
+      const { most_similar_project, similarity_percentage } = response.data;
+      setSimilarityData({ most_similar_project, similarity_percentage });
+
+      // Check if similarity percentage is more than 25%
+      if (similarity_percentage > 25) {
+        setMessage("Your project summary is quite similar to an existing project. Consider changing your project.");
+      } else {
+        setMessage("Your project summary is unique.");
       }
-      setSimilarProjects(data);
     } catch (error) {
-      console.error('Error fetching similar projects:', error.message);
+      console.error('Error checking similarity:', error.message);
     }
   };
 
@@ -47,17 +57,13 @@ const SimilarityChecker = () => {
           </button>
         </form>
         
-        {similarProjects.length > 0 && (
+        {similarityData && (
           <div className="similar-projects">
-            <h2>Similar Projects Found:</h2>
-            <ul>
-              {similarProjects.map(project => (
-                <li key={project.id}>
-                  <h3>{project.title}</h3>
-                  <p>{project.summary}</p>
-                </li>
-              ))}
-            </ul>
+            <h2>Most similar project:</h2>
+            <h3>Title: {similarityData.most_similar_project.title}</h3>
+            <p>Summary: {similarityData.most_similar_project.summary}</p>
+            <h3>Similarity percentage: {(similarityData.similarity_percentage * 100).toFixed(2)}%</h3>
+            <p>{message}</p>
           </div>
         )}
       </div>
