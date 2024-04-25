@@ -1,6 +1,9 @@
 import React, { useState } from "react";
 import NavBar from "../NavBar/NavBar";
 import axios from "axios"; // Import axios for making HTTP requests
+import "./SimilarityChecker.css"; // Import custom CSS for styling
+import Footer from "../Footer/footer";
+
 
 const SimilarityChecker = () => {
   const [summary, setSummary] = useState("");
@@ -36,37 +39,40 @@ const SimilarityChecker = () => {
   };
 
   return (
-    <div>
+    <div className="similarity-container">
       <NavBar />
-      <div className="container">
-        <h1>Similarity Checker</h1>
+      <div className="content-container">
+        <h1 className="header">Similarity Checker</h1>
         <form onSubmit={handleSubmit}>
           <div className="form-group">
-            <label htmlFor="summary">Enter Your Project Summary:</label>
+            <label htmlFor="summary" className="label">Enter Your Project Summary:</label>
             <textarea
-              className="form-control"
+              className="summary-textarea"
               id="summary"
               name="summary"
               value={summary}
               onChange={handleChange}
-              rows="6"
+              rows="10"
+              cols="50" // Adjusted width
             ></textarea>
           </div>
-          <button type="submit" className="btn btn-primary">
+          <button type="submit" className="check-btn">
             Check Similarity
           </button>
         </form>
         
         {similarityData && (
-          <div className="similar-projects">
-            <h2>Most similar project:</h2>
-            <h3>Title: {similarityData.most_similar_project.title}</h3>
-            <p>Summary: {similarityData.most_similar_project.summary}</p>
-            <h3>Similarity percentage: {(similarityData.similarity_percentage * 100).toFixed(2)}%</h3>
-            <p>{message}</p>
+          <div className="result-container">
+            <h2 className="result-header">Most Similar Project:</h2>
+            <h3 className="project-title">Title: {similarityData.most_similar_project.title}</h3>
+            <p className="project-summary">Summary: {similarityData.most_similar_project.summary}</p>
+            <h3 className="percentage">Similarity Percentage: {(similarityData.similarity_percentage * 100).toFixed(2)}%</h3>
+            <p className="message">{message}</p>
           </div>
         )}
       </div>
+      <Footer/>
+
     </div>
   );
 };

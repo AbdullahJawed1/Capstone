@@ -22,7 +22,7 @@ export default function ProjectsPage() {
           out within the larger container.
         </p>
         <Link to="/SimilarityChecker" className="btn btn-primary btn-lg" role="button">
-        SimilarityChecker
+        Similarity Checker
         </Link>
       </div>
       <ProjectsWithSearchBar/>

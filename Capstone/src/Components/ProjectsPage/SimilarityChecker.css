@@ -1,0 +1,99 @@
+/* SimilarityChecker.css */
+.similarity-container {
+    background-color: #f5f5f5;
+    min-height: 100vh;
+  }
+  
+  .content-container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+  }
+  
+  .header {
+    text-align: center;
+    font-size: 36px;
+    color: #3B71CA;
+    margin-bottom: 30px;
+  }
+  
+  .label {
+    font-size: 18px;
+    color: #333;
+  }
+  
+  .summary-textarea {
+    width: 100%;
+    padding: 10px;
+    font-size: 16px;
+    margin-bottom: 20px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+  }
+  
+  .check-btn {
+    background-color: #007bff;
+    color: #fff;
+    font-size: 18px;
+    border: none;
+    border-radius: 5px;
+    padding: 10px 20px;
+    cursor: pointer;
+  }
+  
+  .check-btn:hover {
+    background-color: #0056b3;
+  }
+  
+  .result-container {
+    margin-top: 40px;
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  }
+  
+  .result-header {
+    font-size: 24px;
+    color: #333;
+  }
+  
+  .project-title {
+    font-size: 20px;
+    color: #333;
+    margin-top: 20px;
+  }
+  
+  .project-summary {
+    font-size: 16px;
+    color: #333;
+    margin-bottom: 20px;
+  }
+  
+  .percentage {
+    font-size: 20px;
+    color: #333;
+    margin-top: 20px;
+  }
+  
+  .message {
+    font-size: 18px;
+    color: #333;
+    margin-top: 20px;
+  }
+  
+  /* SimilarityChecker.css */
+.check-btn {
+    background-color: #007bff; /* Blue color */
+    color: #fff; /* White text color */
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s; /* Smooth transition */
+  }
+  
+  .check-btn:hover {
+    background-color: #2ecc71; /* Green color on hover */
+  }
+  
