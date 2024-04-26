@@ -8,7 +8,7 @@ from sklearn.metrics.pairwise import cosine_similarity
 from flask_cors import CORS
 
 app = Flask(__name__)
-CORS(app)
+CORS(app, resources={r"/*": {"origins": "http://localhost:5173"}})
 
 # Load the dataset
 data = pd.read_csv('C:\\Users\\abdul\\Documents\\GitHub\\Capstone\\Capstone\\src\\assets\\Fyp.csv', encoding='latin1')
