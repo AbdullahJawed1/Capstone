@@ -68,8 +68,12 @@ const SimilarityChecker = () => {
         <p className="project-summary">Summary: {similarityData.most_similar_project.summary}</p>
       </>
     ) : (
+      <>
+      <h2 className="result-header">Most Similar Project: None</h2>
+
       <p className="project-unique">Congratulations!!! your project is very unique </p>
-      // Render nothing if similarity is below 10 percent
+
+      </>
     )}
     <h3 className="percentage">Similarity Percentage: {(similarityData.similarity_percentage * 100).toFixed(2)}%</h3>
     <p className="message">{message}</p>
