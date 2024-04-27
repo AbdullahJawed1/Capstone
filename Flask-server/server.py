@@ -11,7 +11,7 @@ app = Flask(__name__)
 CORS(app, resources={r"/*": {"origins": "http://localhost:5173"}})
 
 # Load the dataset
-data = pd.read_csv('C:\\Users\\abdul\\Documents\\GitHub\\Capstone\\Capstone\\src\\assets\\Fyp.csv', encoding='latin1')
+data = pd.read_csv('./Capstone/src/assets/Fyp.csv', encoding='latin1')
 
 nltk.download('punkt')
 nltk.download('stopwords')
