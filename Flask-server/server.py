@@ -62,15 +62,17 @@ def recommend_projects(user_interests, data, N=12):
 
 @app.route('/check-similarity', methods=['POST'])
 def check_similarity():
-    # Get user input summary and database summaries from request
+    # Get user input summary from request
     user_summary = request.json.get('user_summary', '')
-    db_summaries = data['summary']  # Get all summaries from the dataset
     
-    # Calculate similarity for each summary in the dataset
+    # Concatenate project titles and summaries
+    project_texts = data['title'] + ' ' + data['summary']
+    
+    # Calculate similarity for each project text in the dataset
     max_similarity = 0
     most_similar_project = None
-    for idx, summary in enumerate(db_summaries):
-        similarity_percentage = calculate_similarity(summary, user_summary)
+    for idx, project_text in enumerate(project_texts):
+        similarity_percentage = calculate_similarity(project_text, user_summary)
         if similarity_percentage > max_similarity:
             max_similarity = similarity_percentage
             most_similar_project = data.iloc[idx]
@@ -79,6 +81,7 @@ def check_similarity():
         'most_similar_project': most_similar_project.to_dict(),
         'similarity_percentage': max_similarity
     })
+
 
 
 
