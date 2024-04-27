@@ -3,7 +3,7 @@
 Fyp project Team members 
 
 Abdullah Jawed,
-Abdullah Omerji,
+Abdullah Omarji,
 Tayyib Ismail.
 
 This is a project management system with advanced capabilities of supporting features.
