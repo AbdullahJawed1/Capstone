@@ -6,12 +6,17 @@ from nltk.tokenize import word_tokenize
 from sklearn.feature_extraction.text import TfidfVectorizer
 from sklearn.metrics.pairwise import cosine_similarity
 from flask_cors import CORS
+import os
+
 
 app = Flask(__name__)
 CORS(app, resources={r"/*": {"origins": "http://localhost:5173"}})
 
 # Load the dataset
-data = pd.read_csv('./Capstone/src/assets/Fyp.csv', encoding='latin1')
+file_path = os.path.abspath('./Capstone/src/assets/Fyp.csv')
+
+# Read the CSV file
+data = pd.read_csv(file_path, encoding='latin1')
 
 nltk.download('punkt')
 nltk.download('stopwords')
