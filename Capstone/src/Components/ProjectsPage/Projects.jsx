@@ -1,11 +1,13 @@
 import React, { useState, useEffect } from "react";
 import Button from "react-bootstrap/Button";
 import Card from "react-bootstrap/Card";
+import Modal from "react-bootstrap/Modal";
 import "./Projects.css";
 
 function Projects() {
   const [projects, setProjects] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [selectedProject, setSelectedProject] = useState(null);
 
   useEffect(() => {
     async function fetchProjects() {
@@ -31,6 +33,14 @@ function Projects() {
     fetchProjects();
   }, []);
 
+  const handleClose = () => {
+    setSelectedProject(null);
+  };
+
+  const handleOpen = (project) => {
+    setSelectedProject(project);
+  };
+
   if (loading) {
     return <div>Loading...</div>;
   }
@@ -47,11 +57,32 @@ function Projects() {
             <Card.Body>
               <Card.Title>{project.title}</Card.Title>
               <Card.Text>{project.domain}</Card.Text>
-              <Button variant="primary">Open</Button>
+              <Button variant="primary" onClick={() => handleOpen(project)}>Open</Button>
             </Card.Body>
           </Card>
         ))}
       </div>
+      <Modal show={selectedProject !== null} onHide={handleClose}>
+        <Modal.Header closeButton>
+          <Modal.Title>{selectedProject && selectedProject.title}</Modal.Title>
+        </Modal.Header>
+        <Modal.Body>
+          {selectedProject && (
+            <div>
+              <p><strong>Domain:</strong> {selectedProject.domain}</p>
+              <p><strong>Summary:</strong> {selectedProject.summary}</p>
+              <p><strong>Tag:</strong> {selectedProject.tag}</p>
+              <p><strong>Authors:</strong> {selectedProject.authors}</p>
+              {/* Add other project details here */}
+            </div>
+          )}
+        </Modal.Body>
+        <Modal.Footer>
+          <Button variant="secondary" onClick={handleClose}>
+            Close
+          </Button>
+        </Modal.Footer>
+      </Modal>
     </>
   );
 }
