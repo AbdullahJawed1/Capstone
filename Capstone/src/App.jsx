@@ -14,6 +14,8 @@ import ChatHome from "./Components/chatComponents/chatHome";
 import SupervisorProfile from "./Components/Supervisors/SupervisorProfile"
 import SendProposal from "./Components/Supervisors/SendProposal"
 import SimilarityChecker from "./Components/ProjectsPage/similarityChecker"
+import addGroups from "./Components/GroupsPage/Groups"
+
 
 function App() {
   return (
@@ -35,6 +37,8 @@ function App() {
           <Route path="/SupervisorsPage/SupervisorProfile/:id" element={<SupervisorProfile />} />
           <Route path="/SupervisorsPage/SendProposal" element =  {<SendProposal/>}>  </Route>
           <Route path="/SimilarityChecker" element =  {<SimilarityChecker/>}>  </Route>
+          <Route path="/addGroups" element =  {<addGroups/>}>  </Route>
+
 
 
 
