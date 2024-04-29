@@ -13,7 +13,7 @@ app = Flask(__name__)
 CORS(app, resources={r"/*": {"origins": "http://localhost:5173"}})
 
 # Load the dataset
-file_path = os.path.abspath('C:\\Users\\abdul\\Documents\\GitHub\\Capstone\\Capstone\\src\\assets\\Fyp.csv')
+file_path = os.path.abspath('../Capstone/capstone/src/assets/Fyp.csv')
 
 # Read the CSV file
 data = pd.read_csv(file_path, encoding='latin1')
