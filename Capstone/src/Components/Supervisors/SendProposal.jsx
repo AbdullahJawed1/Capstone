@@ -44,7 +44,7 @@ export default function SendProposal() {
       // Hide success popup after 3 seconds
       setTimeout(() => {
         setShowSuccessPopup(false);
-      }, 3000);
+      }, 5000);
     } catch (error) {
       console.error('Error submitting proposal:', error.message);
     }
