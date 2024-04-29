@@ -3,6 +3,7 @@ import Button from "react-bootstrap/Button";
 import Card from "react-bootstrap/Card";
 import Modal from "react-bootstrap/Modal";
 import supabase from '../../CONFIG/supabaseClient'; // Assuming you've exported supabase instance correctly
+import SearchBar from '../SearchBar/searchbar'; // Import the SearchBar component
 import "./Projects.css";
 
 function Projects() {
@@ -36,10 +37,6 @@ function Projects() {
   // Change page
   const paginate = (pageNumber) => setCurrentPage(pageNumber);
 
-  const handleClose = () => {
-    setSelectedProject(null);
-  };
-
   const handleOpen = (project) => {
     setSelectedProject(project);
   };
@@ -49,17 +46,12 @@ function Projects() {
     setCurrentPage(1); // Reset to first page when search term changes
   };
 
+  const handleClose = () => {
+    setSelectedProject(null);
+  };
   return (
     <>
-      <div className="search-bar-container">
-        <input
-          type="text"
-          placeholder="Search Projects"
-          value={searchTerm}
-          onChange={handleSearchChange}
-          className="search-input" // Added class for styling
-        />
-      </div>
+      <SearchBar searchTerm={searchTerm} onSearchChange={handleSearchChange} /> {/* Use the SearchBar component */}
       <div className="card_container">
         {currentProjects.map(project => (
           <Card key={project.ProjectID} border="info" style={{ width: "18rem", height: "22rem", marginBottom: "20px" }}>
@@ -86,7 +78,6 @@ function Projects() {
           </Button>
         ))}
       </div>
-      {/* Modal */}
       <Modal show={selectedProject !== null} onHide={handleClose}>
         <Modal.Header closeButton>
           <Modal.Title>{selectedProject && selectedProject.title}</Modal.Title>
@@ -98,7 +89,6 @@ function Projects() {
               <p><strong>Summary:</strong> {selectedProject.summary}</p>
               <p><strong>Tag:</strong> {selectedProject.tag}</p>
               <p><strong>Authors:</strong> {selectedProject.authors}</p>
-              {/* Add other project details here */}
             </div>
           )}
         </Modal.Body>

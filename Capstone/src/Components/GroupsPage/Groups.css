@@ -1,8 +1,79 @@
-.Groups--container{
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-between;
-    margin: 30px;
-    
+.tab-style {
+  background-color: #f8f9fa; /* Background color of tabs */
+  border-radius: 10px;
+  padding: 10px;
+  margin: 10px;
+}
 
+.groups-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  margin: 30px;
+}
+
+.group-card {
+  flex-basis: calc(25% - 20px); /* Adjust card width to fit four cards in a row with space between */
+  margin-bottom: 20px;
+  border-radius: 10px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.group-card .card-body {
+  padding: 20px;
+}
+
+.search-bar-container {
+  margin: 0 20px; /* Add space on left and right sides */
+}
+
+.search-input {
+  width: calc(100% - 20px); /* Adjust width to consider the margin */
+  padding: 10px;
+  border: 4px solid #3498db; /* Blue border color */
+  border-radius: 10px;
+  font-size: 16px;
+  outline: none;
+  transition: border-color 0.3s ease-in-out;
+}
+
+.search-input:focus {
+  border-color: #2ecc71; /* Green border color when focused */
+}
+
+/* New style for Open button hover effect */
+.btn-primary:hover {
+  background-color: #2ecc71; /* Green background color on hover */
+  border-color: #2ecc71; /* Green border color on hover */
+  color: #fff; /* Text color on hover */
+}
+
+.open-button {
+  margin-top: 10px; /* Add space on top of the button */
+}
+
+.pagination {
+  display: flex;
+  justify-content: center;
+  margin-top: 20px;
+}
+
+.pagination button {
+  margin: 0 5px;
+  margin-bottom: 10px;
+  padding: 5px 10px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.pagination button:hover {
+  background-color: #007bff;
+  color: #fff;
+}
+
+.pagination button.active {
+  background-color: #007bff;
+  color: #fff;
 }

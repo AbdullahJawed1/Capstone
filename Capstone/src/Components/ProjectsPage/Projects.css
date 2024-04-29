@@ -59,3 +59,14 @@
     color: #fff;
   }
   
+
+  /* Projects.css */
+.modal-header .close {
+  display: none; /* Hide the close button ("X") */
+}
+
+.modal-footer .btn-secondary {
+  background-color: red; /* Set the background color of the close button to red */
+  border-color: red; /* Set the border color of the close button to red */
+  color: white; /* Set the text color of the close button to white */
+}

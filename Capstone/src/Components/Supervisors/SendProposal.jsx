@@ -11,6 +11,7 @@ export default function SendProposal() {
   const [teamLeadEmail, setTeamLeadEmail] = useState('');
   const [reason, setReason] = useState('');
   const [proposal, setProposal] = useState('');
+  const [showSuccessPopup, setShowSuccessPopup] = useState(false);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -30,8 +31,20 @@ export default function SendProposal() {
       if (error) {
         throw error;
       }
-      // Handle successful submission (e.g., show a success message)
-      console.log('Proposal submitted successfully:', data);
+      // Reset input fields
+      setProjectName('');
+      setProjectDomain('');
+      setTeamLeadName('');
+      setTeamLeadRollNumber('');
+      setTeamLeadEmail('');
+      setReason('');
+      setProposal('');
+      // Show success popup
+      setShowSuccessPopup(true);
+      // Hide success popup after 3 seconds
+      setTimeout(() => {
+        setShowSuccessPopup(false);
+      }, 5000);
     } catch (error) {
       console.error('Error submitting proposal:', error.message);
     }
@@ -77,6 +90,13 @@ export default function SendProposal() {
           </div>
         </div>
       </div>
+
+      {/* Success Popup */}
+      {showSuccessPopup && (
+        <div className="alert alert-success text-center" role="alert">
+          Proposal sent successfully!
+        </div>
+      )}
 
       <Footer/>
     </>
