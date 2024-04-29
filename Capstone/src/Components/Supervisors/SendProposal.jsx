@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import NavBar from "../NavBar/NavBar";
 import supabase from '../../CONFIG/supabaseClient'; // Assuming you've exported supabase instance correctly
 import Footer from "../Footer/footer";
+import './SendProposal.css';
 
 export default function SendProposal() {
   const [projectName, setProjectName] = useState('');
@@ -11,10 +12,28 @@ export default function SendProposal() {
   const [teamLeadEmail, setTeamLeadEmail] = useState('');
   const [reason, setReason] = useState('');
   const [proposal, setProposal] = useState('');
-  const [showSuccessPopup, setShowSuccessPopup] = useState(false);
+  const [errorMessage, setErrorMessage] = useState('');
+  const [successMessage, setSuccessMessage] = useState('');
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    // Validation
+    if (
+      projectName.trim() === '' ||
+      projectDomain.trim() === '' ||
+      teamLeadName.trim() === '' ||
+      teamLeadRollNumber.trim() === '' ||
+      teamLeadEmail.trim() === '' ||
+      reason.trim() === '' ||
+      proposal.trim() === ''
+    ) {
+      setErrorMessage('Please fill in all fields.');
+      setTimeout(() => {
+        setErrorMessage('');
+      }, 3000);
+      return;
+    }
+
     try {
       // Insert the proposal into the database
       const { data, error } = await supabase.from('Proposals').insert([
@@ -39,12 +58,11 @@ export default function SendProposal() {
       setTeamLeadEmail('');
       setReason('');
       setProposal('');
-      // Show success popup
-      setShowSuccessPopup(true);
-      // Hide success popup after 3 seconds
+      // Show success message
+      setSuccessMessage('Proposal sent successfully!');
       setTimeout(() => {
-        setShowSuccessPopup(false);
-      }, 5000);
+        setSuccessMessage('');
+      }, 3000);
     } catch (error) {
       console.error('Error submitting proposal:', error.message);
     }
@@ -91,10 +109,17 @@ export default function SendProposal() {
         </div>
       </div>
 
-      {/* Success Popup */}
-      {showSuccessPopup && (
+      {/* Error Message */}
+      {errorMessage && (
+        <div className="alert alert-danger text-center" role="alert">
+          {errorMessage}
+        </div>
+      )}
+
+      {/* Success Message */}
+      {successMessage && (
         <div className="alert alert-success text-center" role="alert">
-          Proposal sent successfully!
+          {successMessage}
         </div>
       )}
 
