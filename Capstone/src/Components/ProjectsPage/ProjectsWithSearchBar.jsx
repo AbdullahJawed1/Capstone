@@ -3,6 +3,7 @@ import Button from "react-bootstrap/Button";
 import Card from "react-bootstrap/Card";
 import Modal from "react-bootstrap/Modal";
 import supabase from '../../CONFIG/supabaseClient'; // Assuming you've exported supabase instance correctly
+import SearchBar from '../SearchBar/searchbar'; // Import the SearchBar component
 import "./Projects.css";
 
 function Projects() {
@@ -51,15 +52,7 @@ function Projects() {
 
   return (
     <>
-      <div className="search-bar-container">
-        <input
-          type="text"
-          placeholder="Search Projects"
-          value={searchTerm}
-          onChange={handleSearchChange}
-          className="search-input" // Added class for styling
-        />
-      </div>
+      <SearchBar searchTerm={searchTerm} onSearchChange={handleSearchChange} /> {/* Use the SearchBar component */}
       <div className="card_container">
         {currentProjects.map(project => (
           <Card key={project.ProjectID} border="info" style={{ width: "18rem", height: "22rem", marginBottom: "20px" }}>

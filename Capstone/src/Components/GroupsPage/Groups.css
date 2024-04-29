@@ -1,3 +1,10 @@
+.tab-style {
+  background-color: #f8f9fa; /* Background color of tabs */
+  border-radius: 10px;
+  padding: 10px;
+  margin: 10px;
+}
+
 .groups-container {
   display: flex;
   flex-wrap: wrap;
@@ -44,8 +51,6 @@
 .open-button {
   margin-top: 10px; /* Add space on top of the button */
 }
-
-
 
 .pagination {
   display: flex;
