@@ -27,6 +27,7 @@ function Login() {
               throw error;
             }
             console.log('User signed in successfully:', data);
+            console.log('User signed in as:',data.user.user_metadata.type)
             navigate('/')
           } catch (error) {
             console.error('Error signing in:', error.message);
