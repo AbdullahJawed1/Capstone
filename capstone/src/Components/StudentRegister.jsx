@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 import { useNavigate } from 'react-router-dom';
 import supabase from '../CONFIG/supabaseClient';
 
-function Register() {
+function StudentRegister() {
     const navigate = useNavigate();
     const [firstname,setFirstname] = useState('');
     const [lastname,setLastname] = useState('');
@@ -23,14 +23,17 @@ function Register() {
         // console.log(email,password,firstname,lastname);
 
             try {
-              const { data, error } = await supabase.auth.signUp({
-                email: email,
-                password: password,
-                data:{ 
-                  username: 'John',
-                  role: 'student'
-                }
-              })        
+                const { data, error } = await supabase.auth.signUp(
+                  {
+                    email: email,
+                    password: password,
+                    options: {
+                      data: {
+                        type: 'student'
+                      }
+                    }
+                  }
+                )        
               if (error) {
                 throw error;
               }
@@ -75,4 +78,4 @@ function Register() {
     )
 }
   
-export default Register  
+export default StudentRegister  
