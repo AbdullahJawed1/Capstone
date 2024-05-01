@@ -37,7 +37,7 @@ function App() {
           {/* <Route path="/Chat" element =  {<ChatHome/>}>  </Route> */}
           {/* <Route path="/SupervisorsPage/SupervisorProfile" element =  {<SupervisorProfile/>}>  </Route> */}
           <Route path="/SupervisorsPage/SupervisorProfile/:id" element={<SupervisorProfile />} />
-          <Route path="/SupervisorsPage/SendProposal" element =  {<SendProposal/>}>  </Route>
+          <Route path="/SupervisorsPage/SendProposal/:id" element =  {<SendProposal/>}>  </Route>
           <Route path="/SimilarityChecker" element =  {<SimilarityChecker/>}>  </Route>
           <Route path="/addGroups" element =  {<addGroups/>}>  </Route>
 

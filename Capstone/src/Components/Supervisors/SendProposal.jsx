@@ -1,10 +1,37 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import NavBar from "../NavBar/NavBar";
+import { useParams } from "react-router-dom";
 import supabase from '../../CONFIG/supabaseClient'; // Assuming you've exported supabase instance correctly
 import Footer from "../Footer/footer";
 import './SendProposal.css';
 
 export default function SendProposal() {
+  const { id } = useParams(); // Supervisor ID from URL params
+  const [supervisor, setSupervisor] = useState(null); // State to store supervisor details
+
+  useEffect(() => {
+    async function fetchSupervisor() {
+      try {
+        if (!id) {
+          throw new Error('Supervisor ID is undefined.');
+        }
+        const { data, error } = await supabase
+          .from('supervisors')
+          .select('*')
+          .eq('supervisorId', id)
+          .single();
+        if (error) {
+          throw error;
+        }
+        setSupervisor(data);
+      } catch (error) {
+        console.error('Error fetching supervisor:', error.message);
+      }
+    }
+    fetchSupervisor();
+  }, [id]);
+  
+  
   const [projectName, setProjectName] = useState('');
   const [projectDomain, setProjectDomain] = useState('');
   const [teamLeadName, setTeamLeadName] = useState('');
@@ -33,11 +60,16 @@ export default function SendProposal() {
       }, 3000);
       return;
     }
-
+  
     try {
+      // Check if supervisor exists before accessing its properties
+      if (!supervisor || !supervisor.supervisorId) {
+        throw new Error('Supervisor ID not found.');
+      }
       // Insert the proposal into the database
       const { data, error } = await supabase.from('Proposals').insert([
         {
+          supervisorId: supervisor.supervisorId,
           project_name: projectName,
           project_domain: projectDomain,
           team_lead_name: teamLeadName,
@@ -62,11 +94,12 @@ export default function SendProposal() {
       setSuccessMessage('Proposal sent successfully!');
       setTimeout(() => {
         setSuccessMessage('');
-      }, 3000);
+      }, 5000);
     } catch (error) {
       console.error('Error submitting proposal:', error.message);
     }
   };
+  
 
   return (
     <>

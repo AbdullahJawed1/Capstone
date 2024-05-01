@@ -65,7 +65,7 @@ export default function SupervisorsCard() {
               <Link to={`/SupervisorsPage/SupervisorProfile/${supervisor.supervisorId}`}>
                 <Button variant="outline-dark" className="btn-profile">See Profile</Button>
               </Link>
-              <Link to="/SupervisorsPage/SendProposal">
+              <Link to={`/SupervisorsPage/SendProposal/${supervisor.supervisorId}`}>
                 <Button variant="outline-dark" className="btn-send-proposal">
                   <i className="far fa-clock me-2"></i> Send Proposal
                 </Button>
