@@ -27,7 +27,7 @@ export default function SupervisorsCard() {
   }, []);
 
   const filteredSupervisors = supervisors.filter(supervisor =>
-    supervisor.Name.toLowerCase().includes(searchTerm.toLowerCase())
+    supervisor.name.toLowerCase().includes(searchTerm.toLowerCase())
   );
 
   // Pagination
@@ -58,9 +58,9 @@ export default function SupervisorsCard() {
         {currentSupervisors.map(supervisor => (
           <Card key={supervisor.supervisorId} border="info" style={{ width: "18rem", height: "20rem", marginBottom: "20px" }}>
             <Card.Body>
-              <Card.Title>{supervisor.Name}</Card.Title>
+              <Card.Title>{supervisor.name}</Card.Title>
               <Card.Text>
-                {supervisor.Domain}
+                {supervisor.domain}
               </Card.Text>
               <Link to={`/SupervisorsPage/SupervisorProfile/${supervisor.supervisorId}`}>
                 <Button variant="outline-dark" className="btn-profile">See Profile</Button>
