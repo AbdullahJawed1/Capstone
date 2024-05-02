@@ -44,7 +44,7 @@ export default function NavBar() {
               <Nav.Link as={NavLink} to="/ProjectsPage" activeclassname="active">Projects</Nav.Link>
               <Nav.Link as={NavLink} to="/GroupsPage" activeclassname="active">Groups</Nav.Link>
               {userType === "supervisor" ? (
-                <Nav.Link as={NavLink} to="/ProposalPage" activeclassname="active">Proposal</Nav.Link>
+                <Nav.Link as={NavLink} to="/Proposals" activeclassname="active">Proposal</Nav.Link>
               ) : userType === "student" ? (
                 <Nav.Link as={NavLink} to="/SupervisorsPage" activeclassname="active">Supervisors</Nav.Link>
               ) : null}

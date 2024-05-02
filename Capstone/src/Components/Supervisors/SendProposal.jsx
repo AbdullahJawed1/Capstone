@@ -18,7 +18,7 @@ export default function SendProposal() {
         const { data, error } = await supabase
           .from('supervisors')
           .select('*')
-          .eq('supervisorId', id)
+          .eq('id', id)
           .single();
         if (error) {
           throw error;
@@ -30,7 +30,7 @@ export default function SendProposal() {
     }
     fetchSupervisor();
   }, [id]);
-  
+
   
   const [projectName, setProjectName] = useState('');
   const [projectDomain, setProjectDomain] = useState('');
@@ -63,13 +63,13 @@ export default function SendProposal() {
   
     try {
       // Check if supervisor exists before accessing its properties
-      if (!supervisor || !supervisor.supervisorId) {
+      if (!supervisor || !supervisor.id) {
         throw new Error('Supervisor ID not found.');
       }
       // Insert the proposal into the database
       const { data, error } = await supabase.from('Proposals').insert([
         {
-          supervisorId: supervisor.supervisorId,
+          id: supervisor.id,
           project_name: projectName,
           project_domain: projectDomain,
           team_lead_name: teamLeadName,

@@ -62,10 +62,10 @@ export default function SupervisorsCard() {
               <Card.Text>
                 {supervisor.domain}
               </Card.Text>
-              <Link to={`/SupervisorsPage/SupervisorProfile/${supervisor.supervisorId}`}>
+              <Link to={`/SupervisorsPage/SupervisorProfile/${supervisor.id}`}>
                 <Button variant="outline-dark" className="btn-profile">See Profile</Button>
               </Link>
-              <Link to={`/SupervisorsPage/SendProposal/${supervisor.supervisorId}`}>
+              <Link to={`/SupervisorsPage/SendProposal/${supervisor.id}`}>
                 <Button variant="outline-dark" className="btn-send-proposal">
                   <i className="far fa-clock me-2"></i> Send Proposal
                 </Button>

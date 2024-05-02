@@ -14,7 +14,7 @@ export default function SupervisorProfile() {
         const { data, error } = await supabase
           .from('supervisors')
           .select('name, email, domain, "Area of Interest 2", "Area of Interest 3", "Area of Interest 4"')
-          .eq('supervisorId', id)
+          .eq('id', id)
           .single();
         if (error) {
           throw error;

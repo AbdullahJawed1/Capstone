@@ -2,7 +2,7 @@
 import React from "react";
 import NavBar from "../NavBar/NavBar";
 import Footer from "../Footer/footer"; // Import Footer component
-
+import Proposalcard from "./ProposalCard"
 const Proposal = () => {
   return (
     <>
@@ -12,6 +12,9 @@ const Proposal = () => {
         <h1 class="display-4">Welcome to CAPSTONE!</h1>
         </div>
       </div>
+      <Proposalcard/>
+
+
       <Footer />
     </>
   );

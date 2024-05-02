@@ -17,6 +17,7 @@ import SupervisorProfile from "./Components/Supervisors/SupervisorProfile"
 import SendProposal from "./Components/Supervisors/SendProposal"
 import SimilarityChecker from "./Components/ProjectsPage/similarityChecker"
 import addGroups from "./Components/GroupsPage/Groups"
+import Proposals from "./Components/Proposal/ProposalPage"
 
 
 function App() {
@@ -42,7 +43,9 @@ function App() {
           <Route path="/SupervisorsPage/SendProposal/:id" element =  {<SendProposal/>}>  </Route>
           <Route path="/SimilarityChecker" element =  {<SimilarityChecker/>}>  </Route>
           <Route path="/addGroups" element =  {<addGroups/>}>  </Route>
+          <Route path="/Proposals" element =  {<Proposal/>}>  </Route>
 
+          
 
 
 
