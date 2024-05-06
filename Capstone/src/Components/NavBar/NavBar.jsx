@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { NavLink } from "react-router-dom";
+import { NavLink,useNavigate } from "react-router-dom";
 import "./NavBar.css";
 import supabase from '../../CONFIG/supabaseClient';
 import Container from "react-bootstrap/Container";
@@ -9,6 +9,27 @@ import NavDropdown from "react-bootstrap/NavDropdown";
 
 export default function NavBar() {
   const [userType, setUserType] = useState("");
+  const navigate = useNavigate();
+
+  const isUserSignedIn = () => {
+    const user = supabase.auth.user;
+    return user !== null;
+  };
+
+  const handleSignOut = async () => {
+    try {
+      await supabase.auth.signOut();
+      navigate('/Login'); // Redirect to the login page
+    } catch (error) {
+      console.error('Error signing out:', error.message);
+    }
+  };
+  // if (isUserSignedIn()) {
+  //   console.log('User is signed in');
+  // } else {
+  //   console.log('User is not signed in');
+  // }
+
 
   useEffect(() => {
     async function fetchUserType() {
@@ -53,7 +74,11 @@ export default function NavBar() {
                 <NavDropdown.Item as={NavLink} to="/Chat" activeclassname="active">Chat</NavDropdown.Item>
                 <NavDropdown.Divider />
               </NavDropdown>
-              <Nav.Link as={NavLink} to="/Login" activeclassname="active">Login</Nav.Link>
+              {isUserSignedIn() ? (
+                  <Nav.Link onClick={handleSignOut}>Logout</Nav.Link>
+                ) : (
+                  <Nav.Link as={NavLink} to="/Login" activeClassName="active">Login</Nav.Link>
+                )}
             </Nav>
           </Navbar.Collapse>
         </Container>

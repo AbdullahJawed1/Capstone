@@ -45,4 +45,12 @@
   .LoginForm p a:hover {
     text-decoration: underline;
   }
+
+  .LoginForm ul {
+    list-style-type: disc;
+  }
+  .LoginForm ul li {
+    font-size: 14px;
+    color: #999; 
+  }
   

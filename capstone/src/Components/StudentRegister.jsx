@@ -96,9 +96,18 @@ function StudentRegister() {
                 placeholder="Enter Email" onChange={(e) => setEmail(e.target.value)}/>
                 <input type={showPassword ? 'text' : 'password'} id="password" value={password} 
                 placeholder="Enter password" onChange={(e) => setPassword(e.target.value)}/>
-                <button type="button" onClick={() => setShowPassword(!showPassword)}>
+                <button className="showPassword" type="button" onClick={() => setShowPassword(!showPassword)}>
                     {showPassword ? 'Hide' : 'Show'} Password
-                </button>
+                </button >
+                <ul>
+                    Password must
+                    {/* Ab!12345678 */}
+                    <li>Contain at least one lowercase letter.</li>
+                    <li>Contain at least one uppercase letter</li>
+                    <li>Contain at least one digit.</li>
+                    <li>Contain at least one special character among @$!%*?&.</li>
+                    <li>Have a minimum length of 8 characters.</li>
+                </ul>
                 <input type="text" id="firstname" value={firstname} 
                 placeholder="Enter first name" onChange={(e) => setFirstname(e.target.value)}/>
                 <input type="text" id="lastname" value={lastname} 

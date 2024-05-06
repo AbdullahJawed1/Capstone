@@ -2,6 +2,7 @@ import { BrowserRouter, Route, Routes } from "react-router-dom";
 
 import "./Components/style.scss";
 import "bootstrap/dist/css/bootstrap.min.css";
+import supabase from "./CONFIG/supabaseClient";
 import HomePage from "./Components/Homepage/homepage";
 import ProjectsPage from "./Components/ProjectsPage/ProjectsPage";
 import GroupsPage from "./Components/GroupsPage/GroupsPage";
@@ -21,12 +22,14 @@ import Proposals from "./Components/Proposal/ProposalPage"
 
 
 function App() {
+
+  
+ 
+
   return (
     <>
       <BrowserRouter>
         <Routes>
-        
-
           <Route path="/" element =  {<HomePage />}>  </Route>
           <Route path="/ProjectsPage" element =  {<ProjectsPage/>}>  </Route>
           <Route path="/GroupsPage" element =  {<GroupsPage/>}>  </Route>
@@ -44,15 +47,6 @@ function App() {
           <Route path="/SimilarityChecker" element =  {<SimilarityChecker/>}>  </Route>
           <Route path="/addGroups" element =  {<addGroups/>}>  </Route>
           <Route path="/Proposals" element =  {<Proposal/>}>  </Route>
-
-          
-
-
-
-          
-
-
-
         </Routes>
       </BrowserRouter>
 

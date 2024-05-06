@@ -37,7 +37,7 @@ function Login() {
             let tableName = userType === 'student' ? 'student' : 'supervisors';
             const { data: userData, error: userError } = await supabase
                 .from(tableName)
-                .select('id, name')
+                .select('id, firstname,lastname')
                 .eq('email', email)
                 .single();
 
