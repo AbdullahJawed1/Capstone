@@ -13,10 +13,10 @@
     justify-content:center;
 } */
 
-/* .container{
+.container-md{
     width: 90vw;
     height: 90vh;
     background-color: #0056b3;
     border-radius: 10px;
     display: flex;
-} */
+}

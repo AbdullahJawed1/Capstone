@@ -5,7 +5,7 @@ import Chat from "./chat/Chat";
 
 function ChatHome(){
     return(
-    <div className="container">
+    <div className="container-md">
         {/* <p>chat home</p> */}
         <List />
         <Chat />
