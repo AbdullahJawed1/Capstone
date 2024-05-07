@@ -35,11 +35,14 @@ function Login() {
             setUserType(userType);
             // Search the appropriate table based on user type
             let tableName = userType === 'student' ? 'student' : 'supervisors';
+            let selectFields = userType === 'student' ? 'id, firstname, lastname' : 'id, name';
             const { data: userData, error: userError } = await supabase
                 .from(tableName)
-                .select('id, firstname,lastname')
+                .select(selectFields)
                 .eq('email', email)
                 .single();
+            
+            
 
             if (userError) {
                 throw userError;
