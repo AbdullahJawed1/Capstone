@@ -1,32 +1,117 @@
-import React, { useEffect, useState } from 'react'
-import NavBar from '../NavBar/NavBar';
+import React, { useState, useEffect } from "react";
+import NavBar from "../NavBar/NavBar";
+import Footer from "../Footer/footer";
 import supabase from '../../CONFIG/supabaseClient';
 
-export const Profile = () => {
+export default function Profile() {
+  const [profile, setProfile] = useState(null);
+  const [formData, setFormData] = useState({
+    'Area of Interest 1': '',
+    'Area of Interest 2': '',
+    'Area of Interest 3': '',
+    'Area of Interest 4': ''
+  });
+  const [editMode, setEditMode] = useState(false);
+  const [userType, setUserType] = useState('');
+
+  useEffect(() => {
+    async function fetchProfile() {
+      const { data: { user } } = await supabase.auth.getUser();
+      if (!user) throw new Error("No user logged in.");
+
+      const userTable = user.user_metadata.type === "student" ? "student" : "supervisors";
+      setUserType(userTable);
+
+      const { data, error } = await supabase.from(userTable)
+        .select('*')
+        .eq('email', user.email)
+        .single();
+      if (error) throw error;
+      
+      setProfile(data);
+      setFormData({
+        'Area of Interest 1': data['Area of Interest 1'],
+        'Area of Interest 2': data['Area of Interest 2'],
+        'Area of Interest 3': data['Area of Interest 3'],
+        'Area of Interest 4': data['Area of Interest 4']
+      });
+    }
+    fetchProfile();
+  }, []);
+
+  const onSubmit = async (e) => {
+    e.preventDefault();
+    try {
+      const { error } = await supabase.from(userType)
+        .update(formData)
+        .eq('email', profile.email);
+
+      if (error) throw error;
+
+      alert('Profile updated successfully!');
+      setEditMode(false);  // Turn off edit mode after successful update
+      setProfile({ ...profile, ...formData });  // Update the local profile state
+    } catch (error) {
+      alert(`Failed to update profile: ${error.message}`);
+    }
+  };
+
+  const handleChange = (e) => {
+    setFormData({ ...formData, [e.target.name]: e.target.value });
+  };
+
+  if (!profile) {
+    return <div>Loading...</div>;
+  }
+
   return (
-    <div>
-        
-        <NavBar />
-
-        <div class="jumbotron">
-        <p class="lead">
-          This is a simple hero unit, a simple jumbotron-style component for
-          calling extra attention to featured content or information.
-        </p>
-        <hr class="my-4" />
-        <p>
-          It uses utility classes for typography and spacing to space content
-          out within the larger container.
-        </p>
-        <a class="btn btn-primary btn-lg" href="#" role="button">
-          Learn more
-        </a>
+    <>
+      <NavBar />
+      <div className="container mt-5">
+        <div className="card p-4 shadow-sm" style={{ backgroundColor: "#f8f9fa" }}>
+          <div className="card-body">
+            <h2 className="card-title mb-4 text-primary">{userType.replace(/^\w/, c => c.toUpperCase())} Profile</h2>
+            {editMode ? (
+              <form onSubmit={onSubmit}>
+                {['Area of Interest 1', 'Area of Interest 2', 'Area of Interest 3', 'Area of Interest 4'].map((field, index) => (
+                  <div key={index} className="form-group">
+                    <label>{field}</label>
+                    <input type="text" className="form-control" name={field} value={formData[field]} onChange={handleChange} />
+                  </div>
+                ))}
+                <button type="submit" className="btn btn-primary mt-3">Save Changes</button>
+                <button type="button" onClick={() => setEditMode(false)} className="btn btn-secondary mt-3 ml-2">Cancel</button>
+              </form>
+            ) : (
+              <>
+                <div className="row">
+                  <div className="col-md-4">
+                    <img
+                      src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-profiles/avatar-2.webp"
+                      alt="Profile"
+                      className="img-fluid rounded-circle border border-primary"
+                      style={{ width: "150px" }}
+                    />
+                  </div>
+                  <div className="col-md-8">
+                    <h3 className="card-title text-primary">{profile.name}</h3>
+                    <p className="card-text mb-4">
+                      <strong>Email:</strong> {profile.email}
+                    </p>
+                    {['Area of Interest 1', 'Area of Interest 2', 'Area of Interest 3', 'Area of Interest 4'].map((field) => (
+                      <p className="card-text" key={field}>
+                        <strong>{field}:</strong> {profile[field]}
+                      </p>
+                    ))}
+                    <button onClick={() => setEditMode(true)} className="btn btn-primary">Edit Profile</button>
+                  </div>
+                </div>
+              </>
+            )}
+          </div>
+        </div>
       </div>
-
-
-
-    </div>
+      <Footer />
+    </>
   );
-};
-
-export default Profile;
+}

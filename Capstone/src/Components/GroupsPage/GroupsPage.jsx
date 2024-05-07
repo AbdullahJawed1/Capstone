@@ -14,6 +14,7 @@ export default function GroupsPage() {
         <Link to="/AddGroups" className="btn btn-primary btn-lg" role="button">
         Add Group
         </Link>
+        <h6 class="display-6">1 person can only create 1 group</h6>
       </div>
       </div>
       <Groups/>

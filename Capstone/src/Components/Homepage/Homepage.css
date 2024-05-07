@@ -46,6 +46,11 @@
     color: #fcfdfd; /* Change color to dark blue */
     text-shadow: -2px -2px 10px rgba(6, 19, 100, 0.922); /* Add text shadow */
 }
+.display-6 {
+    font-weight: bold;
+    color:rgba(0, 0, 0, 0.689);
+    font-size: 1.25rem;
+}
 .lead{
     font-weight: bold;
     color: #0c11a9;

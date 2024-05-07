@@ -9,7 +9,7 @@ const Proposal = () => {
       <NavBar />
       <div class="jumbotron">
         <div class="box">
-        <h1 class="display-4">Welcome to CAPSTONE!</h1>
+        <h1 class="display-4">Proposals Gallery!</h1>
         </div>
       </div>
       <Proposalcard/>

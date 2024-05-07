@@ -21,13 +21,17 @@ function StudentRegister() {
     const [email,setEmail] = useState('');
     const [password,setPassword] = useState('');
     const [id, setId] = useState('');
+    const [interest1, setInterest1] = useState('');
+    const [interest2, setInterest2] = useState('');
+    const [interest3, setInterest3] = useState('');
+    const [interest4, setInterest4] = useState('');
     const [error, setError] = useState('');
     const [showPassword, setShowPassword] = useState(false); // State variable for toggling password visibility
 
     const handleSubmit = async (e) => {
       e.preventDefault();
       
-      if (!email || !password || !firstname || !lastname || !id) {
+      if (!email || !password || !firstname || !lastname || !id || !interest1 || !interest2) {
           setError("Fill all fields");
           return;
       }
@@ -72,7 +76,12 @@ function StudentRegister() {
                       firstname: firstname,
                       lastname: lastname,
                       email: email,
-                      nu_id: id
+                      nu_id: id,
+                      "Area of Interest 1": interest1,
+                      "Area of Interest 2": interest2,
+                      "Area of Interest 3": interest3,
+                      "Area of Interest 4": interest4,
+                      name: firstname + ' ' + lastname
                   }
               ]);        
           if (studentError) {
@@ -114,6 +123,14 @@ function StudentRegister() {
                 placeholder="Enter last name" onChange={(e) => setLastname(e.target.value)}/>
                 <input type="text" id="id" value={id} 
                 placeholder="Enter ID (e.g., 20k-0461)" onChange={(e) => setId(e.target.value)}/>
+                <input type="text" id="interest1" value={interest1} 
+                placeholder="Enter Area of Interest 1" onChange={(e) => setInterest1(e.target.value)}/>
+                <input type="text" id="interest2" value={interest2} 
+                placeholder="Enter Area of Interest 2" onChange={(e) => setInterest2(e.target.value)}/>
+                <input type="text" id="interest3" value={interest3} 
+                placeholder="Enter Area of Interest 3 (optional)" onChange={(e) => setInterest3(e.target.value)}/>
+                <input type="text" id="interest4" value={interest4} 
+                placeholder="Enter Area of Interest 4 (optional)" onChange={(e) => setInterest4(e.target.value)}/>
                 <button type='submit'>Register</button>
                 {error && <div className="error-message">{error}</div>}
                 <p>Already have an account? <Link to="/Login">Login</Link></p>
