@@ -17,6 +17,7 @@ import SendProposal from "./Components/Supervisors/SendProposal"
 import SimilarityChecker from "./Components/ProjectsPage/similarityChecker"
 import AddGroups from "./Components/GroupsPage/addGroups"
 import Proposals from "./Components/Proposal/ProposalPage"
+import ChatHome from "./Components/ChatPages/ChatHome";
 
 
 function App() {
@@ -39,6 +40,7 @@ function App() {
           <Route path="/SimilarityChecker" element =  {<SimilarityChecker/>}>  </Route>
           <Route path="/AddGroups" element =  {<AddGroups/>}>  </Route>
           <Route path="/Proposals" element =  {<Proposal/>}>  </Route>
+          <Route path="/ChatHome" element =  {<ChatHome/>}>  </Route>
         </Routes>
       </BrowserRouter>
 
