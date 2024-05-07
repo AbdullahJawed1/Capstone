@@ -13,7 +13,7 @@ export default function SupervisorProfile() {
       try {
         const { data, error } = await supabase
           .from('supervisors')
-          .select('name, email, domain, "Area of Interest 2", "Area of Interest 3", "Area of Interest 4"')
+          .select('name, email, "Area of Interest 1", "Area of Interest 2", "Area of Interest 3", "Area of Interest 4"')
           .eq('id', id)
           .single();
         if (error) {
@@ -53,7 +53,7 @@ export default function SupervisorProfile() {
                   <strong>Email:</strong> {supervisor.email}
                 </p>
                 <p className="card-text">
-                  <strong>Domain:</strong> {supervisor.domain}
+                  <strong>Area of Interest 1:</strong> {supervisor['Area of Interest 1']}
                 </p>
                 <p className="card-text">
                   <strong>Area of Interest 2:</strong> {supervisor['Area of Interest 2']}

@@ -18,15 +18,18 @@ function SuperVisorRegister() {
     const [name, setName] = useState('');
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
-    const [domain, setDomain] = useState('');
+    const [interest1, setInterest1] = useState('');
+    const [interest2, setInterest2] = useState('');
+    const [interest3, setInterest3] = useState('');
+    const [interest4, setInterest4] = useState('');
     const [error, setError] = useState('');
     const [showPassword, setShowPassword] = useState(false);
 
     const handleSubmit = async (e) => {
         e.preventDefault();
         
-        if (!email || !password || !name || !domain) {
-            setError("Fill all fields");
+        if (!email || !password || !name || !interest1 || !interest2) {
+            setError("Fill all mandatory fields");
             return;
         }
 
@@ -58,7 +61,13 @@ function SuperVisorRegister() {
             const { data, error: insertError } = await supabase
                 .from('supervisors')
                 .insert([
-                    { domain, name, email },
+                    {
+                    email: email,
+                    name: name, 
+                    "Area of Interest 1": interest1,
+                    "Area of Interest 2": interest2,
+                    "Area of Interest 3": interest3,
+                    "Area of Interest 4": interest4 },
                 ]);
             if (insertError) {
                 throw insertError;
@@ -85,8 +94,14 @@ function SuperVisorRegister() {
                 </button>
                 <input type="text" id="name" value={name} 
                 placeholder="Enter name" onChange={(e) => setName(e.target.value)}/>
-                <input type="text" id="domain" value={domain} 
-                placeholder="Enter domain" onChange={(e) => setDomain(e.target.value)}/>
+                <input type="text" id="interest1" value={interest1} 
+                placeholder="Enter interest 1" onChange={(e) => setInterest1(e.target.value)}/>
+                <input type="text" id="interest2" value={interest2} 
+                placeholder="Enter interest 2" onChange={(e) => setInterest2(e.target.value)}/>
+                <input type="text" id="interest3" value={interest3} 
+                placeholder="Enter interest 3 (Optional)" onChange={(e) => setInterest3(e.target.value)}/>
+                <input type="text" id="interest4" value={interest4} 
+                placeholder="Enter interest 4 (Optional)" onChange={(e) => setInterest4(e.target.value)}/>
                 <button type='submit'>Register</button>
                 {error && <div className="error-message">{error}</div>}
                 <p>Already have an account? <Link to="/Login">Login</Link></p>

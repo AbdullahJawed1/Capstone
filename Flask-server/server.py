@@ -10,10 +10,13 @@ import os
 
 
 app = Flask(__name__)
-CORS(app, resources={r"/*": {"origins": "http://localhost:5173"}})
+CORS(app, resources={r"/api/*": {"origins": "http://localhost:5173"}})
 
-# Load the dataset
-file_path = os.path.abspath('../capstone/src/assets/Fyp.csv')
+#app = Flask(__name__)
+#CORS(app, resources={r"/*": {"origins": "http://localhost:5173"}})
+
+# Load the datasetC:\Users\INTEL\OneDrive\Documents\GitHub\Capstone\Capstone\src\assets\Fyp.csv
+file_path = os.path.abspath('C:\\Users\\INTEL\\OneDrive\\Documents\\GitHub\\Capstone\\Capstone\\src\\assets\\Fyp.csv')
 
 # Read the CSV file
 data = pd.read_csv(file_path, encoding='latin1')
@@ -54,7 +57,7 @@ def recommend_projects(user_interests, data, N=12):
     tfidf_matrix = tfidf_vectorizer.fit_transform(data['title'] + ' ' + data['summary'] + ' ' + data['domain'] + ' ' + data['tag'])
 
     # Transform user interests using the same vectorizer
-    user_tfidf = tfidf_vectorizer.transform([user_interests])
+    user_tfidf = tfidf_vectorizer.transform(user_interests)
 
     # Calculate similarity
     similarities = cosine_similarity(user_tfidf, tfidf_matrix).flatten()
@@ -93,6 +96,8 @@ def check_similarity():
 @app.route('/recommend-projects', methods=['POST'])
 def get_recommendations():
     user_interests = request.json.get('user_interests', '')  # Get user interests from request
+    if isinstance(user_interests, str):
+        user_interests = [user_interests]  # Ensure it is a list of strings
     recommended_projects = recommend_projects(user_interests, data)
     return jsonify(recommended_projects)
 

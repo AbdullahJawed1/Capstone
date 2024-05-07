@@ -60,7 +60,7 @@ export default function SupervisorsCard() {
             <Card.Body>
               <Card.Title>{supervisor.name}</Card.Title>
               <Card.Text>
-                {supervisor.domain}
+                {supervisor['Area of Interest 1']}
               </Card.Text>
               <Link to={`/SupervisorsPage/SupervisorProfile/${supervisor.id}`}>
                 <Button variant="outline-dark" className="btn-profile">See Profile</Button>
