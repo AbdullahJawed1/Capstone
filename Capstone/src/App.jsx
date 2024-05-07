@@ -17,15 +17,11 @@ import ChatHome from "./Components/chatComponents/chatHome";
 import SupervisorProfile from "./Components/Supervisors/SupervisorProfile"
 import SendProposal from "./Components/Supervisors/SendProposal"
 import SimilarityChecker from "./Components/ProjectsPage/similarityChecker"
-import addGroups from "./Components/GroupsPage/Groups"
+import AddGroups from "./Components/GroupsPage/addGroups"
 import Proposals from "./Components/Proposal/ProposalPage"
 
 
 function App() {
-
-  
- 
-
   return (
     <>
       <BrowserRouter>
@@ -45,7 +41,7 @@ function App() {
           <Route path="/SupervisorsPage/SupervisorProfile/:id" element={<SupervisorProfile />} />
           <Route path="/SupervisorsPage/SendProposal/:id" element =  {<SendProposal/>}>  </Route>
           <Route path="/SimilarityChecker" element =  {<SimilarityChecker/>}>  </Route>
-          <Route path="/addGroups" element =  {<addGroups/>}>  </Route>
+          <Route path="/AddGroups" element =  {<AddGroups/>}>  </Route>
           <Route path="/Proposals" element =  {<Proposal/>}>  </Route>
         </Routes>
       </BrowserRouter>
