@@ -16,7 +16,7 @@ CORS(app, resources={r"/api/*": {"origins": "http://localhost:5173"}})
 #CORS(app, resources={r"/*": {"origins": "http://localhost:5173"}})
 
 # Load the datasetC:\Users\INTEL\OneDrive\Documents\GitHub\Capstone\Capstone\src\assets\Fyp.csv
-file_path = os.path.abspath('C:\\Users\\INTEL\\OneDrive\\Documents\\GitHub\\Capstone\\Capstone\\src\\assets\\Fyp.csv')
+file_path = os.path.abspath('../capstone/src/assets/Fyp.csv')
 
 # Read the CSV file
 data = pd.read_csv(file_path, encoding='latin1')
