@@ -9,7 +9,7 @@ function ChatHome(){
         {/* <p>chat home</p> */}
         <List />
         <Chat />
-        <Detail />
+        {/* <Detail /> */}
     </div>
     )
 }

@@ -71,7 +71,7 @@ export default function NavBar() {
               ) : null}
               <NavDropdown title="Settings" id="basic-nav-dropdown">
                 <NavDropdown.Item as={NavLink} to="/profile" activeclassname="active">Profile</NavDropdown.Item>
-                <NavDropdown.Item as={NavLink} to="/Chat" activeclassname="active">Chat</NavDropdown.Item>
+                <NavDropdown.Item as={NavLink} to="/ChatHome" activeclassname="active" target="_blank">Chat</NavDropdown.Item>
                 <NavDropdown.Divider />
               </NavDropdown>
               {isUserSignedIn() ? (
