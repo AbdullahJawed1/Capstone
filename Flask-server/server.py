@@ -10,12 +10,9 @@ import os
 
 
 app = Flask(__name__)
-CORS(app, resources={r"/api/*": {"origins": "http://localhost:5173"}})
+CORS(app, resources={r"/*": {"origins": "http://localhost:5173"}})
 
-#app = Flask(__name__)
-#CORS(app, resources={r"/*": {"origins": "http://localhost:5173"}})
-
-# Load the datasetC:\Users\INTEL\OneDrive\Documents\GitHub\Capstone\Capstone\src\assets\Fyp.csv
+# Load the dataset
 file_path = os.path.abspath('../capstone/src/assets/Fyp.csv')
 
 # Read the CSV file
@@ -57,7 +54,7 @@ def recommend_projects(user_interests, data, N=12):
     tfidf_matrix = tfidf_vectorizer.fit_transform(data['title'] + ' ' + data['summary'] + ' ' + data['domain'] + ' ' + data['tag'])
 
     # Transform user interests using the same vectorizer
-    user_tfidf = tfidf_vectorizer.transform(user_interests)
+    user_tfidf = tfidf_vectorizer.transform([user_interests])
 
     # Calculate similarity
     similarities = cosine_similarity(user_tfidf, tfidf_matrix).flatten()
@@ -85,6 +82,13 @@ def check_similarity():
             max_similarity = similarity_percentage
             most_similar_project = data.iloc[idx]
     
+    # Check similarity with project titles as well
+    for idx, title in enumerate(data['title']):
+        title_similarity = calculate_similarity(title, user_summary)
+        if title_similarity > max_similarity:
+            max_similarity = title_similarity
+            most_similar_project = data.iloc[idx]
+    
     return jsonify({
         'most_similar_project': most_similar_project.to_dict(),
         'similarity_percentage': max_similarity
@@ -96,8 +100,6 @@ def check_similarity():
 @app.route('/recommend-projects', methods=['POST'])
 def get_recommendations():
     user_interests = request.json.get('user_interests', '')  # Get user interests from request
-    if isinstance(user_interests, str):
-        user_interests = [user_interests]  # Ensure it is a list of strings
     recommended_projects = recommend_projects(user_interests, data)
     return jsonify(recommended_projects)
 
