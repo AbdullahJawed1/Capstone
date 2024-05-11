@@ -1,111 +1,101 @@
-import React from "react";
-import Card from "react-bootstrap/Card";
-import ListGroup from "react-bootstrap/ListGroup";
+import React, { useState, useEffect } from "react";
 import Button from "react-bootstrap/Button";
-
+import Card from "react-bootstrap/Card";
+import Modal from "react-bootstrap/Modal"; // Import Modal from react-bootstrap
+import supabase from '../../CONFIG/supabaseClient'; // Assuming your Supabase instance is correctly set up
+import SearchBar from '../SearchBar/searchbar'; // Import your custom SearchBar component
 import "./Groups.css";
 
-export const Groups = () => {
+export default function Groups() {
+  const [groups, setGroups] = useState([]);
+  const [searchTerm, setSearchTerm] = useState('');
+  const [currentPage, setCurrentPage] = useState(1);
+  const groupsPerPage = 50;
+  const [selectedGroup, setSelectedGroup] = useState(null);
+  const [showModal, setShowModal] = useState(false);
+
+  useEffect(() => {
+    async function fetchGroups() {
+      try {
+        const { data, error } = await supabase.from('groups').select('*');
+        if (error) throw error;
+        setGroups(data);
+      } catch (error) {
+        console.error('Error fetching groups:', error.message);
+      }
+    }
+    fetchGroups();
+  }, []);
+
+  const filteredGroups = groups.filter(group =>
+    group.project_domain.toLowerCase().includes(searchTerm.toLowerCase())
+  );
+
+  const indexOfLastGroup = currentPage * groupsPerPage;
+  const indexOfFirstGroup = indexOfLastGroup - groupsPerPage;
+  const currentGroups = filteredGroups.slice(indexOfFirstGroup, indexOfLastGroup);
+  
+  const handleSearchChange = (event) => {
+    setSearchTerm(event.target.value);
+    setCurrentPage(1);
+  };
+
+  const handleOpenDetails = (group) => {
+    setSelectedGroup(group);
+    setShowModal(true);
+    if (group) {
+      // Format the created_at timestamp
+      const createdAt = new Date(group.created_at).toLocaleString();
+      setSelectedGroup({ ...group, createdAt });
+    }
+  };
+
+  const handleCloseDetails = () => {
+    setShowModal(false);
+  };
+
   return (
     <>
-      <div className="Groups--container">
-        <Card border="info" style={{ width: "18rem" }}>
-          <Card.Img variant="top" src="holder.js/100px180?text=Image cap" />
-          <Card.Body>
-            <Card.Title>Group Title</Card.Title>
-            <Card.Text>
-              Some quick example text to build on the card title and make up the
-              bulk of the card's content.
-            </Card.Text>
-          </Card.Body>
-          <ListGroup className="list-group-flush">
-            <ListGroup.Item>Member 1</ListGroup.Item>
-            <ListGroup.Item>Member 2</ListGroup.Item>
-            <ListGroup.Item>Member 3</ListGroup.Item>
-          </ListGroup>
-          {/* <Card.Body> */}
-          <Button variant="primary">Open</Button>
-          {/* </Card.Body> */}
-        </Card>
-
-        <Card border="info"  style={{ width: "18rem" }}>
-          <Card.Img variant="top" src="holder.js/100px180?text=Image cap" />
-          <Card.Body>
-            <Card.Title>Group Title</Card.Title>
-            <Card.Text>
-              Some quick example text to build on the card title and make up the
-              bulk of the card's content.
-            </Card.Text>
-          </Card.Body>
-          <ListGroup className="list-group-flush">
-            <ListGroup.Item>Member 1</ListGroup.Item>
-            <ListGroup.Item>Member 2</ListGroup.Item>
-            <ListGroup.Item>Member 3</ListGroup.Item>
-          </ListGroup>
-          {/* <Card.Body> */}
-          <Button variant="primary">Open</Button>
-          {/* </Card.Body> */}
-        </Card>
-
-        <Card border="info"  style={{ width: "18rem" }}>
-          <Card.Img variant="top" src="holder.js/100px180?text=Image cap" />
-          <Card.Body>
-            <Card.Title>Group Title</Card.Title>
-            <Card.Text>
-              Some quick example text to build on the card title and make up the
-              bulk of the card's content.
-            </Card.Text>
-          </Card.Body>
-          <ListGroup className="list-group-flush">
-            <ListGroup.Item>Member 1</ListGroup.Item>
-            <ListGroup.Item>Member 2</ListGroup.Item>
-            <ListGroup.Item>Member 3</ListGroup.Item>
-          </ListGroup>
-          {/* <Card.Body> */}
-          <Button variant="primary">Open</Button>
-          {/* </Card.Body> */}
-        </Card>
-
-        <Card border="info"  style={{ width: "18rem" }}>
-          <Card.Img variant="top" src="holder.js/100px180?text=Image cap" />
-          <Card.Body>
-            <Card.Title>Group Title</Card.Title>
-            <Card.Text>
-              Some quick example text to build on the card title and make up the
-              bulk of the card's content.
-            </Card.Text>
-          </Card.Body>
-          <ListGroup className="list-group-flush">
-            <ListGroup.Item>Member 1</ListGroup.Item>
-            <ListGroup.Item>Member 2</ListGroup.Item>
-            <ListGroup.Item>Member 3</ListGroup.Item>
-          </ListGroup>
-          {/* <Card.Body> */}
-          <Button variant="primary">Open</Button>
-          {/* </Card.Body> */}
-        </Card>
-
-        <Card border="info"  style={{ width: "18rem" }}>
-          <Card.Img variant="top" src="holder.js/100px180?text=Image cap" />
-          <Card.Body>
-            <Card.Title>Group Title</Card.Title>
-            <Card.Text>
-              Some quick example text to build on the card title and make up the
-              bulk of the card's content.
-            </Card.Text>
-          </Card.Body>
-          <ListGroup className="list-group-flush">
-            <ListGroup.Item>Member 1</ListGroup.Item>
-            <ListGroup.Item>Member 2</ListGroup.Item>
-            <ListGroup.Item>Member 3</ListGroup.Item>
-          </ListGroup>
-          {/* <Card.Body> */}
-          <Button variant="primary">Open</Button>
-          {/* </Card.Body> */}
-        </Card>
+      <SearchBar searchTerm={searchTerm} onSearchChange={handleSearchChange} />
+      <div className="groups-container">
+        {currentGroups.map(group => (
+          <Card key={group.groupId} className="group-card">
+            <Card.Body>
+              <Card.Title>{group.project_name}</Card.Title>
+              <Card.Text>Project Domain: {group.project_domain}</Card.Text>
+              <Card.Text>Student 1 Email: {group.studentId1}</Card.Text>
+              <Card.Text>Student 2 Email: {group.studentId2}</Card.Text>
+              <Card.Text>Student 3 Email: {group.studentId3}</Card.Text>
+              <Button variant="primary" onClick={() => handleOpenDetails(group)}>Open</Button>
+            </Card.Body>
+          </Card>
+        ))}
       </div>
+      
+      <Modal show={showModal} onHide={handleCloseDetails}>
+        <Modal.Header closeButton>
+          <Modal.Title>{selectedGroup ? selectedGroup.project_name : 'Group Details'}</Modal.Title>
+        </Modal.Header>
+        <Modal.Body>
+          {selectedGroup && (
+            <div>
+              <p><strong>Project Name:</strong> {selectedGroup.project_name}</p>
+              <p><strong>Project Domain:</strong> {selectedGroup.project_domain}</p>
+              <p><strong>Student 1 Email:</strong> {selectedGroup.studentId1}</p>
+              <p><strong>Student 2 Email:</strong> {selectedGroup.studentId2}</p>
+              <p><strong>Student 3 Email:</strong> {selectedGroup.studentId3}</p>
+              <p><strong>Project Description</strong> {selectedGroup.project_description}</p>
+              <p><strong>Date and Time Completed:</strong> {selectedGroup.createdAt}</p>
+              {/* Include more details as necessary */}
+            </div>
+          )}
+        </Modal.Body>
+        <Modal.Footer>
+          <Button variant="secondary" onClick={handleCloseDetails}>
+            Close
+          </Button>
+        </Modal.Footer>
+      </Modal>
     </>
   );
-};
-
-export default Groups;
+}

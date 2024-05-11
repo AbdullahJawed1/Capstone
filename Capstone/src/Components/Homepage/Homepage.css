@@ -1,10 +1,62 @@
-.jumbotron{
+/**.jumbotron{
     color: aliceblue;
     margin: 20px;
     background-color: #303F9F;
     /*  #303F9F background-image: url("C:\Users\abdul\Documents\GitHub\Capstone\Capstone\src\assets\welcome.jpg"); */
+/*}*/
+.jumbotron {
+    position: relative;
+    background: url('./src/assets/Fastimg.jpg') no-repeat center center;
+    background-size: cover;
+    color: #fff; /* Set text color to white or light color */
+    text-align: center; /* Center align the text */
+    padding: 100px 0; /* Adjust padding as needed */
+    justify-content: center;
+    width: 100%; /* Set the width of the jumbotron */
+    height: 350px; /* Set the height of the jumbotron */
+}
+.jumbotron .container {
+    position: relative;
+    z-index: 1; /* Ensure text appears above the background image */
 }
 
+.jumbotron::after {
+    content: "";
+    background: rgba(255, 255, 255, 0.7); /* Light overlay to make text more readable */
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+}
+.box {
+    justify-content: center;
+    text-align: center;
+    margin: 0 auto; /* Center horizontally */
+    width: 70%; /* Adjust width as needed */
+    height: auto;
+    background-color: rgba(249, 249, 249, 0.596); /* Translucent background color */
+    padding: 20px; /* Adjust padding as needed */
+    border-radius: 10px; /* Rounded corners for the box */
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.5); /* Box shadow */
+}
+.display-4 {
+    font-weight: bold; /* Make the text bold */
+    color: #fcfdfd; /* Change color to dark blue */
+    text-shadow: -2px -2px 10px rgba(6, 19, 100, 0.922); /* Add text shadow */
+}
+.display-6 {
+    font-weight: bold;
+    color:rgba(0, 0, 0, 0.689);
+    font-size: 1.25rem;
+}
+.lead{
+    font-weight: bold;
+    color: #0c11a9;
+    text-shadow: -2px -2px 15px rgba(255, 255, 255, 0.922);
+    font-size: 1.25rem;
+}
 .sub-project-heading{
 
     margin-left: 40px;

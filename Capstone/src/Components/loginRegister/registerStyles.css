@@ -1,0 +1,100 @@
+/* registerStyles.css */
+
+/* Common styles */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f0f0f0;
+    margin: 0;
+    padding: 0;
+  }
+  
+  .container {
+    max-width: 500px;
+    margin: 50px auto;
+    background-color: #ffffff;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+  }
+  
+  .form-container {
+    margin-top: 20px;
+  }
+  
+  .input-container {
+    margin-bottom: 15px;
+  }
+  
+  .input-container input {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-sizing: border-box;
+  }
+  
+  .input-container input:focus {
+    outline: none;
+    border-color: #007bff;
+  }
+  
+  .error-message {
+    color: #dc3545;
+    margin-top: 5px;
+  }
+  
+  .button-container {
+    text-align: center;
+  }
+  
+  .button-container button {
+    background-color: #007bff;
+    color: #fff;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  
+  .button-container button:hover {
+    background-color: #0056b3;
+  }
+  
+  .link-container {
+    margin-top: 10px;
+    text-align: center;
+  }
+  
+  .link-container a {
+    color: #007bff;
+    text-decoration: none;
+  }
+  
+  .link-container a:hover {
+    text-decoration: underline;
+  }
+  
+  /* Individual styles for SupervisorRegister */
+  .supervisor-title {
+    text-align: center;
+    color: #007bff;
+  }
+  
+  .supervisor-form {
+    background-color: #f8f9fa;
+    padding: 20px;
+    border-radius: 5px;
+  }
+  
+  /* Individual styles for StudentRegister */
+  .student-title {
+    text-align: center;
+    color: #007bff;
+  }
+  
+  .student-form {
+    background-color: #f8f9fa;
+    padding: 20px;
+    border-radius: 5px;
+  }
+  

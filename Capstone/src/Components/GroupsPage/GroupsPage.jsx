@@ -1,33 +1,25 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import NavBar from "../NavBar/NavBar";
 import Groups from "./Groups";
-import Groups_SearchBar from "../SearchBar/Groups_SearchBar";
+import Footer from "../Footer/footer"; 
 
-const GroupsPage = () => {
+export default function GroupsPage() {
   return (
     <div>
       <NavBar />
       <div class="jumbotron">
-        <h1 class="display-4">CAPSTONE'S Project Library!</h1>
-        <p class="lead">
-          This is a simple hero unit, a simple jumbotron-style component for
-          calling extra attention to featured content or information.
-        </p>
-        <hr class="my-4" />
-        <p>
-          It uses utility classes for typography and spacing to space content
-          out within the larger container.
-        </p>
-        <a class="btn btn-primary btn-lg" href="#" role="button">
-          Learn more
-        </a>
+      <div class="box">
+        <h1 class="display-4">Group's Library!</h1>
+        <Link to="/AddGroups" className="btn btn-primary btn-lg" role="button">
+        Add Group
+        </Link>
+        <h6 class="display-6">1 person can only create 1 group</h6>
       </div>
-      
-      <Groups_SearchBar/>
+      </div>
       <Groups/>
-
+      <Footer/>
     </div>
   );
-};
+}
 
-export default GroupsPage;

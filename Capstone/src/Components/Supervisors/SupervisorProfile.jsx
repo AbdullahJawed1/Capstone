@@ -1,7 +1,36 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
+import { useParams } from "react-router-dom";
 import NavBar from "../NavBar/NavBar";
+import supabase from '../../CONFIG/supabaseClient'; // Assuming you've exported supabase instance correctly
+import Footer from "../Footer/footer";
 
 export default function SupervisorProfile() {
+  const { id } = useParams();
+  const [supervisor, setSupervisor] = useState(null);
+
+  useEffect(() => {
+    async function fetchSupervisor() {
+      try {
+        const { data, error } = await supabase
+          .from('supervisors')
+          .select('name, email, "Area of Interest 1", "Area of Interest 2", "Area of Interest 3", "Area of Interest 4"')
+          .eq('id', id)
+          .single();
+        if (error) {
+          throw error;
+        }
+        setSupervisor(data);
+      } catch (error) {
+        console.error('Error fetching supervisor:', error.message);
+      }
+    }
+    fetchSupervisor();
+  }, [id]);
+
+  if (!supervisor) {
+    return <div>Loading...</div>;
+  }
+
   return (
     <>
       <NavBar />
@@ -19,30 +48,30 @@ export default function SupervisorProfile() {
                 />
               </div>
               <div className="col-md-8">
-                <h3 className="card-title text-primary">Supervisor's Name</h3>
+                <h3 className="card-title text-primary">{supervisor.name}</h3>
                 <p className="card-text mb-4">
-                  <strong>Introduction:</strong> Lorem ipsum dolor sit amet,
-                  consectetur adipiscing elit. Phasellus nec iaculis mauris.
+                  <strong>Email:</strong> {supervisor.email}
                 </p>
                 <p className="card-text">
-                  <strong>Domain:</strong> Supervisor's Domain
+                  <strong>Area of Interest 1:</strong> {supervisor['Area of Interest 1']}
+                </p>
+                <p className="card-text">
+                  <strong>Area of Interest 2:</strong> {supervisor['Area of Interest 2']}
+                </p>
+                <p className="card-text">
+                  <strong>Area of Interest 3:</strong> {supervisor['Area of Interest 3']}
+                </p>
+                <p className="card-text">
+                  <strong>Area of Interest 4:</strong> {supervisor['Area of Interest 4']}
                 </p>
               </div>
             </div>
           </div>
         </div>
-
-        <div className="card mt-4 p-4 shadow-sm" style={{ backgroundColor: "#f8f9fa" }}>
-          <div className="card-body">
-            <h3 className="card-title mb-4 text-primary">Groups Under Supervisor</h3>
-            <ul className="list-group">
-              <li className="list-group-item bg-light">Group 1</li>
-              <li className="list-group-item bg-light">Group 2</li>
-              <li className="list-group-item bg-light">Group 3</li>
-            </ul>
-          </div>
-        </div>
       </div>
+
+      <Footer />
+
     </>
   );
 }

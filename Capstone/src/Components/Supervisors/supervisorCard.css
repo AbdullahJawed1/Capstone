@@ -1,0 +1,68 @@
+/* supervisorCard.css */
+
+.card_container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+  
+  .card {
+    border-radius: 15px;
+    background-color: #f8f9fa; /* Light gray background */
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1); /* Soft shadow */
+    margin: 10px;
+  }
+  
+  .card-body {
+    padding: 1.5rem; /* Increased padding for better spacing */
+  }
+  
+  .card-title {
+    font-size: 1.25rem; /* Larger font size for title */
+    font-weight: bold;
+    margin-bottom: 0.5rem;
+  }
+  
+  .card-text {
+    font-size: 1rem; /* Regular font size for text */
+    color: #6c757d; /* Dark gray text color */
+  }
+  
+  .btn-profile,
+  .btn-send-proposal {
+    width: 100%;
+  }
+  
+  .btn-profile {
+    background-color: black; /* Blue profile button */
+  }
+  
+  .btn-send-proposal {
+    background-color: #DC4C64; /* Green send proposal button */
+  }
+  
+  .btn-profile,
+  .btn-send-proposal {
+    margin-top: 1rem; /* Add some space between buttons */
+  }
+  
+
+  .btn-profile {
+    background-color:white; /* Blue profile button */
+    color: black; /* White text color */
+    transition: background-color 0.3s, color 0.3s; /* Smooth transition effect for both background color and text color */
+  }
+  
+  .btn-profile:hover {
+    background-color: black; /* Darker color on hover */
+    color: white; /* Change text color to white on hover */
+  }
+  
+  .btn-send-proposal {
+    background-color: #2ecc71; /* Green send proposal button */
+    transition: background-color 0.3s; /* Smooth transition effect */
+  }
+  
+  .btn-send-proposal:hover {
+    background-color: #DC4C64; /* Red color on hover */
+  }

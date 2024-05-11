@@ -1,94 +1,92 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
+import Button from "react-bootstrap/Button";
+import Card from "react-bootstrap/Card";
 import { Link } from "react-router-dom";
-import SupervisorProfile from './SupervisorProfile';
+import supabase from '../../CONFIG/supabaseClient';
+import "./supervisorCard.css"; // Import CSS file
 
 export default function SupervisorsCard() {
-  // Define availability status for supervisors
-  const supervisorsAvailability = [
-    { name: "Supervisor name", status: ["available", "booked", "available"] },
-    { name: "Supervisor name", status: ["booked", "available", "available"] },
-    { name: "Supervisor name", status: ["available", "available", "available"] },
-    { name: "Supervisor name", status: ["booked", "booked", "booked"] },
-    { name: "Supervisor name", status: ["available", "booked", "available"] },
-    { name: "Supervisor name ", status: ["available", "booked", "available"] },
-  ];
+  const [supervisors, setSupervisors] = useState([]);
+  const [searchTerm, setSearchTerm] = useState('');
+  const [currentPage, setCurrentPage] = useState(1);
+  const supervisorsPerPage = 50; // Adjust as needed
+
+  useEffect(() => {
+    async function fetchSupervisors() {
+      try {
+        const { data, error } = await supabase.from('supervisors').select('*');
+        if (error) {
+          throw error;
+        }
+        setSupervisors(data);
+      } catch (error) {
+        console.error('Error fetching supervisors:', error.message);
+      }
+    }
+    fetchSupervisors();
+  }, []);
+
+  const filteredSupervisors = supervisors.filter(supervisor =>
+    supervisor.name.toLowerCase().includes(searchTerm.toLowerCase())
+  );
+
+  // Pagination
+  const indexOfLastSupervisor = currentPage * supervisorsPerPage;
+  const indexOfFirstSupervisor = indexOfLastSupervisor - supervisorsPerPage;
+  const currentSupervisors = filteredSupervisors.slice(indexOfFirstSupervisor, indexOfLastSupervisor);
+
+  // Change page
+  const paginate = (pageNumber) => setCurrentPage(pageNumber);
+
+  const handleSearchChange = (event) => {
+    setSearchTerm(event.target.value);
+    setCurrentPage(1); // Reset to first page when search term changes
+  };
 
   return (
-    <div className="vh-100" style={{ backgroundColor: "#eee" }}>
-      <div className="container supervisorCards">
-        <div className="row justify-content-center">
-          {supervisorsAvailability.map((supervisor, index) => (
-            <div className="col-md-4 mt-5" key={index}>
-              <div
-                className="card"
-                style={{ borderRadius: "15px", backgroundColor: "#fff" }}
-              >
-                <div className="card-body p-4 text-black">
-                  <div>
-                    <h6>
-                      {supervisor.name}
-                      {/* Display multiple color dots based on status */}
-                      {supervisor.status.map((status, idx) => (
-                        <span
-                          key={idx}
-                          className="ms-2 me-1"
-                          style={{
-                            width: "10px",
-                            height: "10px",
-                            borderRadius: "50%",
-                            display: "inline-block",
-                            backgroundColor:
-                              status === "available"
-                                ? "#1B7B2C" // green for available
-                                : "#DC4C64", // red for booked
-                          }}
-                        ></span>
-                      ))}
-                    </h6>
-                  </div>
-                  <div className="d-flex align-items-center mb-4">
-                    <div className="flex-shrink-0">
-                      <img
-                        src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-profiles/avatar-2.webp"
-                        alt="Profile"
-                        style={{ width: "70px" }}
-                        className="img-fluid rounded-circle border border-dark border-3"
-                      />
-                    </div>
-                    <div className="flex-grow-1 ms-3">
-                      <div className="d-flex flex-row align-items-center mb-2">
-                        <p className="mb-0 me-2">Supervisor's Name</p>
-                        <ul className="mb-0 list-unstyled d-flex flex-row" style={{ color: "#1B7B2C" }}>
-                          <li><i className="fas fa-star fa-xs me-1"></i></li>
-                          <li><i className="fas fa-star fa-xs me-1"></i></li>
-                          <li><i className="fas fa-star fa-xs me-1"></i></li>
-                          <li><i className="fas fa-star fa-xs me-1"></i></li>
-                          <li><i className="fas fa-star fa-xs me-1"></i></li>
-                        </ul>
-                      </div>
-                      <div>
-                        {/* Link to SupervisorProfile */}
-                        <Link to="/SupervisorsPage/SupervisorProfile">
-                          <button className="btn btn-outline-dark rounded mx-1">See profile</button>
-                        </Link>
-                      </div>
-                    </div>
-                  </div>
-                  <hr />
-                  <Link to="/SupervisorsPage/SendProposal">
-                    <button
-                      className="btn btn-outline-dark rounded block"
-                      style={{ backgroundColor: "#DC4C64", width: "100%" }}
-                    >
-                      <i className="far fa-clock me-2"></i> Send proposal
-                    </button>
-                  </Link>
-                </div>
-              </div>
-            </div>
-          ))}
-        </div>
+    <>
+      <div className="search-bar-container">
+        <input
+          type="text"
+          placeholder="Search Supervisors"
+          value={searchTerm}
+          onChange={handleSearchChange}
+          className="search-input"
+        />
       </div>
-    </div>
+      <div className="card_container">
+        {currentSupervisors.map(supervisor => (
+          <Card key={supervisor.supervisorId} border="info" style={{ width: "18rem", height: "20rem", marginBottom: "20px" }}>
+            <Card.Body>
+              <Card.Title>{supervisor.name}</Card.Title>
+              <Card.Text>
+                {supervisor['Area of Interest 1']}
+              </Card.Text>
+              <Link to={`/SupervisorsPage/SupervisorProfile/${supervisor.id}`}>
+                <Button variant="outline-dark" className="btn-profile">See Profile</Button>
+              </Link>
+              <Link to={`/SupervisorsPage/SendProposal/${supervisor.id}`}>
+                <Button variant="outline-dark" className="btn-send-proposal">
+                  <i className="far fa-clock me-2"></i> Send Proposal
+                </Button>
+              </Link>
+            </Card.Body>
+          </Card>
+        ))}
+      </div>
+      {/* Pagination */}
+      <div className="pagination">
+        {Array.from({ length: Math.ceil(filteredSupervisors.length / supervisorsPerPage) }, (_, i) => (
+          <Button
+            key={i}
+            variant="outline-primary"
+            className={currentPage === i + 1 ? "active" : ""}
+            onClick={() => paginate(i + 1)}
+          >
+            {i + 1}
+          </Button>
+        ))}
+      </div>
+    </>
   );
 }
