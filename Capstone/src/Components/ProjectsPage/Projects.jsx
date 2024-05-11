@@ -3,6 +3,8 @@ import Button from "react-bootstrap/Button";
 import Card from "react-bootstrap/Card";
 import Modal from "react-bootstrap/Modal";
 import "./Projects.css";
+import supabase from '../../CONFIG/supabaseClient';
+
 
 function Projects() {
   const [projects, setProjects] = useState([]);
@@ -12,12 +14,24 @@ function Projects() {
   useEffect(() => {
     async function fetchProjects() {
       try {
+        const { data: { user } } = await supabase.auth.getUser();
+        if (!user) throw new Error("No user logged in.");
+  
+        const userTable = user.user_metadata.type === "student" ? "student" : "supervisors";
+        const { data: userData, error: userError } = await supabase.from(userTable)
+          .select('*')
+          .eq('email', user.email)
+          .single();
+        if (userError) throw userError;
+  
+        const userInterests = [userData['Area of Interest 1'], userData['Area of Interest 2']];
+  
         const response = await fetch('http://127.0.0.1:5000/recommend-projects', {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json'
           },
-          body: JSON.stringify({ user_interests: 'machine learning, Corporate ' }) // Provide user interests here
+          body: JSON.stringify({ user_interests: userInterests.join(', ') })
         });
         if (!response.ok) {
           throw new Error('Failed to fetch data');
@@ -32,6 +46,7 @@ function Projects() {
     }
     fetchProjects();
   }, []);
+  
 
   const handleClose = () => {
     setSelectedProject(null);
