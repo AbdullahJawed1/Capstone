@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import supabase from '../CONFIG/supabaseClient';
-import Proposalcard from '../Components/Proposal/ProposalCard';
+import supabase from '../../CONFIG/supabaseClient';
+import Proposalcard from '../Proposal/ProposalCard';
 import './Login.css'; // Import custom CSS for login styling
 
 function Login() {

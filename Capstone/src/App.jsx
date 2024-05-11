@@ -9,9 +9,9 @@ import GroupsPage from "./Components/GroupsPage/GroupsPage";
 import Profile from "./Components/Profle/Profile";
 import SupervisorsPage from "./Components/Supervisors/SupervisorsPage";
 import Proposal from "./Components/Proposal/ProposalPage";
-import StudentRegister from "./Components/StudentRegister";
-import SuperVisorRegister from "./Components/SuperVisorRegister";
-import Login from "./Components/Login";
+import StudentRegister from "./Components/loginRegister/StudentRegister";
+import SuperVisorRegister from "./Components/loginRegister/SuperVisorRegister";
+import Login from "./Components/loginRegister/Login";
 import SupervisorProfile from "./Components/Supervisors/SupervisorProfile"
 import SendProposal from "./Components/Supervisors/SendProposal"
 import SimilarityChecker from "./Components/ProjectsPage/similarityChecker"

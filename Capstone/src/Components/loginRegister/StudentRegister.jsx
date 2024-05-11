@@ -1,8 +1,7 @@
 import { useState } from 'react';
-import '../assets/style.css';
 import { Link } from 'react-router-dom';
 import { useNavigate } from 'react-router-dom';
-import supabase from '../CONFIG/supabaseClient';
+import supabase from '../../CONFIG/supabaseClient';
 
 function isValidIdFormat(id) {
   const regex = /^\d{2}[a-zA-Z]-\d{4}$/;
