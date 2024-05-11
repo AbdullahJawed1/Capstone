@@ -1,0 +1,74 @@
+/* Login Container */
+.login-container {
+    max-width: 400px;
+    margin: 0 auto;
+    padding: 20px;
+    border-radius: 10px;
+    background-color: #f0f5ff; /* Blue theme */
+    box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.1);
+}
+
+/* Login Heading */
+.login-heading {
+    text-align: center;
+    margin-bottom: 20px;
+    color: #007bff; /* Blue color */
+}
+
+/* Form Group */
+.form-group {
+    margin-bottom: 20px;
+}
+
+/* Form Label */
+.form-label {
+    display: block;
+    margin-bottom: 5px;
+    color: #333; /* Dark gray color */
+    font-weight: bold;
+}
+
+/* Form Input */
+.form-input {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+/* Login Button */
+.login-button {
+    width: 100%;
+    padding: 10px;
+    background-color: #007bff; /* Blue color */
+    color: #fff; /* White color */
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.login-button:hover {
+    background-color: #0056b3; /* Darker shade of blue */
+}
+
+/* Error Message */
+.error-message {
+    color: #dc3545; /* Red color */
+    margin-top: 10px;
+}
+
+/* Register Link */
+.register-link {
+    text-align: center;
+    margin-top: 20px;
+}
+
+.register-link a {
+    color: #007bff; /* Blue color */
+    text-decoration: none;
+}
+
+.register-link a:hover {
+    text-decoration: underline;
+}

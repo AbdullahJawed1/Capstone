@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import supabase from '../CONFIG/supabaseClient';
 import Proposalcard from '../Components/Proposal/ProposalCard';
+import './Login.css'; // Import custom CSS for login styling
 
 function Login() {
     const navigate = useNavigate();
@@ -15,7 +16,7 @@ function Login() {
         e.preventDefault();
 
         if (!email || !password) {
-            setError("Fill all fields");
+            setError("Please fill in all fields");
             return;
         }
 
@@ -42,8 +43,6 @@ function Login() {
                 .eq('email', email)
                 .single();
             
-            
-
             if (userError) {
                 throw userError;
             }
@@ -64,14 +63,20 @@ function Login() {
     };
 
     return (
-        <div>
-            <h1>Login Page</h1>
-            <form className="LoginForm" onSubmit={handleSubmit}>
-                <input type="text" id="email" value={email} placeholder="Enter Email" onChange={(e) => setEmail(e.target.value)} />
-                <input type="password" id="password" value={password} placeholder="Enter password" onChange={(e) => setPassword(e.target.value)} />
-                <button type='submit'>Login</button>
+        <div className="login-container">
+            <h1 className="login-heading">Login</h1>
+            <form className="login-form" onSubmit={handleSubmit}>
+                <div className="form-group">
+                    <label className="form-label" htmlFor="email">Email</label>
+                    <input className="form-input" type="text" id="email" value={email} placeholder="Enter Email" onChange={(e) => setEmail(e.target.value)} />
+                </div>
+                <div className="form-group">
+                    <label className="form-label" htmlFor="password">Password</label>
+                    <input className="form-input" type="password" id="password" value={password} placeholder="Enter Password" onChange={(e) => setPassword(e.target.value)} />
+                </div>
+                <button className="login-button" type='submit'>Login</button>
                 {error && <div className="error-message">{error}</div>}
-                <p>Don't have an account? <Link to="/Register">Register</Link></p>
+                <p className="register-link">Don't have an account? <Link to="/Register">Register</Link></p>
             </form>
 
             {userId && <Proposalcard userId={userId} />} {/* Render Proposalcard only if userId is available */}
