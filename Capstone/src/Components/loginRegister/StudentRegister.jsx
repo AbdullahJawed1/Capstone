@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { useNavigate } from 'react-router-dom';
 import supabase from '../../CONFIG/supabaseClient';
+// import "../../assets/style.css"
 
 function isValidIdFormat(id) {
   const regex = /^\d{2}[a-zA-Z]-\d{4}$/;
@@ -30,6 +31,13 @@ function StudentRegister() {
     const handleSubmit = async (e) => {
       e.preventDefault();
       
+      //firebase for chat:
+      const formData = new FormData()
+
+      const {firebaseName,firebaseEmail,firebasePassword} = Object.fromEntries(formData);
+
+      console.log(firebaseName);
+
       if (!email || !password || !firstname || !lastname || !id || !interest1 || !interest2) {
           setError("Fill all fields");
           return;
@@ -65,7 +73,7 @@ function StudentRegister() {
           if (error) {
               throw error;
           }
-          console.log('User registered successfully:', user);
+          console.log('User registered successfully (supabase):', user);
   
           // Insert student details into database
           const { data: studentData, error: studentError } = await supabase
@@ -97,14 +105,14 @@ function StudentRegister() {
   };
   
     return(
-        <div>
-            <h1>Register Page</h1>
-            <form className="LoginForm" onSubmit={handleSubmit}>
+        <div className="login-container">
+            <h1 className="login-heading">Register Page</h1>
+            <form className="login-form" onSubmit={handleSubmit}>
                 <input type="text" id="email" value={email} 
-                placeholder="Enter Email" onChange={(e) => setEmail(e.target.value)}/>
+                placeholder="Enter Email" onChange={(e) => setEmail(e.target.value)} className="form-input"/>
                 <input type={showPassword ? 'text' : 'password'} id="password" value={password} 
-                placeholder="Enter password" onChange={(e) => setPassword(e.target.value)}/>
-                <button className="showPassword" type="button" onClick={() => setShowPassword(!showPassword)}>
+                placeholder="Enter password" onChange={(e) => setPassword(e.target.value)} className="form-input"/>
+                <button className="login-button" type="button" onClick={() => setShowPassword(!showPassword)}>
                     {showPassword ? 'Hide' : 'Show'} Password
                 </button >
                 <ul>
@@ -116,21 +124,21 @@ function StudentRegister() {
                     <li>Contain at least one special character among @$!%*?&.</li>
                     <li>Have a minimum length of 8 characters.</li>
                 </ul>
-                <input type="text" id="firstname" value={firstname} 
+                <input className="form-input" type="text" id="firstname" value={firstname} 
                 placeholder="Enter first name" onChange={(e) => setFirstname(e.target.value)}/>
-                <input type="text" id="lastname" value={lastname} 
+                <input className="form-input" type="text" id="lastname" value={lastname} 
                 placeholder="Enter last name" onChange={(e) => setLastname(e.target.value)}/>
-                <input type="text" id="id" value={id} 
+                <input className="form-input" type="text" id="id" value={id} 
                 placeholder="Enter ID (e.g., 20k-0461)" onChange={(e) => setId(e.target.value)}/>
-                <input type="text" id="interest1" value={interest1} 
+                <input className="form-input" type="text" id="interest1" value={interest1} 
                 placeholder="Enter Area of Interest 1" onChange={(e) => setInterest1(e.target.value)}/>
-                <input type="text" id="interest2" value={interest2} 
+                <input className="form-input" type="text" id="interest2" value={interest2} 
                 placeholder="Enter Area of Interest 2" onChange={(e) => setInterest2(e.target.value)}/>
-                <input type="text" id="interest3" value={interest3} 
+                <input className="form-input" type="text" id="interest3" value={interest3} 
                 placeholder="Enter Area of Interest 3 (optional)" onChange={(e) => setInterest3(e.target.value)}/>
-                <input type="text" id="interest4" value={interest4} 
+                <input className="form-input" type="text" id="interest4" value={interest4} 
                 placeholder="Enter Area of Interest 4 (optional)" onChange={(e) => setInterest4(e.target.value)}/>
-                <button type='submit'>Register</button>
+                <button className="login-button" type='submit'>Register</button>
                 {error && <div className="error-message">{error}</div>}
                 <p>Already have an account? <Link to="/Login">Login</Link></p>
             </form>

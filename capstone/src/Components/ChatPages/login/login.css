@@ -1,0 +1,50 @@
+.ChatLogin{
+    width: 100%;
+    height: 90%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+
+    .item{
+        margin: 10%;
+        background-color: #007bff;
+        padding: 100px;
+        border-radius: 25px;
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 20px;
+
+        form{
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 20px;
+
+            input{
+                width: 100%;
+                padding: 10px;
+                border: 1px solid #ccc;
+                border-radius: 5px;
+            }
+            
+            button{
+                width: 100%;
+                padding: 10px;
+                background-color: #007bff; /* Blue color */
+                color: #fff; /* White color */
+                border: none;
+                border-radius: 5px;
+                cursor: pointer;
+                transition: background-color 0.3s ease;
+            }
+
+            button:hover {
+                background-color: #0056b3; /* Darker shade of blue */
+            }
+        }
+    }
+}
