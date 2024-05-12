@@ -4,10 +4,22 @@ import List from "./list/List";
 import Chat from "./chat/Chat";
 import ChatLogin from "./login/ChatLogin";
 import Notification from "../notificationChatithink/Notification";
+import { useEffect,useState } from "react";
+import { onAuthStateChanged } from "firebase/auth";
+import { firebaseAuth } from "../../CONFIG/firebase";
 
 function ChatHome(){
 
-    const user = true;
+    const user = false;
+
+    useEffect(() =>{
+        const unSub = onAuthStateChanged(firebaseAuth,(user) =>{
+            console.log(user)
+        });
+        return () =>{
+            unSub();
+        };
+    }, []);
 
     return(
     <div className="container-md">

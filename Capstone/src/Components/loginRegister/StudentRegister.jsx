@@ -1,7 +1,15 @@
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { useNavigate } from 'react-router-dom';
+
 import supabase from '../../CONFIG/supabaseClient';
+
+import { toast } from 'react-toastify';
+
+import {createUserWithEmailAndPassword} from "firebase/auth";
+import { firebaseAuth,firebaseDb,firebaseStorage } from "../../CONFIG/firebase";
+import { doc, setDoc } from "firebase/firestore"; 
+
 // import "../../assets/style.css"
 
 function isValidIdFormat(id) {
@@ -28,15 +36,21 @@ function StudentRegister() {
     const [error, setError] = useState('');
     const [showPassword, setShowPassword] = useState(false); // State variable for toggling password visibility
 
+    // this sets variable to true IF an error in either firebase or supabase auth or db entries
+    // and will not allow navigate to Login
+    const[anyError,setAnyError] = useState(false);
+
     const handleSubmit = async (e) => {
       e.preventDefault();
       
       //firebase for chat:
-      const formData = new FormData()
+    //   const formData = new FormData(e.target);
 
-      const {firebaseName,firebaseEmail,firebasePassword} = Object.fromEntries(formData);
+    //   const {firebaseName,firebaseEmail,firebasePassword} = Object.fromEntries(formData);
 
-      console.log(firebaseName);
+    //   console.log(firebaseName);
+
+
 
       if (!email || !password || !firstname || !lastname || !id || !interest1 || !interest2) {
           setError("Fill all fields");
@@ -59,6 +73,32 @@ function StudentRegister() {
           return;
       }
       
+      const fullName = firstname + ' ' + lastname;
+
+      // FIREBASE
+      try {
+        console.log(email,password)
+        const res = await createUserWithEmailAndPassword(firebaseAuth,email,password);
+        console.log('User registered successfully (firebase):', res);
+
+        await setDoc(doc(firebaseDb, "users", res.user.uid), {
+            id : res.user.uid,
+            name: fullName,
+            email: email
+          });
+
+          await setDoc(doc(firebaseDb, "userschats", res.user.uid), {
+            chats:[],
+          });
+
+      } catch (err) {
+        setAnyError(true);
+        console.error('Error registering student (firebase):', err.message);
+        setError("Error registering student. Please try again later.");
+        toast.error('Error registering student (firebase):')
+      }
+
+      // SUPABASE
       try {
           // Sign up user
           const { user, error } = await supabase.auth.signUp({
@@ -71,7 +111,9 @@ function StudentRegister() {
               }
           });
           if (error) {
-              throw error;
+            setAnyError(true);
+            toast.error('Error registering student (supabase):', error.message)
+            throw error;
           }
           console.log('User registered successfully (supabase):', user);
   
@@ -92,15 +134,19 @@ function StudentRegister() {
                   }
               ]);        
           if (studentError) {
-              throw studentError;
+            setAnyError(true);
+            throw studentError;
           }
-          console.log('Student inserted successfully:', studentData);
-  
-          // Navigate to login page
-          navigate('/Login');
+          console.log('Student inserted successfully (supabase):', studentData);
       } catch (error) {
-          console.error('Error registering student:', error.message);
+            setAnyError(true);
+          console.error('Error registering student (supabase):', error.message);
           setError("Error registering student. Please try again later.");
+          toast.error('Error registering student (supabase):', error.message)
+      }
+
+      if(!anyError){
+        navigate('/Login');
       }
   };
   

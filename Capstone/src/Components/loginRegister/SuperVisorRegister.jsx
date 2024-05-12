@@ -24,6 +24,10 @@ function SuperVisorRegister() {
     const [error, setError] = useState('');
     const [showPassword, setShowPassword] = useState(false);
 
+    // this sets variable to true IF an error in either firebase or supabase auth or db entries
+    // and will not allow navigate to Login
+    const[anyError,setAnyError] = useState(false);
+
     const handleSubmit = async (e) => {
         e.preventDefault();
         
@@ -42,6 +46,29 @@ function SuperVisorRegister() {
             return;
         }
         
+        // FIREBASE
+      try {
+        console.log(email,password)
+        const res = await createUserWithEmailAndPassword(firebaseAuth,email,password);
+        console.log('User registered successfully (firebase):', res);
+
+        await setDoc(doc(firebaseDb, "users", res.user.uid), {
+            id : res.user.uid,
+            name: name,
+            email: email
+          });
+
+        await setDoc(doc(firebaseDb, "userschats", res.user.uid), {
+            chats:[],
+          });
+
+      } catch (err) {
+        setAnyError(true);
+        console.error('Error registering supervisor (firebase):', err.message);
+        setError("Error registering supervisor. Please try again later.");
+        toast.error('Error registering supervisor (firebase):')
+      }
+
         try {
             const { user, error } = await supabase.auth.signUp({
                 email: email,
@@ -77,6 +104,10 @@ function SuperVisorRegister() {
         } catch (error) {
             console.error('Error registering supervisor:', error.message);
             setError("Error registering supervisor. Please try again later.");
+        }
+
+        if(!anyError){
+            navigate('/Login');
         }
     };
 
