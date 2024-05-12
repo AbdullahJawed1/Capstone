@@ -7,28 +7,31 @@ import Notification from "../notificationChatithink/Notification";
 import { useEffect,useState } from "react";
 import { onAuthStateChanged } from "firebase/auth";
 import { firebaseAuth } from "../../CONFIG/firebase";
+import { useUserStore } from "../../CONFIG/userstoreZustand";
+import { useChatStore } from "../../CONFIG/chatstoreZustand";
 
 function ChatHome(){
 
-    const user = false;
+    const {currentUser,isLoading,fetchUserInfo } = useUserStore();
+    const {chatId} = useChatStore();
 
     useEffect(() =>{
         const unSub = onAuthStateChanged(firebaseAuth,(user) =>{
-            console.log(user)
+            fetchUserInfo(user?.uid);
         });
         return () =>{
             unSub();
         };
-    }, []);
+    }, [fetchUserInfo]);
+
+    if(isLoading) return <div className="loading">Loading</div>
 
     return(
     <div className="container-md">
         {
-            user ? (<>
-                {/* <p>chat home</p> */}
+            currentUser ? (<>
                 <List />
-                <Chat />
-                {/* <Detail /> */}
+                {chatId && <Chat />}
             </>
             ) : (<ChatLogin />)
         }

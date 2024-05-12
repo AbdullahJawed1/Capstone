@@ -17,8 +17,9 @@ function ChatLogin(){
 
         try {
             const res = await signInWithEmailAndPassword(firebaseAuth,email,password);
-            console.log(res.user.uid);
+            //console.log(res.user.uid);
             toast.success("Logged into capstone chat.")
+            
         } catch (error) {
             console.error('Error signing in:', error.message);
             toast.error(error.message);

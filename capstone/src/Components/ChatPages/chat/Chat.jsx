@@ -1,8 +1,14 @@
 import { useEffect, useRef, useState } from "react";
 import "./chatchat.css"
+import { firebaseAuth, firebaseDb } from "../../../CONFIG/firebase";
+import { doc, onSnapshot } from "firebase/firestore";
+import { useChatStore } from "../../../CONFIG/chatstoreZustand";
 
 function Chat(){
     const [text,setText] = useState("");
+    const [chat,setChat] = useState("");
+
+    const {chatId} = useChatStore();
 
     const endRef = useRef(null)
 
@@ -10,7 +16,18 @@ function Chat(){
         endRef.current?.scrollIntoView({behavior:"smooth"});
     },[]);
 
-    // console.log(text);
+    useEffect(() =>{
+        const unSub = onSnapshot(doc(firebaseDb,"chats",chatId)
+        ,(res) =>{
+            setChat(res.data())
+        })
+
+        return () =>{
+            unSub();
+        }
+    },[chatId]);
+
+    
     return(
         <div className="chatMain"> 
             <div className="top">
@@ -21,33 +38,19 @@ function Chat(){
                         <p> user description </p>
                     </div>
                 </div>
-                {/* <div className="icons">
-
-                </div> */}
-                <button className="logOut">LogOut</button>
+                <button className="logOut" onClick={()=>firebaseAuth.signOut()}>
+                    LogOut
+                </button>
             </div>
             <div className="center">
-                <div className="message">
-                    <img src="src/assets/avatar.png" />
+                { chat?.messages?.map((message) =>(
+                <div className="message own" key={message?.createdAt}>
                     <div className="texts">
-                        <p> hello,a message sent</p>
-                        <span> 1 min ago </span>
+                        <p>{message.text}</p>
+                        {/* <span>{message} </span> */}
                     </div>
                 </div>
-                <div className="message">
-                    <img src="src/assets/avatar.png" />
-                    <div className="texts">
-                        <p> hello,a message sent</p>
-                        <span> 1 min ago </span>
-                    </div>
-                </div>
-                <div className="message own">
-                    <div className="texts">
-                        <img src="src/assets/welcome.jpg" />
-                        <p> hello,a message sent</p>
-                        <span> 1 min ago </span>
-                    </div>
-                </div>
+                ))}
                 <div ref={endRef}></div>
             </div>
             <div className="bottom">
