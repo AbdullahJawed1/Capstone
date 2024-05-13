@@ -1,14 +1,16 @@
 import { useEffect, useRef, useState } from "react";
 import "./chatchat.css"
 import { firebaseAuth, firebaseDb } from "../../../CONFIG/firebase";
-import { doc, onSnapshot } from "firebase/firestore";
+import { arrayUnion, doc, getDoc, onSnapshot, updateDoc } from "firebase/firestore";
 import { useChatStore } from "../../../CONFIG/chatstoreZustand";
+import { useUserStore } from "../../../CONFIG/userstoreZustand";
 
 function Chat(){
     const [text,setText] = useState("");
     const [chat,setChat] = useState("");
 
-    const {chatId} = useChatStore();
+    const {currentUser} = useUserStore();
+    const {chatId,user} = useChatStore();
 
     const endRef = useRef(null)
 
@@ -27,6 +29,44 @@ function Chat(){
         }
     },[chatId]);
 
+    const handleSend = async () =>{
+        if (text === "") return
+
+        try {
+            await updateDoc(doc(firebaseDb,"chats",chatId),{
+                messages:arrayUnion({
+                    senderId: currentUser.id,
+                    text,
+                    createdAt: new Date()
+                }),
+            });
+
+            const userIDs = [currentUser.id,user.id]
+
+            userIDs.forEach(async (id) => {
+                const userChatRef = doc(firebaseDb,"userschats",id);
+                const userChatSnapshot = await getDoc(userChatRef);
+
+                if(userChatSnapshot.exists()){
+                    const userChatsData = userChatSnapshot.data()
+
+                    const chatIndex = userChatsData.chats.findIndex(c=>c.chatId === chatId);
+                    
+                    userChatsData.chats[chatIndex].lastMessage = text;
+                    userChatsData.chats[chatIndex].isSeen = 
+                        id === currentUser.id ? true : false;
+                    userChatsData.chats[chatIndex].updatedAt = Date.now();
+
+                    await updateDoc(userChatRef,{
+                        chats:userChatsData.chats,
+                    })
+
+                }
+            });
+        } catch (err) {
+            console.log("Error sending message: ",err.message);
+        }
+    }
     
     return(
         <div className="chatMain"> 
@@ -34,8 +74,8 @@ function Chat(){
                 <div className="user">
                     <img src="src/assets/avatar.png" />
                     <div className="texts">
-                        <span> user </span>
-                        <p> user description </p>
+                        <span> {user.name} </span>
+                        <p> {user.email} </p>
                     </div>
                 </div>
                 <button className="logOut" onClick={()=>firebaseAuth.signOut()}>
@@ -59,7 +99,9 @@ function Chat(){
                 </div>
                 <input type="text" placeholder="Send a message." 
                 onChange={(e) =>setText(e.target.value)}/>
-                <button className="sendMessage">send</button>
+                <button className="sendMessage" onClick={handleSend}>
+                    send
+                </button>
             </div>
         </div>
     )

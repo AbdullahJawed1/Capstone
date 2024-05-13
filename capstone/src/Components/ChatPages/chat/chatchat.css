@@ -37,7 +37,7 @@
     .texts{
         display: flex;
         flex-direction: column;
-        gap: 20px;
+        gap: 10px;
 
         span{
             font-size: 20px;
@@ -47,7 +47,7 @@
         p{
            font-size: 14px;
            font-weight: 300;
-           color: #a5a5a5; 
+           color: black; 
         }
     }
 
@@ -62,7 +62,7 @@
         .message{
             max-width: 70%;
             display: flex;
-            gap: 20px;
+            gap: 10px;
             
             img{
                 width: 30px;
@@ -85,7 +85,7 @@
                 }
 
                 p{
-                    padding: 20px;
+                    padding: 15px;
                     background-color: #003a75;
                     border-radius: 10px;
                 }
