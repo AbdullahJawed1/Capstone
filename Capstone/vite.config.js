@@ -8,4 +8,14 @@ export default defineConfig({
     alias: {       
       '@': '/src',
     },},
+    esbuild: {
+      loader: 'jsx',
+    },
+    optimizeDeps: {
+      esbuildOptions: {
+        loader: {
+          '.js': 'jsx',
+        },
+      },
+    },  
 })
