@@ -1,12 +1,13 @@
 import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import NavBar from "../NavBar/NavBar";
-import supabase from '../../CONFIG/supabaseClient'; // Assuming you've exported supabase instance correctly
+import supabase from '../../CONFIG/supabaseClient';
 import Footer from "../Footer/footer";
 
 export default function SupervisorProfile() {
   const { id } = useParams();
   const [supervisor, setSupervisor] = useState(null);
+  const [proposals, setProposals] = useState([]);
 
   useEffect(() => {
     async function fetchSupervisor() {
@@ -24,7 +25,25 @@ export default function SupervisorProfile() {
         console.error('Error fetching supervisor:', error.message);
       }
     }
+
+    async function fetchProposals() {
+      try {
+        const { data: proposalsData, error: proposalsError } = await supabase
+          .from('Proposals')
+          .select('project_name, team_lead_email, team_lead_name')
+          .eq('supervisor_id', id)
+          .eq('status', true);
+        if (proposalsError) {
+          throw proposalsError;
+        }
+        setProposals(proposalsData);
+      } catch (error) {
+        console.error('Error fetching proposals:', error.message);
+      }
+    }
+
     fetchSupervisor();
+    fetchProposals();
   }, [id]);
 
   if (!supervisor) {
@@ -39,14 +58,6 @@ export default function SupervisorProfile() {
           <div className="card-body">
             <h2 className="card-title mb-4 text-primary">Supervisor Profile</h2>
             <div className="row">
-              <div className="col-md-4">
-                <img
-                  src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-profiles/avatar-2.webp"
-                  alt="Supervisor"
-                  className="img-fluid rounded-circle border border-primary"
-                  style={{ width: "150px" }}
-                />
-              </div>
               <div className="col-md-8">
                 <h3 className="card-title text-primary">{supervisor.name}</h3>
                 <p className="card-text mb-4">
@@ -68,10 +79,30 @@ export default function SupervisorProfile() {
             </div>
           </div>
         </div>
+
+        <div className="mt-5">
+          <h2 className="text-primary mb-3">Projects Under Supervision</h2>
+          {proposals.length === 0 ? (
+            <p>No projects under supervision</p>
+          ) : (
+            proposals.map((proposal, index) => (
+              <div className="card mb-3" key={index}>
+                <div className="card-body">
+                  <h5 className="card-title">{proposal.project_name}</h5>
+                  <p className="card-text">
+                    <strong>Team Leader Name:</strong> {proposal.team_lead_name}
+                  </p>
+                  <p className="card-text">
+                    <strong>Team Leader Email:</strong> {proposal.team_lead_email}
+                  </p>
+                </div>
+              </div>
+            ))
+          )}
+        </div>
       </div>
 
       <Footer />
-
     </>
   );
 }

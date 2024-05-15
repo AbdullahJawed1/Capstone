@@ -84,25 +84,21 @@ export default function Profile() {
               </form>
             ) : (
               <>
+                <h3 className="card-title text-primary">{profile.name}</h3>
+                <p className="card-text">
+                  <strong>Email:</strong> {profile.email}
+                </p>
                 <div className="row">
-                  <div className="col-md-4">
-                    <img
-                      src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-profiles/avatar-2.webp"
-                      alt="Profile"
-                      className="img-fluid rounded-circle border border-primary"
-                      style={{ width: "150px" }}
-                    />
+                  <div className="col-md-6">
+                    <ul className="list-group">
+                      {['Area of Interest 1', 'Area of Interest 2', 'Area of Interest 3', 'Area of Interest 4'].map((field, index) => (
+                        <li key={index} className="list-group-item">
+                          <strong>{field}:</strong> {profile[field]}
+                        </li>
+                      ))}
+                    </ul>
                   </div>
-                  <div className="col-md-8">
-                    <h3 className="card-title text-primary">{profile.name}</h3>
-                    <p className="card-text mb-4">
-                      <strong>Email:</strong> {profile.email}
-                    </p>
-                    {['Area of Interest 1', 'Area of Interest 2', 'Area of Interest 3', 'Area of Interest 4'].map((field) => (
-                      <p className="card-text" key={field}>
-                        <strong>{field}:</strong> {profile[field]}
-                      </p>
-                    ))}
+                  <div className="col-md-6">
                     <button onClick={() => setEditMode(true)} className="btn btn-primary">Edit Profile</button>
                   </div>
                 </div>
