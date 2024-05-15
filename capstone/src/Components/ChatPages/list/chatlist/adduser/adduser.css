@@ -1,0 +1,73 @@
+.addUser{
+    width: max-content;
+    height: max-content;
+    padding: 20px;
+    background-color: rgba(0, 123, 255, 0.5);
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    left: 0;
+    margin: auto;
+
+    form{
+        display: flex;
+        gap: 20px;
+        padding: 10px;
+        input{
+            width: 100%;
+            padding: 10px;
+            border: 1px solid black;
+            border-radius: 5px;
+        }
+
+        button{
+            width: 100%;
+            padding: 10px;
+            background-color: #007bff; /* Blue color */
+            color: #fff; /* White color */
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        button:hover {
+            background-color: #0056b3; /* Darker shade of blue */
+        }
+    }
+}
+
+.user{
+
+    .detail{
+        border: 1px solid black;
+        border-radius: 10px;
+        padding: 10px;
+        display: flex;
+        span{
+            color: #444; 
+            font-size: 14px; 
+            font-weight: normal; 
+            line-height: 1.5;
+        }
+    }
+
+    button{
+        margin-top: 5px;
+        width: 100%;
+        padding: 10px;
+        background-color: #007bff; /* Blue color */
+        color: #fff; /* White color */
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+    }
+
+    button:hover {
+        background-color: #0056b3; /* Darker shade of blue */
+    }
+}

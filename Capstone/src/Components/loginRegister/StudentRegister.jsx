@@ -1,7 +1,16 @@
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { useNavigate } from 'react-router-dom';
+
 import supabase from '../../CONFIG/supabaseClient';
+
+import { toast } from 'react-toastify';
+
+import {createUserWithEmailAndPassword} from "firebase/auth";
+import { firebaseAuth,firebaseDb,firebaseStorage } from "../../CONFIG/firebase";
+import { doc, setDoc } from "firebase/firestore"; 
+
+// import "../../assets/style.css"
 
 function isValidIdFormat(id) {
   const regex = /^\d{2}[a-zA-Z]-\d{4}$/;
@@ -27,9 +36,22 @@ function StudentRegister() {
     const [error, setError] = useState('');
     const [showPassword, setShowPassword] = useState(false); // State variable for toggling password visibility
 
+    // this sets variable to true IF an error in either firebase or supabase auth or db entries
+    // and will not allow navigate to Login
+    const[anyError,setAnyError] = useState(false);
+
     const handleSubmit = async (e) => {
       e.preventDefault();
       
+      //firebase for chat:
+    //   const formData = new FormData(e.target);
+
+    //   const {firebaseName,firebaseEmail,firebasePassword} = Object.fromEntries(formData);
+
+    //   console.log(firebaseName);
+
+
+
       if (!email || !password || !firstname || !lastname || !id || !interest1 || !interest2) {
           setError("Fill all fields");
           return;
@@ -51,6 +73,32 @@ function StudentRegister() {
           return;
       }
       
+      const fullName = firstname + ' ' + lastname;
+
+      // FIREBASE
+      try {
+        console.log(email,password)
+        const res = await createUserWithEmailAndPassword(firebaseAuth,email,password);
+        console.log('User registered successfully (firebase):', res);
+
+        await setDoc(doc(firebaseDb, "users", res.user.uid), {
+            id : res.user.uid,
+            name: fullName,
+            email: email
+          });
+
+          await setDoc(doc(firebaseDb, "userschats", res.user.uid), {
+            chats:[],
+          });
+
+      } catch (err) {
+        setAnyError(true);
+        console.error('Error registering student (firebase):', err.message);
+        setError("Error registering student. Please try again later.");
+        toast.error('Error registering student (firebase):')
+      }
+
+      // SUPABASE
       try {
           // Sign up user
           const { user, error } = await supabase.auth.signUp({
@@ -63,9 +111,11 @@ function StudentRegister() {
               }
           });
           if (error) {
-              throw error;
+            setAnyError(true);
+            toast.error('Error registering student (supabase):', error.message)
+            throw error;
           }
-          console.log('User registered successfully:', user);
+          console.log('User registered successfully (supabase):', user);
   
           // Insert student details into database
           const { data: studentData, error: studentError } = await supabase
@@ -84,27 +134,31 @@ function StudentRegister() {
                   }
               ]);        
           if (studentError) {
-              throw studentError;
+            setAnyError(true);
+            throw studentError;
           }
-          console.log('Student inserted successfully:', studentData);
-  
-          // Navigate to login page
-          navigate('/Login');
+          console.log('Student inserted successfully (supabase):', studentData);
       } catch (error) {
-          console.error('Error registering student:', error.message);
+            setAnyError(true);
+          console.error('Error registering student (supabase):', error.message);
           setError("Error registering student. Please try again later.");
+          toast.error('Error registering student (supabase):', error.message)
+      }
+
+      if(!anyError){
+        navigate('/Login');
       }
   };
   
     return(
-        <div>
-            <h1>Register Page</h1>
-            <form className="LoginForm" onSubmit={handleSubmit}>
+        <div className="login-container">
+            <h1 className="login-heading">Register Page</h1>
+            <form className="login-form" onSubmit={handleSubmit}>
                 <input type="text" id="email" value={email} 
-                placeholder="Enter Email" onChange={(e) => setEmail(e.target.value)}/>
+                placeholder="Enter Email" onChange={(e) => setEmail(e.target.value)} className="form-input"/>
                 <input type={showPassword ? 'text' : 'password'} id="password" value={password} 
-                placeholder="Enter password" onChange={(e) => setPassword(e.target.value)}/>
-                <button className="showPassword" type="button" onClick={() => setShowPassword(!showPassword)}>
+                placeholder="Enter password" onChange={(e) => setPassword(e.target.value)} className="form-input"/>
+                <button className="login-button" type="button" onClick={() => setShowPassword(!showPassword)}>
                     {showPassword ? 'Hide' : 'Show'} Password
                 </button >
                 <ul>
@@ -116,21 +170,21 @@ function StudentRegister() {
                     <li>Contain at least one special character among @$!%*?&.</li>
                     <li>Have a minimum length of 8 characters.</li>
                 </ul>
-                <input type="text" id="firstname" value={firstname} 
+                <input className="form-input" type="text" id="firstname" value={firstname} 
                 placeholder="Enter first name" onChange={(e) => setFirstname(e.target.value)}/>
-                <input type="text" id="lastname" value={lastname} 
+                <input className="form-input" type="text" id="lastname" value={lastname} 
                 placeholder="Enter last name" onChange={(e) => setLastname(e.target.value)}/>
-                <input type="text" id="id" value={id} 
+                <input className="form-input" type="text" id="id" value={id} 
                 placeholder="Enter ID (e.g., 20k-0461)" onChange={(e) => setId(e.target.value)}/>
-                <input type="text" id="interest1" value={interest1} 
+                <input className="form-input" type="text" id="interest1" value={interest1} 
                 placeholder="Enter Area of Interest 1" onChange={(e) => setInterest1(e.target.value)}/>
-                <input type="text" id="interest2" value={interest2} 
+                <input className="form-input" type="text" id="interest2" value={interest2} 
                 placeholder="Enter Area of Interest 2" onChange={(e) => setInterest2(e.target.value)}/>
-                <input type="text" id="interest3" value={interest3} 
+                <input className="form-input" type="text" id="interest3" value={interest3} 
                 placeholder="Enter Area of Interest 3 (optional)" onChange={(e) => setInterest3(e.target.value)}/>
-                <input type="text" id="interest4" value={interest4} 
+                <input className="form-input" type="text" id="interest4" value={interest4} 
                 placeholder="Enter Area of Interest 4 (optional)" onChange={(e) => setInterest4(e.target.value)}/>
-                <button type='submit'>Register</button>
+                <button className="login-button" type='submit'>Register</button>
                 {error && <div className="error-message">{error}</div>}
                 <p>Already have an account? <Link to="/Login">Login</Link></p>
             </form>

@@ -24,6 +24,10 @@ function SuperVisorRegister() {
     const [error, setError] = useState('');
     const [showPassword, setShowPassword] = useState(false);
 
+    // this sets variable to true IF an error in either firebase or supabase auth or db entries
+    // and will not allow navigate to Login
+    const[anyError,setAnyError] = useState(false);
+
     const handleSubmit = async (e) => {
         e.preventDefault();
         
@@ -42,6 +46,29 @@ function SuperVisorRegister() {
             return;
         }
         
+        // FIREBASE
+      try {
+        console.log(email,password)
+        const res = await createUserWithEmailAndPassword(firebaseAuth,email,password);
+        console.log('User registered successfully (firebase):', res);
+
+        await setDoc(doc(firebaseDb, "users", res.user.uid), {
+            id : res.user.uid,
+            name: name,
+            email: email
+          });
+
+        await setDoc(doc(firebaseDb, "userschats", res.user.uid), {
+            chats:[],
+          });
+
+      } catch (err) {
+        setAnyError(true);
+        console.error('Error registering supervisor (firebase):', err.message);
+        setError("Error registering supervisor. Please try again later.");
+        toast.error('Error registering supervisor (firebase):')
+      }
+
         try {
             const { user, error } = await supabase.auth.signUp({
                 email: email,
@@ -55,7 +82,7 @@ function SuperVisorRegister() {
             if (error) {
                 throw error;
             }
-            console.log('Supervisor registered successfully:', user);
+            console.log('Supervisor registered successfully (supabase):', user);
 
             const { data, error: insertError } = await supabase
                 .from('supervisors')
@@ -78,30 +105,34 @@ function SuperVisorRegister() {
             console.error('Error registering supervisor:', error.message);
             setError("Error registering supervisor. Please try again later.");
         }
+
+        if(!anyError){
+            navigate('/Login');
+        }
     };
 
     return(
-        <div>
-            <h1>Register SUPERVISOR Page</h1>
-            <form className="LoginForm" onSubmit={handleSubmit}>
-                <input type="text" id="email" value={email} 
+        <div className='login-container'>
+            <h1 className="login-heading" >Register SUPERVISOR Page</h1>
+            <form className="login-form" onSubmit={handleSubmit}>
+                <input className="form-input" type="text" id="email" value={email} 
                 placeholder="Enter Email" onChange={(e) => setEmail(e.target.value)}/>
-                <input type={showPassword ? 'text' : 'password'} id="password" value={password} 
+                <input className="form-input" type={showPassword ? 'text' : 'password'} id="password" value={password} 
                 placeholder="Enter password" onChange={(e) => setPassword(e.target.value)}/>
-                <button type="button" onClick={() => setShowPassword(!showPassword)}>
+                <button className="login-button" type="button" onClick={() => setShowPassword(!showPassword)}>
                 {showPassword ? 'Hide' : 'Show'} Password
                 </button>
-                <input type="text" id="name" value={name} 
+                <input className="form-input" type="text" id="name" value={name} 
                 placeholder="Enter name" onChange={(e) => setName(e.target.value)}/>
-                <input type="text" id="interest1" value={interest1} 
+                <input className="form-input"type="text" id="interest1" value={interest1} 
                 placeholder="Enter interest 1" onChange={(e) => setInterest1(e.target.value)}/>
-                <input type="text" id="interest2" value={interest2} 
+                <input className="form-input" type="text" id="interest2" value={interest2} 
                 placeholder="Enter interest 2" onChange={(e) => setInterest2(e.target.value)}/>
-                <input type="text" id="interest3" value={interest3} 
+                <input className="form-input" type="text" id="interest3" value={interest3} 
                 placeholder="Enter interest 3 (Optional)" onChange={(e) => setInterest3(e.target.value)}/>
-                <input type="text" id="interest4" value={interest4} 
+                <input className="form-input" type="text" id="interest4" value={interest4} 
                 placeholder="Enter interest 4 (Optional)" onChange={(e) => setInterest4(e.target.value)}/>
-                <button type='submit'>Register</button>
+                <button className="login-button" type='submit'>Register</button>
                 {error && <div className="error-message">{error}</div>}
                 <p>Already have an account? <Link to="/Login">Login</Link></p>
             </form>

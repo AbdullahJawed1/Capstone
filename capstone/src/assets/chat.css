@@ -15,8 +15,16 @@
 
 .container-md{
     width: 90vw;
+    margin-top: 2.5%;
     height: 90vh;
     background-color: #0056b3;
     border-radius: 10px;
     display: flex;
+}
+
+.loading{
+   padding: 50px;
+   font-size: 24px;
+   border-radius: 10px;
+   background-color: #0056b3;
 }
