@@ -2,6 +2,8 @@ import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { useNavigate } from 'react-router-dom';
 import supabase from '../../CONFIG/supabaseClient';
+import { toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 function isValidEmailDomain(email) {
   return email.endsWith('@nu.edu.pk');
