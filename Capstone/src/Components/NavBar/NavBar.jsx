@@ -6,6 +6,7 @@ import Container from "react-bootstrap/Container";
 import Nav from "react-bootstrap/Nav";
 import Navbar from "react-bootstrap/Navbar";
 import NavDropdown from "react-bootstrap/NavDropdown";
+import { firebaseAuth } from "../../CONFIG/firebase";
 
 export default function NavBar() {
   const [userType, setUserType] = useState("");
@@ -17,6 +18,9 @@ export default function NavBar() {
   };
 
   const handleSignOut = async () => {
+
+    firebaseAuth.signOut();
+
     try {
       await supabase.auth.signOut();
       navigate('/Login'); // Redirect to the login page
