@@ -3,6 +3,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import supabase from '../../CONFIG/supabaseClient';
 import Proposalcard from '../Proposal/ProposalCard';
 import './login.css'; // Import custom CSS for login styling
+import { toast } from 'react-toastify';
 
 function Login() {
     const navigate = useNavigate();
@@ -31,7 +32,7 @@ function Login() {
             console.log('User signed in successfully:', data);
             const userType = data.user.user_metadata.type;
             console.log('User signed in as:', userType);
-
+            toast.success("Logged in.")
             // Save user type to state
             setUserType(userType);
             // Search the appropriate table based on user type
@@ -58,6 +59,7 @@ function Login() {
             navigate('/');
         } catch (error) {
             console.error('Error signing in:', error.message);
+            toast.error('Error signing in:',error.message);
             setError('Invalid email or password. Please try again.');
         }
     };

@@ -1,5 +1,6 @@
 import "../../assets/chat.css"
 import Detail from "./detail/Detail";
+import NavBar from "../NavBar/NavBar";
 import List from "./list/List";
 import Chat from "./chat/Chat";
 import ChatLogin from "./login/ChatLogin";
@@ -27,6 +28,8 @@ function ChatHome(){
     if(isLoading) return <div className="loading">Loading</div>
 
     return(
+    <>
+    <NavBar />
     <div className="container-md">
         {
             currentUser ? (<>
@@ -37,6 +40,7 @@ function ChatHome(){
         }
         <Notification />
     </div>
+    </>
     )
 }
 
